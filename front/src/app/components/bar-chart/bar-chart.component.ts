@@ -13,9 +13,9 @@ export class BarChartComponent {
   barChartOptions: ChartOptions = {
     responsive: true,
   };
-  barChartLabels: any;
-  barChartType: any;
-  barChartLegend: any;
+  barChartLabels: any = ['Instructor', 'Student', 'Courses'];
+  barChartType: any = 'bar';
+  barChartLegend: any = true;
   barChartPlugins = [];
   instructor: any = [];
   student: any = [];
@@ -33,28 +33,17 @@ export class BarChartComponent {
   ngOnInit(): void {
     this.allinstructor();
     this.allstudent();
-    this.barChartLabels = ['Instructor', 'Student', 'Courses'];
-    this.barChartType = 'bar';
-    this.barChartLegend = true;
-    this.barChartPlugins = [];
-
-    this.barChartData = [
-      {
-        data: [this.instructor.length, this.student.length, 1],
-        label: 'Statistic',
-      },
-    ];
   }
   allinstructor() {
     this.instructorService.getAllInstructors().subscribe((res) => {
       console.log(res);
-      this.instructor = res.data;
+      this.instructor = res;
     });
   }
   allstudent() {
     this.studentService.findStudents().subscribe((res) => {
       console.log(res);
-      this.student = res.data;
+      this.student = res;
     });
   }
 }
