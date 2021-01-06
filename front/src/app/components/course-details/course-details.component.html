@@ -1,0 +1,442 @@
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA="
+crossorigin="anonymous"
+/>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+<div id="preloader">
+  <img class="preloader" src="images/loader.gif" alt="" />
+</div>
+<!-- end loader -->
+<!-- END LOADER -->
+
+<div id="wrapper">
+  <!-- BEGIN # MODAL LOGIN -->
+  <div
+    class="modal fade"
+    id="login-modal"
+    tabindex="-1"
+    role="dialog"
+    aria-hidden="true"
+    style="display: none"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Begin # DIV Form -->
+        <div id="div-forms">
+          <form id="login-form">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span class="flaticon-add" aria-hidden="true"></span>
+            </button>
+            <div class="modal-body">
+              <input
+                class="form-control"
+                type="text"
+                placeholder="What you are looking for?"
+                required
+              />
+            </div>
+          </form>
+          <!-- End # Login Form -->
+        </div>
+        <!-- End # DIV Form -->
+      </div>
+    </div>
+  </div>
+  <!-- END # MODAL LOGIN -->
+
+  <header class="header header-normal">
+    <div class="topbar clearfix">
+      <div class="container">
+        <div class="row-fluid">
+          <div class="col-md-6 col-sm-6 text-left">
+            <p>
+              <strong><i class="fa fa-phone"></i></strong> +90 543 123 45 67
+              &nbsp;&nbsp; <strong><i class="fa fa-envelope"></i></strong>
+              <a href="mailto:#">info@yoursite.com</a>
+            </p>
+          </div>
+          <!-- end left -->
+          <div class="col-md-6 col-sm-6 hidden-xs text-right">
+            <div class="social">
+              <a
+                class="facebook"
+                href="#"
+                data-tooltip="tooltip"
+                data-placement="bottom"
+                title="Facebook"
+                ><i class="fa fa-facebook"></i
+              ></a>
+              <a
+                class="twitter"
+                href="#"
+                data-tooltip="tooltip"
+                data-placement="bottom"
+                title="Twitter"
+                ><i class="fa fa-twitter"></i
+              ></a>
+              <a
+                class="google"
+                href="#"
+                data-tooltip="tooltip"
+                data-placement="bottom"
+                title="Google Plus"
+                ><i class="fa fa-google-plus"></i
+              ></a>
+              <a
+                class="linkedin"
+                href="#"
+                data-tooltip="tooltip"
+                data-placement="bottom"
+                title="Linkedin"
+                ><i class="fa fa-linkedin"></i
+              ></a>
+              <a
+                class="pinterest"
+                href="#"
+                data-tooltip="tooltip"
+                data-placement="bottom"
+                title="Pinterest"
+                ><i class="fa fa-pinterest"></i
+              ></a>
+            </div>
+            <!-- end social -->
+          </div>
+          <!-- end left -->
+        </div>
+        <!-- end row -->
+      </div>
+      <!-- end container -->
+    </div>
+    <!-- end topbar -->
+
+    <div class="container">
+      <nav class="navbar navbar-default yamm">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-expanded="false"
+            aria-controls="navbar"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="logo-normal">
+            <a class="navbar-brand" href="index.html"
+              ><img src="../../assets/images/logo-dark.png" alt=""
+            /></a>
+          </div>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="index.html">Home</a></li>
+            <li><a routerLink='/store' >Store</a></li>
+            <li><a routerLink='/profile'>Profile</a></li>
+            <li>
+              <a><i class="fa fa-sign-out" style="color: red; font-size:30px"></i></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <!-- end navbar -->
+    </div>
+    <!-- end container -->
+  </header>
+  <br /><br />
+
+  <div>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <div class="container pb50">
+      <div class="row">
+        <div class="col-md-9 mb40">
+          <article>
+            <video  src="assets/uploads/courses/{{course.video}}" width="100%" height="100%" controls  style="margin:10px 0">
+            </video>
+           
+
+            <span
+
+              data-toggle="modal"
+              data-target="#modal-lg"
+              (click)="getfile(course.pdf)"
+              >Click here to open PDF  <i class="fa fa-file-pdf-o" style="color:red;text-align:center;margin-left:0px;font-size:30px;" aria-hidden="true"></i></span
+            >
+           
+            <div class="modal fade" id="modal-lg" #modall>
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">tes</h4>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="embed-responsive embed-responsive-16by9">
+                      <iframe
+                        class="embed-responsive-item"
+                        [src]="file"
+                      ></iframe>
+                    </div>
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      data-dismiss="modal"
+                    >
+                      hide
+                    </button>
+                  </div>
+                </div>
+                <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+
+            <div class="post-content">
+              <h3>Title : {{ course.title }}</h3>
+              <ul class="post-meta list-inline">
+                <li class="list-inline-item">
+                  <i class="fa fa-calendar-o"></i>
+                  <a href="#">{{ course.createdAt }}</a>
+                </li>
+                <li class="list-inline-item">
+                  <i class="fa fa-tags"></i>
+                  <a href="#">category : {{ course.category }}</a>
+                </li>
+                <li class="list-inline-item">
+                  <i class="fa fa-paypal"></i>
+                  <a href="#">price : {{ course.price }} DT</a>
+                </li>
+              </ul>
+              <p>
+                {{ course.description }}
+              </p>
+              <div *ngIf="show">
+              <a    class="btn btn-primary a-btn-slide-text">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                <span><strong (click)="editCourse(course._id)">Edit</strong></span>            
+            </a>
+          </div>
+         <div >
+          <fieldset  class="rating">
+            <input type="radio" [name]="inputName"  value="5" [checked]="rating===5" />
+            <label title="Rocks!" (click)='onClick(5)'>5 stars</label>
+          
+            <input type="radio" [name]="inputName" value="4" [checked]="rating===4" />
+            <label title="Pretty good" (click)='onClick(4)'>4 stars</label>
+          
+            <input type="radio" [name]="inputName" value="3" [checked]="rating===3" />
+            <label title="Meh" (click)='onClick(3)'>3 stars</label>
+          
+            <input type="radio" [name]="inputName" value="2" [checked]="rating===2" />
+            <label title="Kinda bad" (click)='onClick(2)'>2 stars</label>
+          
+            <input type="radio" [name]="inputName" value="1" [checked]="rating===1" />
+            <label title="Sucks big time" (click)='onClick(1)'>1 star</label>
+          </fieldset>
+        </div>
+              <hr class="mb40" />
+              <hr class="mb40" />
+              <h4 class="mb40 text-uppercase font500">Comments</h4>
+              <div class="media mb40"  *ngFor="let comment of comments">
+                <i class="d-flex mr-3 fa fa-user-circle-o fa-3x"></i>
+                <div class="media-body">
+                  <h5 class="mt-0 font400 clearfix">
+                    <a href="#" class="float-right">Reply</a>
+                      {{comment.commenterUsername}}                  
+                    </h5>
+               {{comment.text}}
+                </div>
+                <i class="far fa-trash-alt" *ngIf="user._id === comment.commenterId" (click)="deleteComment(comment)"></i> 
+                <i class="fas fa-edit" *ngIf="user._id === comment.commenterId" (click)="change()"></i>       
+                <form  *ngIf="edit && comment.commenterId === user._id" (ngSubmit)="editComment(comment)" className="edit-comment-form">
+                  <label htmlFor="text" (click)="change()">
+                    Edit
+                  </label>
+                  <br />
+                  <input
+                    type="text"
+                    name="text"
+                    defaultValue={{comment.text}}
+                    [(ngModel)]="text"
+                  />
+                 
+                    <input type="submit"  value="save modification" />
+                </form>
+               
+              </div>
+              
+              <h4 class="mb40 text-uppercase font500">Post a comment</h4>
+              <form >
+
+
+                <div class="form-group">
+                  <label>Comment</label>
+                  <textarea
+                     
+                    class="form-control"
+                    rows="5"
+                    placeholder="Comment"
+                    [(ngModel)]="text"
+                  name="text"></textarea>
+                </div>
+                <div class="clearfix float-right">
+                  <button type="button" class="btn btn-primary btn-lg" (click)="postComment()">
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </article>
+          <!-- post article-->
+        </div>
+
+        <!--/col-->
+
+        <!--/col-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="section footer noover">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-4">
+        <div class="widget clearfix">
+          <h3 class="widget-title">Subscribe Our Newsletter</h3>
+          <div class="newsletter-widget">
+            <p>
+              You can opt out of our newsletters at any time.<br />
+              See our <a href="#">privacy policy</a>.
+            </p>
+            <form class="form-inline" role="search">
+              <div class="form-1">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter email here.."
+                />
+                <button type="submit" class="btn btn-primary">
+                  <i class="fa fa-paper-plane-o"></i>
+                </button>
+              </div>
+            </form>
+            <img src="images/payments.png" alt="" class="img-responsive" />
+          </div>
+          <!-- end newsletter -->
+        </div>
+        <!-- end widget -->
+      </div>
+      <!-- end col -->
+
+      <div class="col-lg-3 col-md-3">
+        <div class="widget clearfix">
+          <h3 class="widget-title">Join us today</h3>
+          <p>
+            Would you like to earn your profits by joining our team? Join us
+            without losing time.
+          </p>
+          <a href="#" class="readmore">Became a Teacher</a>
+        </div>
+        <!-- end widget -->
+      </div>
+      <!-- end col -->
+
+      <div class="col-lg-3 col-md-3">
+        <div class="widget clearfix">
+          <h3 class="widget-title">Popular Tags</h3>
+          <div class="tags-widget">
+            <ul class="list-inline">
+              <li><a href="#">course</a></li>
+              <li><a href="#">web design</a></li>
+              <li><a href="#">development</a></li>
+              <li><a href="#">language</a></li>
+              <li><a href="#">teacher</a></li>
+              <li><a href="#">speaking</a></li>
+              <li><a href="#">material</a></li>
+              <li><a href="#">css3</a></li>
+              <li><a href="#">html</a></li>
+              <li><a href="#">learning</a></li>
+            </ul>
+          </div>
+          <!-- end list-widget -->
+        </div>
+        <!-- end widget -->
+      </div>
+      <!-- end col -->
+
+      <div class="col-lg-2 col-md-2">
+        <div class="widget clearfix">
+          <h3 class="widget-title">Support</h3>
+          <div class="list-widget">
+            <ul>
+              <li><a href="#">Terms of Use</a></li>
+              <li><a href="#">Copyrights</a></li>
+              <li><a href="#">Create a Ticket</a></li>
+              <li><a href="#">Pricing & Plans</a></li>
+              <li><a href="#">Carrier</a></li>
+              <li><a href="#">Trademark</a></li>
+            </ul>
+          </div>
+          <!-- end list-widget -->
+        </div>
+        <!-- end widget -->
+      </div>
+      <!-- end col -->
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container -->
+</footer>
+<!-- end footer -->
+
+<div class="copyrights">
+  <div class="container">
+    <div class="clearfix">
+      <div class="pull-left">
+        <div class="cop-logo">
+          <a href="#"><img src="images/logo.png" alt="" /></a>
+        </div>
+      </div>
+
+      <div class="pull-right">
+        <div class="footer-links">
+          <ul class="list-inline">
+            <li>Design : <a href="https://html.design">HTML.Design</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end container -->
+</div>
+<!-- end copy -->
