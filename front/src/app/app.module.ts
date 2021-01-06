@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,7 +26,13 @@ import { PaypalComponent } from './components/paypal/paypal.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ResultComponent } from './components/result/result.component';
 import { EditComponent } from './components/edit/edit.component';
+import { DoughnutChartComponent } from './components/doughnut-chart/doughnut-chart.component';
 
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+
+import { StatisticComponent } from './components/statistic/statistic.component';
+import { BarChartComponent } from './components/bar-chart/bar-chart.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -44,8 +50,10 @@ import { EditComponent } from './components/edit/edit.component';
     PaypalComponent,
     ResultComponent,
     EditComponent,
-   
-    
+    StatisticComponent,
+    BarChartComponent,
+    DoughnutChartComponent,
+    PieChartComponent,
   ],
 
   imports: [
@@ -56,7 +64,8 @@ import { EditComponent } from './components/edit/edit.component';
     ReactiveFormsModule,
     SocialLoginModule,
     NgxPayPalModule,
-    NgbModule
+    NgbModule,
+    ChartsModule,
   ],
   providers: [
     AuthGuard,

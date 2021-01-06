@@ -15,9 +15,12 @@ import { NewcourseComponent } from './components/newcourse/newcourse.component';
 import { StudentGuard } from './guards/student.guard';
 import { InstructorGuard } from './guards/instructor.guard';
 import { HomeGuard } from './guards/home.guard';
-import {ResultComponent} from './components/result/result.component';
+import { ResultComponent } from './components/result/result.component';
 import { EditComponent } from './components/edit/edit.component';
-
+import { DoughnutChartComponent } from './components/doughnut-chart/doughnut-chart.component';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+import { StatisticComponent } from './components/statistic/statistic.component';
+import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [HomeGuard] },
   { path: 'login', component: LoginComponent, canActivate: [HomeGuard] },
@@ -42,10 +45,12 @@ const routes: Routes = [
   },
   { path: 'library', component: LibraryComponent, canActivate: [StudentGuard] },
   { path: 'paypal', component: PaypalComponent },
-  { path:'result/:query' , component:  ResultComponent},
-  { path:'edit/:id' , component:  EditComponent}
-
-
+  { path: 'result/:query', component: ResultComponent },
+  { path: 'edit/:id', component: EditComponent },
+  { path: 'bar', component: BarChartComponent },
+  { path: 'stat', component: StatisticComponent },
+  { path: 'doughnut-chart', component: DoughnutChartComponent },
+  { path: 'pie-chart', component: PieChartComponent },
 ];
 
 @NgModule({
