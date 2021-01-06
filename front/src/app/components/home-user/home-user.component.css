@@ -1,0 +1,17 @@
+.btnAddCourse {
+  background-color: rgb(94, 233, 94);
+  color: white;
+  border: 0px;
+  border-radius: 2px;
+  font-size: 90%;
+}
+
+.btnAddCourse:active {
+  background-color: #255527;
+  border: 0px;
+}
+
+.courseVid {
+  width: 272px;
+  height: 153px;
+}
