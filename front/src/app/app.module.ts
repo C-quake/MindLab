@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +15,13 @@ import {
   SocialLoginModule,
   SocialAuthServiceConfig,
 } from 'angularx-social-login';
+
+import { EditCourseComponent } from './components/edit-course/edit-course.component';
+import { UsersListComponent } from './component/users-list/users-list.component';
+import { ChatWindowComponent } from './component/chat-window/chat-window.component';
+import { ChatNamePopupComponent } from './component/chat-name-popup/chat-name-popup.component';
+import { ChatComponent } from './components/chat/chat.component'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { NgxPayPalModule } from 'ngx-paypal';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { StoreComponent } from './components/store/store.component';
@@ -40,12 +46,18 @@ import { EditComponent } from './components/edit/edit.component';
     StoreComponent,
     NewcourseComponent,
     CourseDetailsComponent,
+    EditCourseComponent,
+    UsersListComponent,
+    ChatWindowComponent,
+    ChatNamePopupComponent,
+    ChatComponent,
+    ResultComponent,
     LibraryComponent,
     PaypalComponent,
     ResultComponent,
     EditComponent,
-   
-    
+
+
   ],
 
   imports: [
@@ -55,9 +67,9 @@ import { EditComponent } from './components/edit/edit.component';
     HttpClientModule,
     ReactiveFormsModule,
     SocialLoginModule,
-    NgxPayPalModule,
-    NgbModule
+    NgbModule,
   ],
+
   providers: [
     AuthGuard,
     {

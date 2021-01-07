@@ -43,14 +43,14 @@ export class CourseDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
+
     this.id = this.activateroute.snapshot.params.id;
     this.StoreService.getService()
     .subscribe(
     (data) => {
       this.courses = data;
       console.log('courses', this.courses);
-      
+
       this.courses.forEach((elm: any) => {
         if(elm._id === this.id){
           this.comments=elm.comments
@@ -59,7 +59,7 @@ export class CourseDetailsComponent implements OnInit {
           // this.course = elm;
           console.log('elm', elm);
         }
-        
+
       });
     })
     this.inputName = this.itemId + '_rating';
@@ -89,7 +89,7 @@ export class CourseDetailsComponent implements OnInit {
       if (this.user._id === this.course.IdInstructor) {
         this.show = !this.show;
       }
-    
+
     });
   }
   onClick(rating: number): void {
