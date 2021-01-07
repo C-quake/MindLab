@@ -143,3 +143,11 @@ exports.ditrateCourse = function (id) {
 exports.getAllStudents = function () {
   return Student.find();
 };
+
+exports.changeInstructorStatus = function (id, status) {
+  return Instructor.findByIdAndUpdate(id, status);
+};
+
+exports.changeStudentStatus = function (id, status) {
+  return Student.findByIdAndUpdate(id, status);
+};

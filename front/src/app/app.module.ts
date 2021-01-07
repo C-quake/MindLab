@@ -16,8 +16,6 @@ import {
   SocialLoginModule,
   SocialAuthServiceConfig,
 } from 'angularx-social-login';
-
-import { EditCourseComponent } from './components/edit-course/edit-course.component';
 import { ChatComponent } from './components/chat/chat.component'
 import { NgxPayPalModule } from 'ngx-paypal';
 import { GoogleLoginProvider } from 'angularx-social-login';
@@ -30,7 +28,16 @@ import { AuthGuard } from './guards/auth.guard';
 import { ResultComponent } from './components/result/result.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { EditComponent } from './components/edit/edit.component';
+import { DoughnutChartComponent } from './components/doughnut-chart/doughnut-chart.component';
+import { ViewcoursesComponent } from './components/viewcourses/viewcourses.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ViewinstructorsComponent } from './components/viewinstructors/viewinstructors.component';
 
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+
+import { StatisticComponent } from './components/statistic/statistic.component';
+import { BarChartComponent } from './components/bar-chart/bar-chart.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -48,13 +55,19 @@ import { EditComponent } from './components/edit/edit.component';
     PaypalComponent,
     ResultComponent,
     AdminDashboardComponent,
-    EditCourseComponent,
     ChatComponent,
     ResultComponent,
     LibraryComponent,
     PaypalComponent,
     ResultComponent,
     EditComponent,
+    StatisticComponent,
+    BarChartComponent,
+    DoughnutChartComponent,
+    PieChartComponent,
+    ViewcoursesComponent,
+    ViewinstructorsComponent,
+
   ],
 
   imports: [
@@ -65,7 +78,11 @@ import { EditComponent } from './components/edit/edit.component';
     ReactiveFormsModule,
     SocialLoginModule,
     NgxPayPalModule,
-    NgbModule
+    NgbModule,
+    ChartsModule,
+    NgxPaginationModule
+
+  
   ],
 
   providers: [

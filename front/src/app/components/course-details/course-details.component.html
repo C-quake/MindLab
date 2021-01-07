@@ -149,16 +149,9 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="index.html">Home</a></li>
-            <li><a routerLink="/store">Store</a></li>
-            <li><a routerLink="/profile">Profile</a></li>
-            <li>
-              <a
-                ><i
-                  class="fa fa-sign-out"
-                  style="color: red; font-size: 30px"
-                ></i
-              ></a>
-            </li>
+            <li><a href="/store">Store</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a (click)="Logout()" href="">Log Out</a></li>
           </ul>
         </div>
       </nav>
@@ -184,8 +177,6 @@
               controls
               style="margin: 10px 0"
             ></video>
-            <<<<<<< HEAD ======= >>>>>>>
-            144c72b57a344a480aebf7dbd58466c45a65df3f
 
             <span
               data-toggle="modal"
@@ -203,8 +194,6 @@
                 aria-hidden="true"
               ></i
             ></span>
-            <<<<<<< HEAD ======= >>>>>>>
-            144c72b57a344a480aebf7dbd58466c45a65df3f
             <div class="modal fade" id="modal-lg" #modall>
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -268,19 +257,11 @@
                     class="glyphicon glyphicon-edit"
                     aria-hidden="true"
                   ></span>
-                  <<<<<<< HEAD
                   <span
                     ><strong (click)="editCourse(course._id)"
                       >Edit</strong
                     ></span
                   >
-                  =======
-                  <span
-                    ><strong (click)="editCourse(course._id)"
-                      >Edit</strong
-                    ></span
-                  >
-                  >>>>>>> 144c72b57a344a480aebf7dbd58466c45a65df3f
                 </a>
               </div>
               <div>
@@ -292,7 +273,6 @@
                     [checked]="rating === 5"
                   />
                   <label title="Rocks!" (click)="onClick(5)">5 stars</label>
-                  <<<<<<< HEAD
 
                   <input
                     type="radio"
@@ -320,8 +300,6 @@
                   />
                   <label title="Kinda bad" (click)="onClick(2)">2 stars</label>
 
-                  =======
-
                   <input
                     type="radio"
                     [name]="inputName"
@@ -347,8 +325,6 @@
                     [checked]="rating === 2"
                   />
                   <label title="Kinda bad" (click)="onClick(2)">2 stars</label>
-
-                  >>>>>>> 144c72b57a344a480aebf7dbd58466c45a65df3f
                   <input
                     type="radio"
                     [name]="inputName"

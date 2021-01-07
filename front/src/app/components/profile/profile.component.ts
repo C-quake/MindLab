@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  user: any = JSON.parse(localStorage.getItem('user') || '{}');
+  user: any;
   image: any;
   file: any;
   update: boolean = false;
@@ -139,4 +139,5 @@ export class ProfileComponent implements OnInit {
   getresult(query: any) {
     this.router.navigate(['/result', query]);
   }
+  getVipSession() {}
 }
