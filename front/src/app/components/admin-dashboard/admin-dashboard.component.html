@@ -22,8 +22,8 @@
         class="c-search__input u-input"
         placeholder="Search..."
         type="text"
-        #input
-        (change)="search(input)"
+        ngModel
+        (ngModelChange)="search($event)"
       />
     </div>
     <div class="header-icons-group">
@@ -64,6 +64,7 @@
         </li>
 
         <li
+          (click)="changeDisplay('courses')"
           class="c-menu__item has-submenu"
           data-toggle="tooltip"
           title="Courses"
@@ -97,10 +98,24 @@
     </nav>
   </div>
 </div>
-<div class="content" style="margin: 7%">
+<div
+  style="margin: 7%"
+  id="content"
+  [ngClass]="
+    isExpanded
+      ? 'sidebar-is-expanded content-expanded'
+      : 'sidebar-is-reduced content-reduced'
+  "
+>
   <div *ngIf="display === 'instructors'">
     <h1>Instructors</h1>
     <div style="border: 1px solid gray; margin: 2%"></div>
+    <div style="margin: 10px; display: flex; color: #102c58">
+      <h3>Username</h3>
+      <h3 style="position: absolute; left: 30%">Email</h3>
+      <h3 style="position: absolute; left: 65%">Status</h3>
+      <h3 style="position: absolute; left: 85%">Action</h3>
+    </div>
     <div class="row-element" *ngFor="let user of result || instructors">
       <h3 (click)="getProfile(user._id, user.role)">{{ user.username }}</h3>
       <h3 style="position: absolute; left: 30%">{{ user.email }}</h3>
@@ -141,9 +156,17 @@
 
     <!-- Students -->
   </div>
+
+  <!-- students -->
   <div *ngIf="display === 'students'">
     <h1>Students</h1>
     <div style="border: 1px solid gray; margin: 2%"></div>
+    <div style="margin: 10px; display: flex; color: #102c58">
+      <h3>Username</h3>
+      <h3 style="position: absolute; left: 30%">Email</h3>
+      <h3 style="position: absolute; left: 65%">Status</h3>
+      <h3 style="position: absolute; left: 85%">Action</h3>
+    </div>
     <div class="row-element" *ngFor="let user of result || students">
       <h3 (click)="getProfile(user._id, user.role)">{{ user.username }}</h3>
       <h3 style="position: absolute; left: 30%">{{ user.email }}</h3>
@@ -179,6 +202,40 @@
         "
       >
         <i class="fa fa-ban"> Ban</i>
+      </button>
+    </div>
+  </div>
+
+  <!-- courses -->
+  <div *ngIf="display === 'courses'">
+    <h1>Courses</h1>
+    <div style="border: 1px solid gray; margin: 2%"></div>
+    <div style="margin: 10px; display: flex; color: #102c58">
+      <h3>Title</h3>
+      <h3 style="position: absolute; left: 30%">Poster</h3>
+      <h3 style="position: absolute; left: 65%">type</h3>
+      <h3 style="position: absolute; left: 85%">Action</h3>
+    </div>
+    <div class="row-element" *ngFor="let course of result || courses">
+      <h3 (click)="getCourse(course._id)">{{ course.title }}</h3>
+      <h3 style="position: absolute; left: 30%">
+        {{ course.IdInstructor.username }}
+      </h3>
+      <h3 style="position: absolute; left: 65%">{{ course.type }}</h3>
+      <button
+        (click)="deleteCourse(course._id)"
+        style="
+          position: absolute;
+          left: 85%;
+          margin-top: 0.7%;
+          border: 0px;
+          background-color: red;
+          color: white;
+          width: 70px;
+          height: 40px;
+        "
+      >
+        Delete
       </button>
     </div>
   </div>

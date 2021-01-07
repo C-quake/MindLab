@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const courseSchema = new mongoose.Schema(
   {
     IdInstructor: {
-      type: String,
-      required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Instructor"
     },
     title: {
       type: String,
@@ -40,8 +40,7 @@ const courseSchema = new mongoose.Schema(
     comments: {
       type: [
         {
-
-          commenterId:String,
+          commenterId: String,
           commenterUsername: String,
           text: String,
           timestamp: Number
@@ -49,21 +48,19 @@ const courseSchema = new mongoose.Schema(
       ]
     },
 
-  
-  rates : {
-    type:[
-      {
-      raterId:String,
-      rates:Number,
+    rates: {
+      type: [
+        {
+          raterId: String,
+          rates: Number
+        }
+      ]
     }
-  ],
   },
-},
   {
     timestamps: true
   }
 );
-
 
 var CourseModel = mongoose.model("course", courseSchema);
 module.exports.CourseModel = CourseModel;

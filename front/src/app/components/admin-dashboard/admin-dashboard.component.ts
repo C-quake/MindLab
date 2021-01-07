@@ -1,3 +1,4 @@
+import { StoreService } from './../../services/store.service';
 import { InstructorService } from './../../services/instructor-service.service';
 import { StudentService } from './../../services/student.service';
 import { Component, OnInit } from '@angular/core';
@@ -20,16 +21,21 @@ export class AdminDashboardComponent implements OnInit {
   constructor(
     private instructorService: InstructorService,
     private studentService: StudentService,
-    private router: Router
+    private router: Router,
+    private storeService: StoreService
   ) {}
 
   ngOnInit() {
-    this.instructorService
-      .getAllInstructors()
-      .subscribe((res) => (this.instructors = res));
+    this.instructorService.getAllInstructors().subscribe((res) => {
+      this.instructors = res;
+    });
 
     this.studentService.getAllStudents().subscribe((res) => {
       this.students = res;
+    });
+
+    this.storeService.getService().subscribe((res) => {
+      this.courses = res;
     });
   }
 
@@ -70,30 +76,40 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   search(input: any) {
+    if (input.length === 0) {
+      this.result = undefined;
+      return;
+    }
     if (this.display === 'instructors') {
-      if (!input.value) {
-        this.result = undefined;
-        return;
-      }
       var arr = [];
       for (var ele of this.instructors) {
-        if (ele.username.toLowerCase() === input.value.toLowerCase()) {
+        if (ele.username.toLowerCase() === input.toLowerCase()) {
           arr.push(ele);
         }
       }
       this.result = arr;
     } else if (this.display === 'students') {
-      if (!input.value) {
-        this.result = undefined;
-        return;
-      }
       var arr = [];
       for (var ele of this.students) {
-        if (ele.username.toLowerCase() === input.value.toLowerCase()) {
+        if (ele.username.toLowerCase() === input.toLowerCase()) {
           arr.push(ele);
         }
       }
       this.result = arr;
     }
+  }
+
+  getCourse(id: any) {
+    this.router.navigate(['/coursedetails', id]).then(() => {
+      window.location.reload();
+    });
+  }
+
+  deleteCourse(id: any) {
+    this.storeService.deleteService(id).subscribe(() => {
+      this.storeService.getService().subscribe((res) => {
+        this.courses = res;
+      });
+    });
   }
 }

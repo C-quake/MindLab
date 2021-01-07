@@ -67,13 +67,10 @@ app.use("/", studentRouter);
 
 app.use("/", instructorRouter);
 
-app.use("/", adminRouter);
+app.use("/api/admin", adminRouter);
 
 app.use("/", courseRouter);
 
-
-
- 
 http.listen(PORT, () => {
   console.log("listening on http://localhost:3000");
 });

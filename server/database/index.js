@@ -3,6 +3,7 @@ var mongoose = require("mongoose");
 var { Instructor } = require("./models/instructorModel");
 var { Student } = require("./models/studentModel");
 var { CourseModel } = require("./models/courseModel");
+var { Admin } = require("./models/adminModel");
 
 mongoose.connect("mongodb+srv://hbib:hbib@cluster0.m3m3t.mongodb.net/mindlab", {
   useNewUrlParser: true,
@@ -142,4 +143,12 @@ exports.changeStudentStatus = function (id, status) {
 
 exports.getAllStudents = function () {
   return Student.find();
+};
+
+exports.getAdminByEmail = function (email) {
+  return Admin.find({ email: email });
+};
+
+exports.insertAdmin = function (user) {
+  return Admin.create(user);
 };
