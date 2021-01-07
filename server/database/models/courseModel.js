@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const courseSchema = new mongoose.Schema(
   {
@@ -13,41 +13,42 @@ const courseSchema = new mongoose.Schema(
     description: {
       type: String,
       trim: true,
-      maxlength: 500,
+      maxlength: 500
     },
-    type:{
+    type: {
       // free/paid
-       type: String,
+      type: String
     },
-    category:{
-      type:String
-    }, 
-    price:{
-      type:Number
+    category: {
+      type: String
+    },
+    price: {
+      type: Number
     },
     picture: {
-      type: String,
+      type: String
     },
     video: {
-      type: String,
+      type: String
     },
-    pdf:{
-      type: String,
+    pdf: {
+      type: String
     },
     likers: {
-      type: [String],
-      
+      type: [String]
     },
     comments: {
       type: [
         {
+
           commenterId:String,
           commenterUsername: String,
           text: String,
-          timestamp: Number,
+          timestamp: Number
         }
-      ],
+      ]
     },
+
   
   rates : {
     type:[
@@ -59,9 +60,10 @@ const courseSchema = new mongoose.Schema(
   },
 },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 
-var CourseModel = mongoose.model("course", courseSchema );
+
+var CourseModel = mongoose.model("course", courseSchema);
 module.exports.CourseModel = CourseModel;

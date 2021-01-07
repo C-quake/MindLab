@@ -14,4 +14,8 @@ export class InstructorService {
   findInstructor(email: string) {
     return this.http.get('http://localhost:3000/api/instructoremail/' + email);
   }
+
+  getAllInstructors() {
+    return this.http.get('http://localhost:3000/api/instructor');
+  }
 }

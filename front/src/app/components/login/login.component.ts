@@ -10,7 +10,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { SocialAuthService } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
-
 import { SocialUser } from 'angularx-social-login';
 import { InstructorService } from '../../services/instructor-service.service';
 // import { Observable } from 'rxjs/Observable';
@@ -34,7 +33,6 @@ export class LoginComponent implements OnInit {
     private authService: SocialAuthService,
     private studentService: StudentService,
     private instructorService: InstructorService
-
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl(null, Validators.required),
@@ -51,12 +49,25 @@ export class LoginComponent implements OnInit {
           .subscribe((res: any) => {
             if (res) {
               localStorage.setItem('user', JSON.stringify(res));
+              this._router.navigate(['/home']).then(() => {
+                location.reload();
+              });
             } else {
               user.username = user.name;
               user.image = user.photoUrl;
               user.role = 'instructor';
+              user.social = {
+                facebook: '',
+                twitter: '',
+                linkedin: '',
+                github: '',
+              };
+              user.store = [];
               this.instructorService.addInstructor(user).subscribe((res) => {
                 localStorage.setItem('user', JSON.stringify(res));
+                this._router.navigate(['/home']).then(() => {
+                  location.reload();
+                });
               });
             }
           });
@@ -64,12 +75,25 @@ export class LoginComponent implements OnInit {
         this.studentService.findStudent(user.email).subscribe((res: any) => {
           if (res) {
             localStorage.setItem('user', JSON.stringify(res));
+            this._router.navigate(['/home']).then(() => {
+              location.reload();
+            });
           } else {
             user.username = user.name;
             user.image = user.photoUrl;
             user.role = 'student';
-            this.studentService.addstudent(user).subscribe((res) => {
+            user.library = [];
+            user.social = {
+              facebook: '',
+              twitter: '',
+              linkedin: '',
+              github: '',
+            };
+            this.studentService.addstudent(user).subscribe((res: any) => {
               localStorage.setItem('user', JSON.stringify(res));
+              this._router.navigate(['/home']).then(() => {
+                location.reload();
+              });
             });
           }
         });
@@ -93,15 +117,16 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.loginForm.value.selectedOption);
     if (this.loginForm.valid) {
       if (this.loginForm.value.selectedOption === 'student') {
         this._service.login1(this.loginForm.value).subscribe(
           (data: any) => {
             console.log(data.data);
             localStorage.setItem('token', data.token);
-
-              localStorage.setItem('user', JSON.stringify(data.data));
+            localStorage.setItem('user', JSON.stringify(data.data));
+            this._router.navigate(['/home']).then(() => {
+              window.location.reload();
+            });
           },
           (error) => {
             console.log(error);
@@ -112,6 +137,9 @@ export class LoginComponent implements OnInit {
           (data: any) => {
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.data));
+            this._router.navigate(['/home']).then(() => {
+              window.location.reload();
+            });
           },
           (error) => {
             console.log(error);

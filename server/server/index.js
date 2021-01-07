@@ -1,13 +1,16 @@
-const express = require("express");
-var app = express();
-var http = require("http").Server(app);
-var io = require("socket.io")(http);
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
 var multer = require("multer");
 var upload = multer({ dest: "uploads/" });
 const PORT = process.env.PORT || 3000;
+var express = require('express'),
+    http = require('http');
+var app = express();
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+
+
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -86,6 +89,6 @@ io.on("connection", function(socket) {
     console.log('user disconnected');
   });
 });
-http.listen(PORT, function() {
+server.listen(PORT, function() {
   console.log(`started on port ${PORT}`);
 });

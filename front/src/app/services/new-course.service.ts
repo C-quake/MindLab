@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NewCourseService {
-
   http: HttpClient;
   urlApi = 'http://localhost:3000/api/newCourse/';
   constructor(private httpClient: HttpClient) {
@@ -18,12 +17,9 @@ export class NewCourseService {
     pdf: any,
     video: any,
     selectedOption: string,
-    type:string,
-    price: string ,
-
-  )
-
-  {
+    type: string,
+    price: string
+  ) {
     const body = new FormData();
     body.append('IdInstructor', IdInstructor);
     body.append('title', title);
@@ -33,8 +29,6 @@ export class NewCourseService {
     body.append('category', selectedOption);
     body.append('type', type);
     body.append('price', price);
-
-
 
     return this.http.post(this.urlApi, body);
   }

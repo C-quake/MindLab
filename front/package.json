@@ -29,10 +29,15 @@
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",
     "marked": "^1.2.7",
+    "ngx-paypal": "^6.2.0",
     "ngx-socket-io": "^3.2.0",
     "rxjs": "~6.6.0",
     "simple-peer": "^9.9.3",
+
     "socket.io": "^2.1.1",
+
+    
+
     "socket.io-client": "^2.2.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

@@ -22,8 +22,9 @@ var instructorSchema = mongoose.Schema({
   mobile: String,
   location: String,
   experience: Array,
-  social: Array,
+  social: Object,
   role: String,
+  store: [{ type: mongoose.Schema.Types.ObjectId, ref: "course" }],
   provider: String
 });
 
