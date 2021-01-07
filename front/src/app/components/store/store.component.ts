@@ -66,7 +66,7 @@ export class StoreComponent implements OnInit {
   }
 
   getCourse(id: any) {
-  
+
     this.router.navigate(['/coursedetails', id]);
   }
 
