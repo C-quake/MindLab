@@ -8,7 +8,7 @@ import { StudentService } from '../../services/student.service';
 import { InstructorService } from '../../services/instructor-service.service';
 @Component({
   selector: 'app-course-details',
-  templateUrl: './course-details.component.html',
+  templateUrl: './course-details.component.html', 
   styleUrls: ['./course-details.component.css'],
 })
 export class CourseDetailsComponent implements OnInit {
@@ -43,25 +43,21 @@ export class CourseDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     this.id = this.activateroute.snapshot.params.id;
-    this.StoreService.getService()
-    .subscribe(
-    (data) => {
+    this.StoreService.getService().subscribe((data) => {
       this.courses = data;
       console.log('courses', this.courses);
 
       this.courses.forEach((elm: any) => {
-        if(elm._id === this.id){
-          this.comments=elm.comments
-          this.rates=elm.rates
-          console.log(this.comments)
+        if (elm._id === this.id) {
+          this.comments = elm.comments;
+          this.rates = elm.rates;
+          console.log(this.comments);
           // this.course = elm;
           console.log('elm', elm);
         }
-
       });
-    })
+    });
     this.inputName = this.itemId + '_rating';
 
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -70,16 +66,16 @@ export class CourseDetailsComponent implements OnInit {
     this.StudentService.findStudents().subscribe((res) => {
       this.students = res;
       console.log('students', this.students);
-      for(var i=0;i<this.students.length;i++){
+      for (var i = 0; i < this.students.length; i++) {
         this.users.push(this.students[i]);
       }
     });
     this.InstructorService.getAllInstructors().subscribe((res) => {
       this.instructors = res;
       console.log('instructors', this.instructors);
-      for(var i=0;i<this.instructors.length;i++){
+      for (var i = 0; i < this.instructors.length; i++) {
         this.users.push(this.instructors[i]);
-      }
+      }  
     });
     this.users = this.instructors;
     console.log('users', this.users);
@@ -89,7 +85,6 @@ export class CourseDetailsComponent implements OnInit {
       if (this.user._id === this.course.IdInstructor) {
         this.show = !this.show;
       }
-
     });
   }
   onClick(rating: number): void {
@@ -145,7 +140,7 @@ export class CourseDetailsComponent implements OnInit {
 
             this.courses.forEach((elm: any) => {
               if (elm._id === this.id) {
-                this.comments = elm.comments;
+                this.comments = elm.comments; 
                 console.log(this.comments);
                 this.course = elm;
                 console.log('elm', elm);
