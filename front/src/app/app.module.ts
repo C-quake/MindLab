@@ -15,10 +15,6 @@ import {
   SocialLoginModule,
   SocialAuthServiceConfig,
 } from 'angularx-social-login';
-
-import { UsersListComponent } from './component/users-list/users-list.component';
-import { ChatWindowComponent } from './component/chat-window/chat-window.component';
-import { ChatNamePopupComponent } from './component/chat-name-popup/chat-name-popup.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPayPalModule } from 'ngx-paypal';

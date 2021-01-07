@@ -119,4 +119,7 @@ export class ProfileComponent implements OnInit {
   getresult(query:any){
     this.router.navigate(['/result',query])
   }
+  getVipSession(){
+    
+  }
 }
