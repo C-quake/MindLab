@@ -1,6 +1,7 @@
+import { ProfileService } from './../../services/profile.service';
+import { StoreService } from './../../services/store.service';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { StoreService } from '../../services/store.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,58 +10,67 @@ import { Router } from '@angular/router';
   styleUrls: ['./store.component.css'],
 })
 export class StoreComponent implements OnInit {
-  query:string;
+  query: string = '';
+  user: any = JSON.parse(localStorage.getItem('user') || '{}');
   file: any;
-  video:any;
-  courses: any = [];
-  constructor(private sanitizer: DomSanitizer, private service: StoreService,private router:Router) {}
+  video: any;
+  store: any = [];
+  constructor(
+    private sanitizer: DomSanitizer,
+    private storeService: StoreService,
+    private router: Router,
+    private profileService: ProfileService
+  ) {}
 
   ngOnInit(): void {
-    this.getallcourses();
-  
+    console.log('here',this.user.store)
+    for (var ele of this.user.store) {
+      this.store.push(ele._id);
+    }
+  }
+  Logout() {
+    localStorage.clear();
   }
 
-  getallcourses() {
-    this.service.getService().subscribe(
-      (res) => {
-
-        this.courses = res;
-      },
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        console.log(this.courses);
+  deleteCourse(id: any) {
+    for (var i = 0; i < this.user.store.length; i++) {
+      if (id === this.user.store[i]._id) {
+        this.user.store.splice(i, 1);
+        break;
       }
-    );
-  }
-  deleteCourse(id:any){
-    this.service.deleteService(id).subscribe((res)=>{
-         console.log('deleted')
-         this.service.getService().subscribe((res) => {
+    }
 
-          this.courses = res;
-        },
-        (error) => {
-          console.log(error);
-        },
-        () => {
-          console.log(this.courses);
-        })
-    })
+    for (var i = 0; i < this.store.length; i++) {
+      if (this.store[i] === id) {
+        this.store.splice(i, 1);
+      }
+    }
+
+    localStorage.setItem('user', JSON.stringify(this.user));
+
+    this.profileService
+      .update(this.user._id, { store: this.store })
+      .subscribe(() => console.log('profile updated'));
+
+    this.storeService
+      .deleteService(id)
+      .subscribe(() => console.log('course deleted'));
   }
+
   getfile(f: any) {
     console.log(f);
     this.file = '';
     this.file = this.sanitizer.bypassSecurityTrustResourceUrl(
-      'assets/uploads/courses/'+f
+      'assets/uploads/courses/' + f
     );
   }
-  getCourse(id:any){
-    this.router.navigate(['/coursedetails',id])
-  }
-   getresult(query:any){
-     this.router.navigate(['/result',query])
-   }
 
+  getCourse(id: any) {
+
+    this.router.navigate(['/coursedetails', id]);
+  }
+
+  getresult(query: any) {
+    this.router.navigate(['/result', query]);
+  }
 }

@@ -15,6 +15,7 @@ var studentSchema = mongoose.Schema({
   password: {
     type: String
   },
+  library: [{ type: mongoose.Schema.Types.ObjectId, ref: "course" }],
   image: String,
   about: String,
   firstName: String,
@@ -22,7 +23,7 @@ var studentSchema = mongoose.Schema({
   mobile: String,
   location: String,
   experience: Array,
-  social: Array,
+  social: Object,
   role: String,
   provider: String
 });

@@ -63,6 +63,24 @@ input:focus + label {
   width: 50%;
   height: 50%;
 }
+#addexpbtn {
+  margin-left: 4%;
+}
+#imguploadbtn {
+  position: relative;
+  left: 132px;
+  bottom: 62px;
+  height: 43px;
+  border-radius: 3px;
+}
+
+#expdesc {
+  width: 92.2%;
+  margin-left: 4%;
+}
+#expdesclabel {
+  margin-left: 4%;
+}
 /* .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;

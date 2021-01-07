@@ -4,7 +4,6 @@ var { Instructor } = require("./models/instructorModel");
 var { Student } = require("./models/studentModel");
 var { CourseModel } = require("./models/courseModel");
 
-
 mongoose.connect("mongodb+srv://hbib:hbib@cluster0.m3m3t.mongodb.net/mindlab", {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -16,62 +15,77 @@ db.once("open", function () {
   console.log("database connected!");
 });
 
-var insertInstructor = function (instructor) {
+exports.insertInstructor = function (instructor) {
   return Instructor.create(instructor);
 };
 
-var insertStudent = function (student) {
+exports.insertStudent = function (student) {
   return Student.create(student);
 };
-var findStudent = function (student) {
-  return Student.findOne(student);
+exports.findStudent = function (student) {
+  return Student.findOne(student).populate("library");
 };
-var findInstructor = function (instructor) {
-  return Instructor.findOne(instructor);
+exports.findInstructor = function (instructor) {
+  return Instructor.findOne(instructor).populate("store");
 };
 
-var updateStudent = function (id, student) {
+exports.updateStudent = function (id, student) {
   return Student.findByIdAndUpdate(id, student);
 };
 
-var updateInstructor = function (id, instructor) {
+exports.updateInstructor = function (id, instructor) {
   return Instructor.findByIdAndUpdate(id, instructor);
 };
-var addCourse=function(course){
+exports.addCourse = function (course) {
   return CourseModel.create(course);
-
-}
-var deleteCourse=function(id){
+};
+exports.deleteCourse = function (id) {
   return CourseModel.findByIdAndRemove(id);
+};
+exports.findCourses = function () {
+  return CourseModel.find({}).populate("IdInstructor");
+};
 
-}
-var findCourses=function(){
-  return CourseModel.find()
-}
-
-var getStudentById = function (id) {
+exports.getStudentById = function (id) {
   return Student.findOne({ _id: id });
 };
 
-var getInstructorById = function (id) {
+exports.getInstructorById = function (id) {
   return Instructor.findOne({ _id: id });
 };
 
-var getInstructorByEmail = function (email) {
-  return Instructor.findOne({ email: email });
+exports.getAllInstructors = function () {
+  return Instructor.find();
+};
+exports.getAllStudents = function () {
+  return Student.find();
 };
 
-var getStudentByEmail = function (email) {
-  return Student.findOne({ email: email });
+exports.getInstructorByEmail = function (email) {
+  return Instructor.findOne({ email: email }).populate("store");
 };
-var updateCourse = function (id, course) {
+
+exports.getStudentByEmail = function (email) {
+  return Student.findOne({ email: email }).populate("library");
+};
+
+exports.findCourseById = function (id) {
+  return CourseModel.findById(id);
+};
+exports.updateCourse = function (id, course) {
   return CourseModel.findByIdAndUpdate(id, course);
 };
-var getCourseById= function (id){
+exports.getCourseById= function (id){
   return CourseModel.findOne({ _id: id });
 }
+exports.getStudentByEmail = function (email) {
+  return Student.findOne({ email: email }).populate("library");
+};
 
-var courseComment=function (id, comment){
+exports.findCourseById = function (id) {
+  return CourseModel.findById(id);
+};
+exports.courseComment=function (id, comment){
   return CourseModel.findByIdAndUpdate(
     id,
     {
@@ -87,10 +101,10 @@ var courseComment=function (id, comment){
     {new:true})
     
 }
-var editcommentCourse= function (id){
+exports.editcommentCourse= function (id){
   return CourseModel.findById(id)
 }
-var deletecommentCourse=function (id,comment){
+exports.deletecommentCourse=function (id,comment){
   return CourseModel.findByIdAndUpdate(id,{
     $pull:{
       comments:{
@@ -99,7 +113,7 @@ var deletecommentCourse=function (id,comment){
     }
   },{new:true})
 }
-var courserate=function (id,rate){
+exports.courserate=function (id,rate){
   return CourseModel.findByIdAndUpdate(
     id,
     {
@@ -113,26 +127,6 @@ var courserate=function (id,rate){
     {new:true})
     
 }
-var editrateCourse= function (id){
+exports.ditrateCourse= function (id){
   return CourseModel.findById(id)
 }
-module.exports.getStudentByEmail = getStudentByEmail;
-module.exports.getInstructorByEmail = getInstructorByEmail;
-module.exports.insertInstructor = insertInstructor;
-module.exports.insertStudent = insertStudent;
-module.exports.updateStudent = updateStudent;
-module.exports.updateInstructor = updateInstructor;
-module.exports.findInstructor = findInstructor;
-module.exports.findStudent = findStudent;
-module.exports.getStudentById = getStudentById;
-module.exports.getInstructorById = getInstructorById;
-module.exports.deleteCourse = deleteCourse;
-module.exports.updateCourse=updateCourse
-module.exports.getCourseById=getCourseById
-module.exports.addCourse = addCourse;
-module.exports.findCourses = findCourses;
-module.exports.courseComment=courseComment
-module.exports.editcommentCourse= editcommentCourse
-module.exports.deletecommentCourse=deletecommentCourse
-module.exports.courserate=courserate
-module.exports.editrateCourse=editrateCourse

@@ -9,76 +9,103 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  query:string;
   user: any;
   image: any;
   file: any;
+  update: boolean = false;
   experiences: any = [];
+  addExperience: boolean = false;
   token: any;
-  numExp: number = 0;
+  imgSelectErr: boolean = false;
 
   constructor(private profileService: ProfileService,private router:Router) {}
-  update: boolean = false;
+
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    console.log(this.user);
     this.profileService
       .getUserById(this.user._id, this.user.role)
       .subscribe((data: any) => {
         this.updateUser(data);
+        this.experiences = this.user.experience;
+        console.log(this.user);
       });
   }
   onChange(img: any) {
     this.image = img.files[0].name.toLowerCase();
     this.file = img.files[0];
+    this.imgSelectErr = false;
   }
   changeView(view: boolean) {
     this.image = '';
-    this.numExp = 0;
-    this.experiences = [];
     this.update = view;
   }
 
   addExp(f: any) {
-    var obj = {
-      title: f.title,
-      description: f.description,
-      date: f.date,
+    if (!f.title || !f.description || !f.date) return;
+    var ID = function () {
+      return '_' + Math.random().toString(36).substr(2, 9);
     };
-    this.experiences.push(obj);
-    this.numExp++;
+    f.id = ID();
+    console.log(this.experiences);
+    this.experiences.push(f);
+    this.profileService
+      .update(this.user._id, { experience: this.experiences })
+      .subscribe();
+  }
+
+  deleteExp(id: string) {
+    for (var i = 0; i < this.experiences.length; i++) {
+      if (this.experiences[i].id === id) {
+        this.experiences.splice(i, 1);
+      }
+    }
+    this.profileService
+      .update(this.user._id, { experience: this.experiences })
+      .subscribe();
+  }
+
+  updateImage() {
+    if (!this.image || !this.file) {
+      this.imgSelectErr = true;
+      return;
+    }
+    const formData = new FormData();
+    formData.append('file', this.file);
+    var obj = { image: '../../../assets/images/' + this.image };
+
+    this.profileService.update(this.user._id, obj).subscribe(() => {
+      this.profileService.image(formData).subscribe(() => {
+        this.profileService
+          .getUserById(this.user._id, this.user.role)
+          .subscribe((data: any) => {
+            this.updateUser(data);
+          });
+      });
+    });
   }
 
   updateProfile(id: string, f: any) {
-    var social = [];
-    social.push(
-      { facebook: f.facebook },
-      { linkedin: f.linkedin },
-      { twitter: f.twitter },
-      { github: f.github }
-    );
-
-    const formData = new FormData();
-    formData.append('file', this.file);
+    var social = {
+      facebook: f.facebook,
+      twitter: f.twitter,
+      linkedin: f.linkedin,
+      github: f.github,
+    };
 
     var obj = {
-      image: '../../../assets/images/' + this.image,
       about: f.about,
       firstName: f.firstName,
       lastName: f.lastName,
       mobile: f.mobile,
       location: f.location,
-      experience: this.experiences,
       social: social,
     };
     this.profileService.update(id, obj).subscribe(() => {
-      this.profileService.image(formData).subscribe(() => {
-        this.profileService
-          .getUserById(id, this.user.role)
-          .subscribe((data: any) => {
-            this.updateUser(data);
-          });
-      });
+      this.profileService
+        .getUserById(id, this.user.role)
+        .subscribe((data: any) => {
+          this.updateUser(data);
+        });
     });
   }
 
@@ -87,8 +114,6 @@ export class ProfileComponent implements OnInit {
     localStorage.setItem('user', JSON.stringify(user));
   }
   Logout() {
-    this.token = null;
-    this.user = null;
     localStorage.clear();
   }
   getresult(query:any){

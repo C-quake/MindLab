@@ -27,13 +27,28 @@ export class SignupInstructorComponent implements OnInit {
         .findInstructor(user.email)
         .subscribe((res: any) => {
           if (res) {
+            res.image =
+              '../../../assets/images/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg';
             localStorage.setItem('user', JSON.stringify(res));
+            this.router.navigate(['/home']).then(() => {
+              window.location.reload();
+            });
           } else {
             user.username = user.name;
             user.image = user.photoUrl;
             user.role = 'instructor';
+            user.social = {
+              facebook: '',
+              twitter: '',
+              linkedin: '',
+              github: '',
+            };
+            user.store = [];
             this.instructorService.addInstructor(user).subscribe((res) => {
               localStorage.setItem('user', JSON.stringify(res));
+              this.router.navigate(['/home']).then(() => {
+                window.location.reload();
+              });
             });
           }
         });
@@ -49,18 +64,25 @@ export class SignupInstructorComponent implements OnInit {
       username: f.username,
       email: f.email,
       password: f.password,
-      image: 'default-profile.jpg',
+      image:
+        '../../../assets/images/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg',
       about: '',
       firstName: '',
       lastName: '',
       mobile: '',
       location: '',
       experience: [],
-      social: [],
+      social: {
+        facebook: '',
+        twitter: '',
+        linkedin: '',
+        github: '',
+      },
+      store: [],
       role: 'instructor',
     };
     this.instructorService.addInstructor(obj).subscribe((res) => {
-      this.router.navigate(['']).then(() => {
+      this.router.navigate(['/login']).then(() => {
         window.location.reload();
       });
     });

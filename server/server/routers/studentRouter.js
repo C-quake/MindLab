@@ -74,4 +74,12 @@ router.route("/api/studentemail/:email").get((req, res) => {
   });
 });
 
+
+router.route("/api/student").get((req, res) => {
+  student.getAllStudents().then((data) => {
+    res.send(data);
+  });
+});
+
+
 module.exports = router;

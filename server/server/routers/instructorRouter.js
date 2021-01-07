@@ -70,4 +70,10 @@ router.route("/api/instructoremail/:email").get((req, res) => {
   });
 });
 
+router.route("/api/instructor").get((req, res) => {
+  instructor.getAllInstructors().then((data) => {
+    res.send(data);
+  });
+});
+
 module.exports = router;

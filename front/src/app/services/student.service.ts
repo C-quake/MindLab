@@ -9,8 +9,10 @@ export class StudentService {
   addstudent(user: any) {
     return this.http.post('http://localhost:3000/api/newstudent', user);
   }
-  findStudent(email: string){
-    return this.http.get('http://localhost:3000/api/studentemail/'+ email);
+  findStudent(email: string) {
+    return this.http.get('http://localhost:3000/api/studentemail/' + email);
   }
-
+  findStudents() {
+    return this.http.get('http://localhost:3000/api/student');
+  }
 }

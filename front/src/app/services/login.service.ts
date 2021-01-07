@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class LoginService {
+  user: any
   constructor(private _http: HttpClient) {}
 
   login1(body: any) {

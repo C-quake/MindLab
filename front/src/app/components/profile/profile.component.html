@@ -10,161 +10,168 @@
   integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA="
   crossorigin="anonymous"
 />
-<div id="preloader">
-  <img class="preloader" src="images/loader.gif" alt="" />
-</div>
-<!-- end loader -->
-<!-- END LOADER -->
 
-<div id="wrapper">
-  <!-- BEGIN # MODAL LOGIN -->
-  <div
-    class="modal fade"
-    id="login-modal"
-    tabindex="-1"
-    role="dialog"
-    aria-hidden="true"
-    style="display: none"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <!-- Begin # DIV Form -->
-        <div id="div-forms">
-          <form id="login-form">
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span class="flaticon-add" aria-hidden="true"></span>
-            </button>
-            <div class="modal-body">
-              <input
-                class="form-control"
-                type="text"
-                placeholder="What you are looking for?"
-                required
-              />
-            </div>
-          </form>
-          <!-- End # Login Form -->
-        </div>
-        <!-- End # DIV Form -->
-      </div>
-    </div>
-  </div>
-  <!-- END # MODAL LOGIN -->
-
-  <header class="header header-normal">
-    <div class="topbar clearfix">
-      <div class="container">
-        <div class="row-fluid">
-          <div class="col-md-6 col-sm-6 text-left">
-            <p>
-              <strong><i class="fa fa-phone"></i></strong> +90 543 123 45 67
-              &nbsp;&nbsp; <strong><i class="fa fa-envelope"></i></strong>
-              <a href="mailto:#">info@yoursite.com</a>
-            </p>
-          </div>
-          <!-- end left -->
-          <div class="col-md-6 col-sm-6 hidden-xs text-right">
-            <div class="social">
-              <a
-                class="facebook"
-                href="#"
-                data-tooltip="tooltip"
-                data-placement="bottom"
-                title="Facebook"
-                ><i class="fa fa-facebook"></i
-              ></a>
-              <a
-                class="twitter"
-                href="#"
-                data-tooltip="tooltip"
-                data-placement="bottom"
-                title="Twitter"
-                ><i class="fa fa-twitter"></i
-              ></a>
-              <a
-                class="google"
-                href="#"
-                data-tooltip="tooltip"
-                data-placement="bottom"
-                title="Google Plus"
-                ><i class="fa fa-google-plus"></i
-              ></a>
-              <a
-                class="linkedin"
-                href="#"
-                data-tooltip="tooltip"
-                data-placement="bottom"
-                title="Linkedin"
-                ><i class="fa fa-linkedin"></i
-              ></a>
-              <a
-                class="pinterest"
-                href="#"
-                data-tooltip="tooltip"
-                data-placement="bottom"
-                title="Pinterest"
-                ><i class="fa fa-pinterest"></i
-              ></a>
-            </div>
-            <!-- end social -->
-          </div>
-          <!-- end left -->
-        </div>
-        <!-- end row -->
-      </div>
-      <!-- end container -->
-    </div>
-    <!-- end topbar -->
-
+<header class="header header-normal">
+  <div class="topbar clearfix">
     <div class="container">
-      <nav class="navbar navbar-default yamm">
-        <div class="navbar-header">
-          <button
-            type="button"
-            class="navbar-toggle collapsed"
-            data-toggle="collapse"
-            data-target="#navbar"
-            aria-expanded="false"
-            aria-controls="navbar"
-          >
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <div class="logo-normal">
-            <a class="navbar-brand" href="index.html"
-              ><img src="../../assets/images/logo-dark.png" alt=""
-            /></a>
+      <div class="row-fluid">
+        <div class="col-md-6 col-sm-6 text-left">
+          <p>
+            <strong><i class="fa fa-phone"></i></strong> +90 543 123 45 67
+            &nbsp;&nbsp; <strong><i class="fa fa-envelope"></i></strong>
+            <a href="mailto:#">info@yoursite.com</a>
+          </p>
+        </div>
+        <!-- end left -->
+        <div class="col-md-6 col-sm-6 hidden-xs text-right">
+          <div class="social">
+            <a
+              class="facebook"
+              href="#"
+              data-tooltip="tooltip"
+              data-placement="bottom"
+              title="Facebook"
+              ><i class="fa fa-facebook"></i
+            ></a>
+            <a
+              class="twitter"
+              href="#"
+              data-tooltip="tooltip"
+              data-placement="bottom"
+              title="Twitter"
+              ><i class="fa fa-twitter"></i
+            ></a>
+            <a
+              class="google"
+              href="#"
+              data-tooltip="tooltip"
+              data-placement="bottom"
+              title="Google Plus"
+              ><i class="fa fa-google-plus"></i
+            ></a>
+            <a
+              class="linkedin"
+              href="#"
+              data-tooltip="tooltip"
+              data-placement="bottom"
+              title="Linkedin"
+              ><i class="fa fa-linkedin"></i
+            ></a>
+            <a
+              class="pinterest"
+              href="#"
+              data-tooltip="tooltip"
+              data-placement="bottom"
+              title="Pinterest"
+              ><i class="fa fa-pinterest"></i
+            ></a>
           </div>
+          <!-- end social -->
         </div>
-        <div>
-          <form class="form-inline pull-right" style="margin-top: 5px">
-            <input type="text" class="form-control" [(ngModel)]="query" placeholder="Search" name="query" >
-            <button class="btn btn-outline-success" (click)="getresult(query)" type="submit">Search</button>
-         </form>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="index.html">Home</a></li>
-            <li><a href='store' >Store</a></li>
-            <li><a href='profile'>Profile</a></li>
-            <li>
-              <a><i class="fa fa-sign-out" style="color: red; font-size:30px"></i></a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <!-- end navbar -->
+        <!-- end left -->
+      </div>
+      <!-- end row -->
     </div>
     <!-- end container -->
-  </header>
-  <br /><br />
+  </div>
+  <!-- end topbar -->
+
+  <div class="container">
+    <nav class="navbar navbar-default yamm">
+      <div class="navbar-header">
+        <button
+          type="button"
+          class="navbar-toggle collapsed"
+          data-toggle="collapse"
+          data-target="#navbar"
+          aria-expanded="false"
+          aria-controls="navbar"
+        >
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="logo-normal">
+          <a class="navbar-brand" href="index.html"
+            ><img src="../../assets/images/logo-dark.png" alt=""
+          /></a>
+        </div>
+      </div>
+
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/home">Home</a></li>
+          <li class="dropdown yamm-fw yamm-half">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle active"
+              >Mega Menu <b class="fa fa-angle-down"></b
+            ></a>
+            <ul class="dropdown-menu">
+              <li>
+                <div class="yamm-content clearfix">
+                  <div class="row-fluid">
+                    <div class="col-md-6 col-sm-6">
+                      <h4>Course Pages</h4>
+                      <ul>
+                        <li><a href="#">Courses Name 01</a></li>
+                        <li><a href="#">Courses Name 02</a></li>
+                        <li><a href="#">Courses Name 03</a></li>
+                        <li><a href="#">Courses Name 04</a></li>
+                        <li><a href="#">Courses Name 05</a></li>
+                        <li><a href="#">Courses Name 06</a></li>
+                        <li><a href="#">Courses Name 07</a></li>
+                        <li><a href="#">Courses Name 08</a></li>
+                        <li><a href="#">Courses Name 09</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                      <div class="menu-widget text-center">
+                        <div class="image-wrap entry">
+                          <img
+                            src="../../../assets/upload/course_01.jpg"
+                            alt=""
+                            class="img-responsive"
+                          />
+                          <div class="magnifier">
+                            <a href="#" title=""
+                              ><i class="flaticon-add"></i
+                            ></a>
+                          </div>
+                        </div>
+
+                        <!-- end image-wrap -->
+                        <h5><a href="#">Learning Bootstrap Framework</a></h5>
+                        <small>$22.00</small>
+                        <a href="#" class="menu-button">View Course</a>
+                      </div>
+                      <!-- end widget -->
+                    </div>
+                  </div>
+
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li><a (click)="Logout()" href="">Log Out</a></li>
+          <li class="iconitem">
+            <a href="#" data-toggle="modal" data-target="#login-modal"
+              ><i class="fa fa-search"></i
+            ></a>
+          </li>
+          <li class="iconitem"></li>
+        </ul>
+      </div>
+      <div>
+        <form class="form-inline pull-right" style="margin-top: 5px">
+          <input type="text" class="form-control" [(ngModel)]="query" placeholder="Search" name="query" >
+          <button class="btn btn-outline-success" (click)="getresult(query)" type="submit">Search</button>
+       </form>
+      </div>
+    </nav>
+    <!-- end navbar -->
+  </div>
+  <!-- end container -->
+</header>
 <div class="container">
   <div class="row">
     <div class="col-lg-4 col-xl-4">
@@ -223,28 +230,28 @@
         <ul class="social-list list-inline mt-3 mb-0">
           <li class="list-inline-item">
             <a
-              href="javascript: void(0);"
+              href="https://{{ user.social.facebook }}"
               class="social-list-item border-purple text-purple"
               ><i class="fab fa-facebook"></i
             ></a>
           </li>
           <li class="list-inline-item">
             <a
-              href="javascript: void(0);"
+              href="https://{{ user.social.linkedin }}"
               class="social-list-item border-danger text-danger"
-              ><i class="fab fa-google"></i
+              ><i class="fab fa-linkedin"></i
             ></a>
           </li>
           <li class="list-inline-item">
             <a
-              href="javascript: void(0);"
+              href="https://{{ user.social.twitter }}"
               class="social-list-item border-info text-info"
               ><i class="fab fa-twitter"></i
             ></a>
           </li>
           <li class="list-inline-item">
             <a
-              href="javascript: void(0);"
+              href="https://{{ user.social.github }}"
               class="social-list-item border-secondary text-secondary"
               ><i class="fab fa-github"></i
             ></a>
@@ -295,16 +302,101 @@
 
               <ul class="list-unstyled timeline-sm">
                 <h5 *ngIf="!user.experience.length">
-                  You have no registered experience yet
+                  You have no registered experience yet,
+                  <a (click)="addExperience = true" style="cursor: pointer"
+                    >click here to add</a
+                  >
                 </h5>
-                <li class="timeline-sm-item" *ngFor="let x of user.experience">
+                <li class="timeline-sm-item" *ngFor="let x of experiences">
                   <span class="timeline-sm-date">{{ x.date }}</span>
                   <h5 class="mt-0 mb-1">{{ x.title }}</h5>
                   <p class="text-muted mt-2">
                     {{ x.description }}
                   </p>
+                  <br />
+                  <i
+                    class="fa fa-trash"
+                    (click)="deleteExp(x.id)"
+                    style="cursor: pointer; font-size: 23px"
+                  >
+                  </i>
                 </li>
               </ul>
+              <br /><br />
+              <div *ngIf="addExperience">
+                <h5 class="mb-3 text-uppercase bg-light p-2">
+                  <i class="mdi mdi-account-circle mr-1"></i> Add Experience
+                </h5>
+                <form #f="ngForm" (ngSubmit)="addExp(f.form.value)">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="title">Title</label>
+                        <input
+                          ngModel
+                          type="text"
+                          name="title"
+                          type="text"
+                          class="form-control"
+                          id="firstname"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="date">Date</label>
+                        <input
+                          ngModel
+                          name="date"
+                          type="date"
+                          class="form-control"
+                          id="lastname"
+                        />
+                      </div>
+                    </div>
+                    <!-- end col -->
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group">
+                          <label for="description" id="expdesclabel"
+                            >Description</label
+                          >
+                          <textarea
+                            ngModel
+                            name="description"
+                            class="form-control"
+                            id="expdesc"
+                            rows="4"
+                          ></textarea>
+                        </div>
+                        <button
+                          type="submit"
+                          class="btn btn-success waves-effect waves-light mt-2"
+                          id="addexpbtn"
+                        >
+                          Add</button
+                        ><button
+                          type="button"
+                          (click)="addExperience = false"
+                          class="btn btn-success waves-effect waves-light mt-2"
+                          style="background-color: gray"
+                        >
+                          Hide
+                        </button>
+                      </div>
+                      <!-- end col -->
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <br /><br />
+              <button
+                class="btn btn-success waves-effect waves-light mt-2"
+                *ngIf="!addExperience && user.experience.length"
+                (click)="addExperience = true"
+              >
+                Click To Add Experiences
+              </button>
             </div>
 
             <!-- end timeline content-->
@@ -321,6 +413,16 @@
                   (change)="onChange(img)"
                 />
                 <label for="file">Select file</label>
+                <button
+                  class="btn btn-success waves-effect waves-light mt-2"
+                  id="imguploadbtn"
+                  (click)="updateImage()"
+                >
+                  Update Image
+                </button>
+                <p *ngIf="imgSelectErr" style="color: red">
+                  Please select an image
+                </p>
                 {{ image }}
               </div>
               <form
@@ -336,12 +438,12 @@
                     <div class="form-group">
                       <label for="firstname">First Name</label>
                       <input
-                        ngModel
+                        ngModel="{{ user.firstName }}"
+                        type="hidden"
                         name="firstName"
                         type="text"
                         class="form-control"
                         id="firstname"
-                        placeholder="Enter first name"
                       />
                     </div>
                   </div>
@@ -349,12 +451,11 @@
                     <div class="form-group">
                       <label for="lastname">Last Name</label>
                       <input
-                        ngModel
+                        ngModel="{{ user.lastName }}"
                         name="lastName"
                         type="text"
                         class="form-control"
                         id="lastname"
-                        placeholder="Enter last name"
                       />
                     </div>
                   </div>
@@ -366,12 +467,11 @@
                     <div class="form-group">
                       <label for="location">Location</label>
                       <input
-                        ngModel
+                        ngModel="{{ user.location }}"
                         name="location"
                         type="text"
                         class="form-control"
                         id="location"
-                        placeholder="Enter location"
                       />
                     </div>
                   </div>
@@ -379,12 +479,11 @@
                     <div class="form-group">
                       <label for="mobile">Mobile</label>
                       <input
-                        ngModel
+                        ngModel="{{ user.mobile }}"
                         name="mobile"
                         type="text"
                         class="form-control"
                         id="mobile"
-                        placeholder="Enter mobile number"
                       />
                     </div>
                   </div>
@@ -396,77 +495,15 @@
                     <div class="form-group">
                       <label for="userbio">About</label>
                       <textarea
-                        ngModel
+                        ngModel="{{ user.about }}"
                         name="about"
                         class="form-control"
                         id="userbio"
                         rows="4"
-                        placeholder="Write something..."
                       ></textarea>
                     </div>
                   </div>
                   <!-- end col -->
-                </div>
-
-                <h5 class="mb-3 text-uppercase bg-light p-2">
-                  <i class="mdi mdi-briefcase mr-1"></i> Add Experience
-                </h5>
-
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="title">Title</label>
-                      <input
-                        ngModel
-                        name="title"
-                        type="text"
-                        class="form-control"
-                        id="title"
-                        placeholder="Enter title"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="date">Date</label>
-                      <input
-                        ngModel
-                        name="date"
-                        type="date"
-                        class="form-control"
-                        id="date"
-                        placeholder="Enter date"
-                      />
-                    </div>
-                  </div>
-                  <!-- end col -->
-                </div>
-                <!-- end row -->
-
-                <div class="row">
-                  <div class="col-12">
-                    <div class="form-group">
-                      <label for="description">Description</label>
-                      <textarea
-                        ngModel
-                        name="description"
-                        class="form-control"
-                        id="description"
-                        rows="4"
-                        placeholder="Write something..."
-                      ></textarea>
-                    </div>
-                  </div>
-                  <!-- end col -->
-                  <button
-                    id="addbtn"
-                    class="btn btn-success waves-effect waves-light mt-2"
-                    type="button"
-                    (click)="addExp(f.form.value)"
-                  >
-                    Add
-                  </button>
-                  <span> {{ numExp }} experience added</span>
                 </div>
                 <!-- end row -->
 
@@ -512,8 +549,7 @@
                           type="text"
                           class="form-control"
                           id="social-fb"
-                          placeholder="Url"
-                          ngModel
+                          ngModel="{{ user.social.facebook }}"
                           name="facebook"
                         />
                       </div>
@@ -532,8 +568,7 @@
                           type="text"
                           class="form-control"
                           id="social-tw"
-                          placeholder="Username"
-                          ngModel
+                          ngModel="{{ user.social.twitter }}"
                           name="twitter"
                         />
                       </div>
@@ -557,8 +592,7 @@
                           type="text"
                           class="form-control"
                           id="social-gh"
-                          placeholder="Username"
-                          ngModel
+                          ngModel="{{ user.social.github }}"
                           name="github"
                         />
                       </div>
@@ -577,8 +611,7 @@
                           type="text"
                           class="form-control"
                           id="social-lin"
-                          placeholder="Url"
-                          ngModel
+                          ngModel="{{ user.social.linkedin }}"
                           name="linkedin"
                         />
                       </div>

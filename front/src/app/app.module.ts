@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,17 +15,24 @@ import {
   SocialLoginModule,
   SocialAuthServiceConfig,
 } from 'angularx-social-login';
-import { GoogleLoginProvider } from 'angularx-social-login';
-import { StoreComponent } from './components/store/store.component';
-import { NewcourseComponent } from './components/newcourse/newcourse.component';
-import {CourseDetailsComponent} from './components/course-details/course-details.component';
+
 import { EditCourseComponent } from './components/edit-course/edit-course.component';
 import { UsersListComponent } from './component/users-list/users-list.component';
 import { ChatWindowComponent } from './component/chat-window/chat-window.component';
 import { ChatNamePopupComponent } from './component/chat-name-popup/chat-name-popup.component';
 import { ChatComponent } from './components/chat/chat.component'
-import { ResultComponent } from './components/result/result.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { NgxPayPalModule } from 'ngx-paypal';
+import { GoogleLoginProvider } from 'angularx-social-login';
+import { StoreComponent } from './components/store/store.component';
+import { NewcourseComponent } from './components/newcourse/newcourse.component';
+import { CourseDetailsComponent } from './components/course-details/course-details.component';
+import { LibraryComponent } from './components/library/library.component';
+import { PaypalComponent } from './components/paypal/paypal.component';
+import { AuthGuard } from './guards/auth.guard';
+import { ResultComponent } from './components/result/result.component';
+import { EditComponent } from './components/edit/edit.component';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +51,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
     ChatWindowComponent,
     ChatNamePopupComponent,
     ChatComponent,
-    ResultComponent
+    ResultComponent,
+    LibraryComponent,
+    PaypalComponent,
+    ResultComponent,
+    EditComponent,
+
+
   ],
 
   imports: [
@@ -55,7 +69,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
     SocialLoginModule,
     NgbModule,
   ],
+
   providers: [
+    AuthGuard,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {

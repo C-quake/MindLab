@@ -1,5 +1,5 @@
 <div id="preloader">
-  <img class="preloader" src="images/loader.gif" alt="" />
+  <img class="preloader" src="../../../assets/images/loader.gif" alt="" />
 </div>
 <!-- end loader -->
 <!-- END LOADER -->
@@ -183,48 +183,22 @@
                 </li>
               </ul>
             </li>
-            <li><a href="events.html">Events</a></li>
-            <li class="dropdown hassubmenu">
+            <li class="dropdown yamm-fw yamm-half">
               <a
-                href="#"
-                class="dropdown-toggle"
                 data-toggle="dropdown"
-                role="button"
-                aria-expanded="false"
-                >Shop <span class="fa fa-angle-down"></span
+                style="cursor: pointer"
+                class="dropdown-toggle active"
+                >Sign Up <b class="fa fa-angle-down"></b
               ></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="shop.html">Shop Layout</a></li>
-                <li><a href="shop-single.html">Shop Single</a></li>
+              <ul class="dropdown-menu">
+                <li><a href="/signupstudent">Sign Up as Student</a></li>
+                <li><a href="/signupinstructor">Sign Up as Instructor</a></li>
               </ul>
             </li>
-            <li class="dropdown hassubmenu">
-              <a
-                href="#"
-                class="dropdown-toggle"
-                data-toggle="dropdown"
-                role="button"
-                aria-expanded="false"
-                >Blog <span class="fa fa-angle-down"></span
-              ></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="blog.html">Blog Right Sidebar</a></li>
-                <li><a href="blog-1.html">Blog Left Sidebar</a></li>
-                <li><a href="blog-2.html">Blog Grid Sidebar</a></li>
-                <li><a href="blog-3.html">Blog Grid Fullwidth</a></li>
-                <li><a href="blog-single.html">Blog Single</a></li>
-              </ul>
-            </li>
-            <li><a href="page-contact.html">login</a></li>
             <li class="iconitem">
               <a href="#" data-toggle="modal" data-target="#login-modal"
                 ><i class="fa fa-search"></i
               ></a>
-            </li>
-            <li class="iconitem">
-              <a class="shopicon" href="shop-cart.html"
-                ><i class="fa fa-shopping-basket"></i> &nbsp;(0)</a
-              >
             </li>
           </ul>
         </div>
@@ -293,8 +267,13 @@
               </select>
               <!-- <small class="text-danger" [class.d-none]="role.valid ||role.untouched">Please choose your role</small> -->
               <br />
-              <button id="logSub" type="submit" class="btn btn-primary" (click)="login()">
-                Submit
+              <button
+                id="logSub"
+                type="submit"
+                class="btn btn-primary wow slideInLeft"
+                (click)="login()"
+              >
+                Sign In
               </button>
             </form>
             <br />
