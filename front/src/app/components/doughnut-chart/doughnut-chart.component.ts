@@ -28,7 +28,7 @@ export class DoughnutChartComponent {
       this.allinstructor(),
       this.allstudent(),
       this.allcouses(),
-    ]).subscribe((data) => {
+    ]).subscribe((data: any) => {
       console.log(data[0].length);
       console.log(data[1].length);
       this.doughnutChartData = [data[0].length, data[1].length, data[2].length];

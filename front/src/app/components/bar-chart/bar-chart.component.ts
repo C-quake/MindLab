@@ -14,6 +14,9 @@ import { StoreService } from '../../services/store.service';
 export class BarChartComponent {
   barChartOptions: ChartOptions = {
     responsive: true,
+    scales: {
+      yAxes: [{ id: 'y-axis-1', ticks: { min: 0, max: 100 } }],
+    },
   };
   barChartLabels: any = ['Instructor', 'Student', 'Courses'];
   barChartType: any = 'bar';
@@ -32,10 +35,11 @@ export class BarChartComponent {
       this.allinstructor(),
       this.allstudent(),
       this.allcouses(),
-    ]).subscribe((data) => {
+    ]).subscribe((data: any) => {
       console.log(data[0].length);
       console.log(data[1].length);
       console.log(data[2].length);
+
       this.barChartData = [
         {
           data: [data[0].length, data[1].length, data[2].length],
