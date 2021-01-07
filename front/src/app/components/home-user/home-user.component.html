@@ -136,27 +136,14 @@
             <li><a href="/home">Home</a></li>
             <li><a href="/profile">Profile</a></li>
             <li class="dropdown yamm-fw yamm-half">
-              <a href="#" data-toggle="dropdown" class="dropdown-toggle active"
+              <!-- <a href="#" data-toggle="dropdown" class="dropdown-toggle active"
                 >Mega Menu <b class="fa fa-angle-down"></b
-              ></a>
+              ></a> -->
               <ul class="dropdown-menu">
                 <li>
                   <div class="yamm-content clearfix">
                     <div class="row-fluid">
-                      <div class="col-md-6 col-sm-6">
-                        <h4>Course Pages</h4>
-                        <ul>
-                          <li><a href="#">Courses Name 01</a></li>
-                          <li><a href="#">Courses Name 02</a></li>
-                          <li><a href="#">Courses Name 03</a></li>
-                          <li><a href="#">Courses Name 04</a></li>
-                          <li><a href="#">Courses Name 05</a></li>
-                          <li><a href="#">Courses Name 06</a></li>
-                          <li><a href="#">Courses Name 07</a></li>
-                          <li><a href="#">Courses Name 08</a></li>
-                          <li><a href="#">Courses Name 09</a></li>
-                        </ul>
-                      </div>
+                    
                       <div class="col-md-6 col-sm-6">
                         <div class="menu-widget text-center">
                           <div class="image-wrap entry">
@@ -184,17 +171,29 @@
               </ul>
             </li>
             <li class="dropdown hassubmenu"></li>
-            <li class="dropdown hassubmenu">
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="blog.html">Blog Right Sidebar</a></li>
-                <li><a href="blog-1.html">Blog Left Sidebar</a></li>
-                <li><a href="blog-2.html">Blog Grid Sidebar</a></li>
-                <li><a href="blog-3.html">Blog Grid Fullwidth</a></li>
-                <li><a href="blog-single.html">Blog Single</a></li>
-              </ul>
-            </li>
-            <li><a href="page-contact.html">Contact</a></li>
+         
             <li><a (click)="Logout()" href="">Log Out</a></li>
+            <li>   <div>
+              <form
+                class="form-inline pull-right"
+                style="margin-top: 5px; margin-left: 20px"
+              >
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="query"
+                  placeholder="Search"
+                  name="query"
+                />
+                <button
+                  class="btn btn-outline-success"
+                  (click)="getresult(query)"
+                  type="submit"
+                >
+                  Search
+                </button>
+              </form>
+            </div> </li>
             <li class="iconitem">
               <a href="#" data-toggle="modal" data-target="#login-modal"
                 ><i class="fa fa-search"></i
@@ -414,7 +413,7 @@
   </div>
     <br /><br />
     <div class="section-button text-center">
-      <a  class="btn btn-primary" >View All Instructors</a>
+      <a  class="btn btn-primary" (click)="getInstructors()">View All Instructors</a>
     </div>
 
     <!-- end container -->

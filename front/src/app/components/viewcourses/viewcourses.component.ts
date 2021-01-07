@@ -16,6 +16,8 @@ export class ViewcoursesComponent implements OnInit {
   user: any = JSON.parse(localStorage.getItem('user') || '{}');
   page = 1;
   count = 0;
+  query: string = '';
+
   tableSize = 7;
   tableSizes = [3, 6, 9, 12];
   courses:any =[]
@@ -95,6 +97,9 @@ export class ViewcoursesComponent implements OnInit {
     this.page = 1;
     this.getAllcourses()
   }  
+  getresult(query: any) {
+    this.router.navigate(['/result', query]);
+  }
   
 }
 

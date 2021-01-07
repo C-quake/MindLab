@@ -19,6 +19,8 @@ export class HomeUserComponent implements OnInit {
   courseCount: any;
   selectedCourse: any;
   lib: any = [];
+  query: string = '';
+
   
   constructor(
     private storeService: StoreService,
@@ -98,4 +100,8 @@ export class HomeUserComponent implements OnInit {
 
 
   }
+  getresult(query: any) {
+    this.router.navigate(['/result', query]);
+  }
+  
 }

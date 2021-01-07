@@ -141,7 +141,29 @@
             <li><a href="profile">Profile</a></li>
 
             <li><a (click)="Logout()" href="">Log Out</a></li>
+            <li>  <div>
+              <form
+                class="form-inline pull-right"
+                style="margin-top: 5px; margin-left: 20px"
+              >
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="query"
+                  placeholder="Search"
+                  name="query"
+                />
+                <button
+                  class="btn btn-outline-success"
+                  (click)="getresult(query)"
+                  type="submit"
+                >
+                  Search
+                </button>
+              </form>
+            </div></li>
           </ul>
+
         </div>
       </nav>
       <!-- end navbar -->
