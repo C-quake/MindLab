@@ -15,8 +15,12 @@ import {
   SocialLoginModule,
   SocialAuthServiceConfig,
 } from 'angularx-social-login';
-import { ChatComponent } from './components/chat/chat.component'
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+
+import { UsersListComponent } from './component/users-list/users-list.component';
+import { ChatWindowComponent } from './component/chat-window/chat-window.component';
+import { ChatNamePopupComponent } from './component/chat-name-popup/chat-name-popup.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { StoreComponent } from './components/store/store.component';
@@ -27,11 +31,17 @@ import { PaypalComponent } from './components/paypal/paypal.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ResultComponent } from './components/result/result.component';
 import { EditComponent } from './components/edit/edit.component';
+import { DoughnutChartComponent } from './components/doughnut-chart/doughnut-chart.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { ViewcoursesComponent } from './components/viewcourses/viewcourses.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ViewinstructorsComponent } from './components/viewinstructors/viewinstructors.component';
 
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+
+import { StatisticComponent } from './components/statistic/statistic.component';
+import { BarChartComponent } from './components/bar-chart/bar-chart.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -51,6 +61,10 @@ import { ViewinstructorsComponent } from './components/viewinstructors/viewinstr
     PaypalComponent,
     ResultComponent,
     EditComponent,
+    StatisticComponent,
+    BarChartComponent,
+    DoughnutChartComponent,
+    PieChartComponent,
     ViewcoursesComponent,
     ViewinstructorsComponent,
 
@@ -63,9 +77,9 @@ import { ViewinstructorsComponent } from './components/viewinstructors/viewinstr
     HttpClientModule,
     ReactiveFormsModule,
     SocialLoginModule,
-
     NgxPayPalModule,
     NgbModule,
+    ChartsModule,
     IvyCarouselModule,
     NgxPaginationModule
 
