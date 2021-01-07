@@ -32,7 +32,7 @@ export class EditService {
     body.append('price', price);
 
 
-      
+
     return this.http.put('http://localhost:3000/api/update/course/'+id, body);
   }
   getcoursebyid(id:string){

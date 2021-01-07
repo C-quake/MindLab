@@ -20,7 +20,7 @@ export class ResultComponent implements OnInit {
   ngOnInit(): void {
     this.getallcourses();
     console.log(this.query)
-  
+
   }
 
   getallcourses() {
