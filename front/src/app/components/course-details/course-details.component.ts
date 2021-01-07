@@ -75,7 +75,7 @@ export class CourseDetailsComponent implements OnInit {
       console.log('instructors', this.instructors);
       for (var i = 0; i < this.instructors.length; i++) {
         this.users.push(this.instructors[i]);
-      }
+      }  
     });
     this.users = this.instructors;
     console.log('users', this.users);

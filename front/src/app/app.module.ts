@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +15,8 @@ import {
   SocialLoginModule,
   SocialAuthServiceConfig,
 } from 'angularx-social-login';
+import { ChatComponent } from './components/chat/chat.component'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { NgxPayPalModule } from 'ngx-paypal';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { StoreComponent } from './components/store/store.component';
@@ -44,14 +45,15 @@ import { ViewinstructorsComponent } from './components/viewinstructors/viewinstr
     StoreComponent,
     NewcourseComponent,
     CourseDetailsComponent,
+    ChatComponent,
+    ResultComponent,
     LibraryComponent,
     PaypalComponent,
     ResultComponent,
     EditComponent,
     ViewcoursesComponent,
     ViewinstructorsComponent,
-   
-    
+
   ],
 
   imports: [
@@ -61,11 +63,15 @@ import { ViewinstructorsComponent } from './components/viewinstructors/viewinstr
     HttpClientModule,
     ReactiveFormsModule,
     SocialLoginModule,
+
     NgxPayPalModule,
     NgbModule,
     IvyCarouselModule,
     NgxPaginationModule
+
+  
   ],
+
   providers: [
     AuthGuard,
     {

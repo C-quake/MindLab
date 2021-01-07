@@ -53,6 +53,7 @@ export class ViewinstructorsComponent implements OnInit {
     this.page = 1;
     this.getAllInstructors()
   }  
+  
 
   
 }
