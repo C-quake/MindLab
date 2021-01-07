@@ -26,6 +26,10 @@ import { PaypalComponent } from './components/paypal/paypal.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ResultComponent } from './components/result/result.component';
 import { EditComponent } from './components/edit/edit.component';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
+import { ViewcoursesComponent } from './components/viewcourses/viewcourses.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ViewinstructorsComponent } from './components/viewinstructors/viewinstructors.component';
 
 
 @NgModule({
@@ -44,6 +48,8 @@ import { EditComponent } from './components/edit/edit.component';
     PaypalComponent,
     ResultComponent,
     EditComponent,
+    ViewcoursesComponent,
+    ViewinstructorsComponent,
    
     
   ],
@@ -56,7 +62,9 @@ import { EditComponent } from './components/edit/edit.component';
     ReactiveFormsModule,
     SocialLoginModule,
     NgxPayPalModule,
-    NgbModule
+    NgbModule,
+    IvyCarouselModule,
+    NgxPaginationModule
   ],
   providers: [
     AuthGuard,

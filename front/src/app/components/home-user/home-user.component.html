@@ -211,7 +211,7 @@
 
   <!-- here carousel -->
   <section class="section gb">
-    <div class="container">
+          <div class="container">
       <div class="section-title text-center">
         <h3>Recent Courses</h3>
         <p>
@@ -224,10 +224,10 @@
       <div style="display: flex">
         <div
           class="caro-item"
-          *ngFor="let course of courses"
+          *ngFor="let course of courses; let i=index"
           style="width: 272px; margin: 2%"
         >
-          <div class="course-box">
+          <div class="course-box" *ngIf="i<4">
             <div
               class="image-wrap entry"
               style="cursor: pointer"
@@ -277,7 +277,7 @@
               <div class="pull-left">
                 <ul class="list-inline">
                   <li>
-                    <a><i class="fa fa-user"></i> 21</a>
+                    <a>{{course.averagerate}}</a>
                   </li>
                 </ul>
               </div>
@@ -293,6 +293,12 @@
                   </li>
                 </ul>
               </div>
+              <div class="rating">
+                <ngb-rating [(rate)]="course.averagerate" [max]="5" style="font-size: 20px;
+                color: #FFC107;
+                "  [readonly]="true"></ngb-rating>
+
+              </div> 
               <!-- end left -->
             </div>
             <!-- end footer -->
@@ -300,23 +306,25 @@
           <!-- end box -->
         </div>
         <!-- end col -->
+
       </div>
       <!-- end row -->
       <div style="margin-left: 17%; margin-top: 10%" *ngIf="paypal">
         <app-paypal
           [selected]="selectedCourse"
           [addToLibrary]="addToLibrary"
-          o
+          
         ></app-paypal>
       </div>
 
       <hr class="invis" />
 
       <div class="section-button text-center">
-        <a href="#" class="btn btn-primary">View All Courses</a>
+        <a  class="btn btn-primary" (click)="getcourses()">View All Courses</a>
       </div>
     </div>
     <!-- end container -->
+   
   </section>
   <!-- end of carousel -->
 
@@ -383,90 +391,32 @@
       </div>
       <!-- end title -->
 
-      <!-- <div class="row">
-        <div class="col-md-4">
-          <div class="box testimonial">
+       <div class="row">
+        <div class="col-md-4" *ngFor="let instructor of instructors ; let i=index">
+          <div class="box testimonial" *ngIf="i<3">
             <p class="testiname">
-              <strong
-                ><img
-                  src="{{ instructors[0].image }}"
+              <strong>
+                <img
+                  src="{{ instructor.image }}"
                   alt=""
                   class="img-circle"
                 />
-                {{ instructors[0].firstName }}
-                {{ instructors[0].lastName }}</strong
-              >
+                {{ instructor.username }}
+              </strong>
             </p>
             <p>
-              {{ instructors[0].about }}
+              {{ instructor.about }}
             </p>
-            <div class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </div>
+            
           </div>
         </div>
-
-        <div class="col-md-4">
-          <div class="box testimonial">
-            <p class="testiname">
-              <strong
-                ><img
-                  src="{{ instructors[1].image }}"
-                  alt=""
-                  class="img-circle"
-                />
-                {{ instructors[1].firstName }}
-                {{ instructors[1].lastName }}</strong
-              >
-            </p>
-            <p>
-              {{ instructors[1].about }}
-            </p>
-            <div class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star-o"></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="box testimonial">
-            <p class="testiname">
-              <strong
-                ><img
-                  src="{{ instructors[2].image }}"
-                  alt=""
-                  class="img-circle"
-                />
-                {{ instructors[2].firstName }}
-                {{ instructors[2].lastName }}</strong
-              >
-            </p>
-            <p>
-              {{ instructors[2].about }}
-            </p>
-            <div class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
+  </div>
     <br /><br />
     <div class="section-button text-center">
-      <a href="#" class="btn btn-primary">View All Instructors</a>
+      <a  class="btn btn-primary" >View All Instructors</a>
     </div>
+
     <!-- end container -->
   </section>
 
