@@ -1,7 +1,9 @@
-<div class="chart-wrapper">
-    <canvas baseChart 
+<div class="chart-wrapper" *ngIf="doughnutChartData">
+  <canvas
+    baseChart
     [data]="doughnutChartData"
     [labels]="doughnutChartLabels"
-    [chartType]="doughnutChartType">
+    [chartType]="doughnutChartType"
+  >
   </canvas>
 </div>

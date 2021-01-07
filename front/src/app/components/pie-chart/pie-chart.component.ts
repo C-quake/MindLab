@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { ChartType, ChartOptions } from 'chart.js';
 import { InstructorService } from '../../services/instructor-service.service';
 import { StudentService } from '../../services/student.service';
+import { StoreService } from '../../services/store.service';
 import {
   SingleDataSet,
   Label,
   monkeyPatchChartJsLegend,
   monkeyPatchChartJsTooltip,
 } from 'ng2-charts';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-pie-chart',
@@ -21,7 +23,7 @@ export class PieChartComponent {
     responsive: true,
   };
   public pieChartLabels: Label[] = ['Instructor', 'Student', 'Courses'];
-  public pieChartData: SingleDataSet = [
+  pieChartData: SingleDataSet = [
     this.instructor.length,
     this.student.length,
     20,
@@ -32,22 +34,27 @@ export class PieChartComponent {
 
   constructor(
     private instructorService: InstructorService,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private storeservice: StoreService
   ) {}
   ngOnInit(): void {
-    this.allinstructor();
-    this.allstudent();
+    forkJoin([
+      this.allinstructor(),
+      this.allstudent(),
+      this.allcouses(),
+    ]).subscribe((data) => {
+      console.log(data[0].length);
+      console.log(data[1].length);
+      this.pieChartData = [data[0].length, data[1].length, data[2].length];
+    });
   }
   allinstructor() {
-    this.instructorService.getAllInstructors().subscribe((res) => {
-      console.log(res);
-      this.instructor = res;
-    });
+    return this.instructorService.getAllInstructors();
   }
   allstudent() {
-    this.studentService.findStudents().subscribe((res) => {
-      console.log(res);
-      this.student = res;
-    });
+    return this.studentService.findStudents();
+  }
+  allcouses() {
+    return this.storeservice.getService();
   }
 }

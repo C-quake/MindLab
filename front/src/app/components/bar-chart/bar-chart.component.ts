@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { forkJoin } from 'rxjs';
 import { InstructorService } from '../../services/instructor-service.service';
 import { StudentService } from '../../services/student.service';
+import { StoreService } from '../../services/store.service';
 
 @Component({
   selector: 'app-bar-chart',
@@ -20,30 +22,35 @@ export class BarChartComponent {
   instructor: any = [];
   student: any = [];
 
-  barChartData: ChartDataSets[] = [
-    {
-      data: [this.instructor.length, this.student.length, 60],
-      label: 'Statistic',
-    },
-  ];
   constructor(
     private instructorService: InstructorService,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private storeservice: StoreService
   ) {}
   ngOnInit(): void {
-    this.allinstructor();
-    this.allstudent();
+    forkJoin([
+      this.allinstructor(),
+      this.allstudent(),
+      this.allcouses(),
+    ]).subscribe((data) => {
+      console.log(data[0].length);
+      console.log(data[1].length);
+      console.log(data[2].length);
+      this.barChartData = [
+        {
+          data: [data[0].length, data[1].length, data[2].length],
+          label: 'Statistic',
+        },
+      ];
+    });
   }
   allinstructor() {
-    this.instructorService.getAllInstructors().subscribe((res) => {
-      console.log(res);
-      this.instructor = res;
-    });
+    return this.instructorService.getAllInstructors();
   }
   allstudent() {
-    this.studentService.findStudents().subscribe((res) => {
-      console.log(res);
-      this.student = res;
-    });
+    return this.studentService.findStudents();
+  }
+  allcouses() {
+    return this.storeservice.getService();
   }
 }

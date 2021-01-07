@@ -1,10 +1,12 @@
-<div class="chart-wrapper">
-    <canvas baseChart 
-    [data]="pieChartData" 
-    [labels]="pieChartLabels" 
+<div class="chart-wrapper" *ngIf="pieChartData">
+  <canvas
+    baseChart
+    [data]="pieChartData"
+    [labels]="pieChartLabels"
     [chartType]="pieChartType"
     [options]="pieChartOptions"
     [plugins]="pieChartPlugins"
-    [legend]="pieChartLegend">
+    [legend]="pieChartLegend"
+  >
   </canvas>
 </div>
