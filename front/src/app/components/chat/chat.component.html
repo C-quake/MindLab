@@ -1,0 +1,60 @@
+<!-- <header>
+  <h2>Mind Lab chat {{username}}</h2>
+</header>
+<div class="chat-app">
+  <div class="messages">
+    <div *ngFor="let message of messages" class="message">
+    {{message}}
+    </div>
+  </div>
+  <div *ngIf="username == ''" id="username-div">
+    <input [ngStyle]="usernameValidatation ? {'border':'2px solid red'} : null" id="username-input" [(ngModel)]="usernameIn" type="name" placeholder="   You sould type your username for chatting!">
+    <br/>
+    <button (click)="getUsername(usernameIn)" class="button">Enter</button>
+
+  </div>
+  <div class="inputs">
+    <input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" class="message-input" />
+    <button (click)="username != '' ? sendMessage(): validatorAlert()" class="button">Send</button>
+  </div>
+</div> -->
+<div class="chat_window">
+  <div class="top_menu">
+    <div class="buttons">
+      <div class="button close"></div>
+      <div class="button minimize"></div>
+      <div class="button maximize"></div>
+    </div>
+    <div class="title">Mind Lab Chat {{username}}</div>
+  </div>
+  <div class="chat-app">
+    <div class="messages">
+      <div *ngFor="let message of messages" class="message">
+      {{message}}
+      </div>
+    </div>
+    <div *ngIf="username == ''" id="username-div">
+      <br/>
+      <input [ngStyle]="usernameValidatation ? {'border':'2px solid red'} : null" id="username-input" [(ngModel)]="usernameIn" type="name" placeholder="   You sould type your username for chatting!">
+      <br/>
+      <br/>
+      <button (click)="getUsername(usernameIn)" class="but">Enter</button>
+
+    </div>
+  <ul class="messages"></ul>
+  <div class="bottom_wrapper clearfix">
+    <div class="message_input_wrapper">
+      <input class="message_input" placeholder="Type your message here..." [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" class="message-input" />
+    </div>
+    <div class="send_message">
+      <div class="icon"></div>
+      <div class="text" (click)="username != '' ? sendMessage(): validatorAlert()" class="button">Send</div>
+    </div>
+  </div>
+</div>
+<div class="message_template">
+  <li class="message">
+    <div class="avatar"></div>
+    <div class="text_wrapper"><div class="text"></div></div>
+  </li>
+</div>

@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +15,8 @@ import {
   SocialLoginModule,
   SocialAuthServiceConfig,
 } from 'angularx-social-login';
+import { ChatComponent } from './components/chat/chat.component'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { NgxPayPalModule } from 'ngx-paypal';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { StoreComponent } from './components/store/store.component';
@@ -26,6 +27,10 @@ import { PaypalComponent } from './components/paypal/paypal.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ResultComponent } from './components/result/result.component';
 import { EditComponent } from './components/edit/edit.component';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
+import { ViewcoursesComponent } from './components/viewcourses/viewcourses.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ViewinstructorsComponent } from './components/viewinstructors/viewinstructors.component';
 
 
 @NgModule({
@@ -40,12 +45,15 @@ import { EditComponent } from './components/edit/edit.component';
     StoreComponent,
     NewcourseComponent,
     CourseDetailsComponent,
+    ChatComponent,
+    ResultComponent,
     LibraryComponent,
     PaypalComponent,
     ResultComponent,
     EditComponent,
-   
-    
+    ViewcoursesComponent,
+    ViewinstructorsComponent,
+
   ],
 
   imports: [
@@ -55,9 +63,15 @@ import { EditComponent } from './components/edit/edit.component';
     HttpClientModule,
     ReactiveFormsModule,
     SocialLoginModule,
+
     NgxPayPalModule,
-    NgbModule
+    NgbModule,
+    IvyCarouselModule,
+    NgxPaginationModule
+
+  
   ],
+
   providers: [
     AuthGuard,
     {
