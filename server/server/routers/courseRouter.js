@@ -63,7 +63,7 @@ router.route("/api/newCourse").post(upload.array("file", 2), (req, res) => {
 
 router.route("/api/allcourses").get(function (req, res) {
   Course
-    .findCourses()
+    .findCourses().sort()
     .then((courses, err) => {
       if (err) res.send(err);
       res.send(courses);
