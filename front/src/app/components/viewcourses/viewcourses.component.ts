@@ -87,7 +87,7 @@ export class ViewcoursesComponent implements OnInit {
  
   onTableDataChange(event:any){
     this.page = event;
-    this.getAllcourses()
+    this.getAllcourses() 
   }  
 
   onTableSizeChange(event:any): void {

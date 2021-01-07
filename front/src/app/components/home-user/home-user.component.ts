@@ -15,6 +15,8 @@ export class HomeUserComponent implements OnInit {
   ready: Boolean = false;
   instructors: any =[];
   paypal: boolean = false;
+  instructorCount: any;
+  courseCount: any;
   selectedCourse: any;
   lib: any = [];
   
@@ -31,6 +33,8 @@ export class HomeUserComponent implements OnInit {
 
     this.storeService.getService().subscribe((res) => {
       this.courses=res
+      this.courseCount = res.length;
+
        this.courses=this.courses.map((course:any)=>{
          var sum=0
          course.rates.map((rate:any)=>{
@@ -45,6 +49,7 @@ export class HomeUserComponent implements OnInit {
 
     // this.ready = true;
     this.instructorService.getAllInstructors().subscribe((res: any) => {
+      this.instructorCount = res.length;
       this.instructors = res
     });
    
