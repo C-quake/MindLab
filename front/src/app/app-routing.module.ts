@@ -20,7 +20,7 @@ import { ResultComponent } from './components/result/result.component';
 import { EditComponent } from './components/edit/edit.component';
 import {ViewcoursesComponent} from './components/viewcourses/viewcourses.component';
 import { ViewinstructorsComponent } from './components/viewinstructors/viewinstructors.component';
-
+import {ChatComponent} from './components/chat/chat.component';
 import { DoughnutChartComponent } from './components/doughnut-chart/doughnut-chart.component';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { StatisticComponent } from './components/statistic/statistic.component';
