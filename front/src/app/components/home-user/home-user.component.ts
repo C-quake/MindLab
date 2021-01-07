@@ -92,4 +92,9 @@ export class HomeUserComponent implements OnInit {
   getcourses(){
     this.router.navigate(['/viewcourses']);  
   }
+  getInstructors(){
+    this.router.navigate(['/viewinstructors']);  
+
+
+  }
 }
