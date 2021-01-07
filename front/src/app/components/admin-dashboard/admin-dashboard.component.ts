@@ -112,4 +112,11 @@ export class AdminDashboardComponent implements OnInit {
       });
     });
   }
+
+  Logout() {
+    localStorage.clear();
+    this.router.navigate(['']).then(() => {
+      location.reload();
+    });
+  }
 }
