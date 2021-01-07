@@ -10,17 +10,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./result.component.css'],
 })
 export class ResultComponent implements OnInit {
-  query:string;
+  query: string;
   file: any;
-  video:any;
+  video: any;
   courses: any = [];
-  results:any =[]
-  constructor(private sanitizer: DomSanitizer, private service: StoreService,private router:Router, private activateroute: ActivatedRoute) {}
+  results: any = [];
+  constructor(
+    private sanitizer: DomSanitizer,
+    private service: StoreService,
+    private router: Router,
+    private activateroute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.getallcourses();
-    console.log(this.query)
-  
+    console.log(this.query);
   }
 
   getallcourses() {
@@ -28,9 +32,12 @@ export class ResultComponent implements OnInit {
 
     this.service.getService().subscribe(
       (res) => {
-       console.log(res)
-       this.courses=res
-        this.results = this.courses.filter((item:any)=> item.title === this.query || item.category.includes( this.query));
+        console.log(res);
+        this.courses = res;
+        this.results = this.courses.filter(
+          (item: any) =>
+            item.title === this.query || item.category.includes(this.query)
+        );
       },
       (error) => {
         console.log(error);
@@ -45,12 +52,10 @@ export class ResultComponent implements OnInit {
     console.log(f);
     this.file = '';
     this.file = this.sanitizer.bypassSecurityTrustResourceUrl(
-      'assets/uploads/courses/'+f
+      'assets/uploads/courses/' + f
     );
   }
-  getCourse(id:any){
-    this.router.navigate(['/coursedetails',id])
+  getCourse(id: any) {
+    this.router.navigate(['/coursedetails', id]);
   }
-
-
 }

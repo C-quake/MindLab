@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   //  roles = ['admin','student','instructor'];
   // user: Observable<User[]>;
   isBanned: boolean = false;
+
   loginForm: any;
   role: string = '';
   options = [{ role: 'Admin' }, { role: 'student' }, { role: 'instructor' }];
@@ -53,6 +54,7 @@ export class LoginComponent implements OnInit {
                 this.isBanned = true;
                 return;
               }
+
               localStorage.setItem('user', JSON.stringify(res));
               this._router.navigate(['/home']).then(() => {
                 location.reload();
@@ -83,6 +85,7 @@ export class LoginComponent implements OnInit {
               this.isBanned = true;
               return;
             }
+
             localStorage.setItem('user', JSON.stringify(res));
             this._router.navigate(['/home']).then(() => {
               location.reload();
@@ -134,6 +137,7 @@ export class LoginComponent implements OnInit {
               this.isBanned = true;
               return;
             }
+
             console.log(data.data);
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.data));
@@ -152,6 +156,7 @@ export class LoginComponent implements OnInit {
               this.isBanned = true;
               return;
             }
+
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.data));
             this._router.navigate(['/home']).then(() => {

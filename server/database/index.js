@@ -73,16 +73,23 @@ exports.findCourseById = function (id) {
 exports.updateCourse = function (id, course) {
   return CourseModel.findByIdAndUpdate(id, course);
 };
+
 exports.getCourseById = function (id) {
   return CourseModel.findOne({ _id: id });
 };
+
 exports.getStudentByEmail = function (email) {
   return Student.findOne({ email: email }).populate("library");
 };
 
-exports.findCourseById = function (id) {
-  return CourseModel.findById(id);
+exports.getAdminByEmail = function (email) {
+  return Admin.find({ email: email });
 };
+
+exports.insertAdmin = function (user) {
+  return Admin.create(user);
+};
+
 exports.courseComment = function (id, comment) {
   return CourseModel.findByIdAndUpdate(
     id,
@@ -133,22 +140,6 @@ exports.ditrateCourse = function (id) {
   return CourseModel.findById(id);
 };
 
-exports.changeInstructorStatus = function (id, status) {
-  return Instructor.findByIdAndUpdate(id, status);
-};
-
-exports.changeStudentStatus = function (id, status) {
-  return Student.findByIdAndUpdate(id, status);
-};
-
 exports.getAllStudents = function () {
   return Student.find();
-};
-
-exports.getAdminByEmail = function (email) {
-  return Admin.find({ email: email });
-};
-
-exports.insertAdmin = function (user) {
-  return Admin.create(user);
 };

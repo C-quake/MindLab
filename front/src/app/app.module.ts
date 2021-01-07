@@ -16,6 +16,9 @@ import {
   SocialLoginModule,
   SocialAuthServiceConfig,
 } from 'angularx-social-login';
+
+import { EditCourseComponent } from './components/edit-course/edit-course.component';
+import { ChatComponent } from './components/chat/chat.component'
 import { NgxPayPalModule } from 'ngx-paypal';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { StoreComponent } from './components/store/store.component';
@@ -26,6 +29,7 @@ import { PaypalComponent } from './components/paypal/paypal.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ResultComponent } from './components/result/result.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { EditComponent } from './components/edit/edit.component';
 
 
 @NgModule({
@@ -44,8 +48,13 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
     PaypalComponent,
     ResultComponent,
     AdminDashboardComponent,
-   
-    
+    EditCourseComponent,
+    ChatComponent,
+    ResultComponent,
+    LibraryComponent,
+    PaypalComponent,
+    ResultComponent,
+    EditComponent,
   ],
 
   imports: [
@@ -58,6 +67,7 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
     NgxPayPalModule,
     NgbModule
   ],
+
   providers: [
     AuthGuard,
     {

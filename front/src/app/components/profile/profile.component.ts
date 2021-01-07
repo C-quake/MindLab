@@ -135,6 +135,7 @@ export class ProfileComponent implements OnInit {
   Logout() {
     localStorage.clear();
   }
+
   getresult(query: any) {
     this.router.navigate(['/result', query]);
   }

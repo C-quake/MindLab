@@ -71,6 +71,7 @@ router.route("/api/instructoremail/:email").get((req, res) => {
     if (data && data.status === "banned") {
       return res.send({ message: "user banned" });
     }
+
     res.send(data);
   });
 });

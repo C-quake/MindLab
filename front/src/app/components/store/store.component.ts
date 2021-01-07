@@ -23,7 +23,7 @@ export class StoreComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('here',this.user.store)
+    console.log('here', this.user.store);
     for (var ele of this.user.store) {
       this.store.push(ele._id);
     }
@@ -66,7 +66,6 @@ export class StoreComponent implements OnInit {
   }
 
   getCourse(id: any) {
-  
     this.router.navigate(['/coursedetails', id]);
   }
 

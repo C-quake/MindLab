@@ -1,12 +1,15 @@
 const express = require("express");
 var app = express();
-var http = require("http").Server(app);
+var http = require("http");
+
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
 var multer = require("multer");
 var upload = multer({ dest: "uploads/" });
 const PORT = process.env.PORT || 3000;
+var server = http.createServer(app);
+var io = require("socket.io").listen(server);
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -67,10 +70,22 @@ app.use("/", studentRouter);
 
 app.use("/", instructorRouter);
 
-app.use("/api/admin", adminRouter);
-
 app.use("/", courseRouter);
 
-http.listen(PORT, () => {
-  console.log("listening on http://localhost:3000");
+app.use("/api/admin", adminRouter);
+
+// live chat part noor
+io.on("connection", function (socket) {
+  console.log("user connected");
+
+  socket.on("chat message", (message) => {
+    console.log(message);
+    io.emit("chat message", message);
+  });
+  socket.on("disconnect", function () {
+    console.log("user disconnected");
+  });
+});
+server.listen(PORT, function () {
+  console.log(`started on port ${PORT}`);
 });

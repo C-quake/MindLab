@@ -44,7 +44,7 @@ router.route("/api/student/login").post(function (req, res, next) {
         }
         return res.status(200).json({ data: data, token: token });
       } else {
-        return res.status(501).json({ message: "Invalid Credentials" });
+
       }
     } else {
       return res
@@ -74,6 +74,7 @@ router.route("/api/studentemail/:email").get((req, res) => {
   student.getStudentByEmail(req.params.email).then((data) => {
     if (data && data.status === "banned")
       return res.send({ message: "user banned" });
+
     res.send(data);
   });
 });
@@ -85,7 +86,9 @@ router.route("/api/student/ban/:id").put((req, res) => {
 });
 
 router.route("/api/student").get((req, res) => {
-  student.getAllStudents().then((data) => res.send(data));
+  student.getAllStudents().then((data) => {
+    res.send(data);
+  });
 });
 
 module.exports = router;

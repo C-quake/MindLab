@@ -11,6 +11,7 @@ import { GoogleLoginProvider } from 'angularx-social-login';
 })
 export class SignupStudentComponent implements OnInit {
   isBanned: boolean = false;
+
   constructor(
     private studentService: StudentService,
     private router: Router,
@@ -25,6 +26,7 @@ export class SignupStudentComponent implements OnInit {
             this.isBanned = true;
             return;
           }
+
           res.image =
             '../../../assets/images/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg';
           localStorage.setItem('user', JSON.stringify(res));

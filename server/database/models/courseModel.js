@@ -47,7 +47,6 @@ const courseSchema = new mongoose.Schema(
         }
       ]
     },
-
     rates: {
       type: [
         {

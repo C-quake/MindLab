@@ -4,7 +4,8 @@ import { StoreService } from '../../services/store.service';
 import { Router } from '@angular/router';
 import { DetailsService } from '../../services/details.service';
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-
+import { StudentService } from '../../services/student.service';
+import { InstructorService } from '../../services/instructor-service.service';
 @Component({
   selector: 'app-course-details',
   templateUrl: './course-details.component.html',
@@ -16,6 +17,7 @@ export class CourseDetailsComponent implements OnInit {
   @Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
   inputName: string;
   starRating: any;
+
   id: any;
   file: any;
   video: any;
@@ -28,60 +30,64 @@ export class CourseDetailsComponent implements OnInit {
   rates: any = [];
   edit: boolean = false;
   change1: boolean = false;
+  students: any = [];
+  instructors: any = [];
+  users: any = [];
   constructor(
     private activateroute: ActivatedRoute,
     private StoreService: StoreService,
     private sanitizer: DomSanitizer,
     private router: Router,
-    private detailsService: DetailsService
+
+    private InstructorService: InstructorService,
+    private detailsService: DetailsService,
+    private StudentService: StudentService
   ) {}
 
   ngOnInit(): void {
     this.id = this.activateroute.snapshot.params.id;
+    this.StoreService.getService().subscribe((data) => {
+      this.courses = data;
+      console.log('courses', this.courses);
 
-    this.inputName = this.itemId + '_rating';
-
-    this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    if (
-      this.user.role === 'instructor' &&
-      this.user._id === this.course.IdInstructor
-    ) {
-      this.show = !this.show;
-    }
-    console.log('id:', this.id);
-    this.StoreService.getCourseById(this.id).subscribe((res) => {
-      this.course = res;
-      console.log(this.course);
       this.courses.forEach((elm: any) => {
         if (elm._id === this.id) {
           this.comments = elm.comments;
           this.rates = elm.rates;
           console.log(this.comments);
-          this.course = elm;
+          // this.course = elm;
           console.log('elm', elm);
         }
       });
     });
-    // this.StoreService.getService()
-    //   .subscribe(
-    //   (data) => {
-    //     this.courses = data;
-    //     console.log('courses', this.courses);
+    this.inputName = this.itemId + '_rating';
 
-    //     this.courses.forEach((elm: any) => {
-    //       if(elm._id === this.id){
-    //         this.comments=elm.comments
-    //         this.rates=elm.rates
-    //         console.log(this.comments)
-    //         this.course = elm;
-    //         console.log('elm', elm);
-    //       }
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
 
-    // },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
+    console.log('user', this.user._id);
+    this.StudentService.getAllStudents().subscribe((res) => {
+      this.students = res;
+      console.log('students', this.students);
+      for (var i = 0; i < this.students.length; i++) {
+        this.users.push(this.students[i]);
+      }
+    });
+    this.InstructorService.getAllInstructors().subscribe((res) => {
+      this.instructors = res;
+      console.log('instructors', this.instructors);
+      for (var i = 0; i < this.instructors.length; i++) {
+        this.users.push(this.instructors[i]);
+      }
+    });
+    this.users = this.instructors;
+    console.log('users', this.users);
+    this.StoreService.getCourseById(this.id).subscribe((res) => {
+      this.course = res;
+      console.log('course', this.course.IdInstructor);
+      if (this.user._id === this.course.IdInstructor) {
+        this.show = !this.show;
+      }
+    });
   }
   onClick(rating: number): void {
     this.rating = rating;
@@ -119,7 +125,7 @@ export class CourseDetailsComponent implements OnInit {
     );
   }
   editCourse(id: any) {
-    this.router.navigate(['/editCourse', id]);
+    this.router.navigate(['/edit', id]);
   }
   postComment() {
     console.log(this.text);
