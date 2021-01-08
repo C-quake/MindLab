@@ -120,6 +120,6 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/result',query])
   }
   getVipSession(){
-    
+    window.open("localhost:3001","_blank");
   }
 }

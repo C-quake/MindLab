@@ -60,7 +60,7 @@ export class CourseDetailsComponent implements OnInit {
     });
     this.inputName = this.itemId + '_rating';
 
-    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}'); 
 
     console.log('user', this.user._id);
     this.StudentService.findStudents().subscribe((res) => {

@@ -42,7 +42,7 @@ export class HomeUserComponent implements OnInit {
          course.rates.map((rate:any)=>{
             sum=sum+rate.rates
          })
-         course['averagerate']=sum/course.rates.length.toFixed(2)
+         course['averagerate']=(sum/course.rates.length).toFixed(1)
          console.log(course)
          return course
        }).sort(function(a:any,b:any){return b.averagerate-a.averagerate})

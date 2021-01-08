@@ -3,13 +3,15 @@ const cors = require("cors");
 const morgan = require("morgan");
 var multer = require("multer");
 var upload = multer({ dest: "uploads/" });
+const cloudinary=require('./cloudinary')
+const fs = require('fs');
 const PORT = process.env.PORT || 3000;
 var express = require("express"),
   http = require("http");
 var app = express();
 var server = http.createServer(app);
 var io = require("socket.io").listen(server);
-
+app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan("dev"));
@@ -53,16 +55,35 @@ var upload = multer({
   }
 });
 
-app.post("/image", upload.single("file"), (req, res) => {
-  if (!req.file) {
-    console.log("No file received");
-    return res.send({
-      success: false
-    });
-  } else {
-    console.log("file received");
-    return res.send(req.file.originalname);
+app.post("/image", upload.single("file"),async (req, res) => {
+  const uploader=async(path)=>await cloudinary.uploads(path,'Images')
+  if(req.method === "POST"){
+    console.log(req.file)
+    const {path}=req.file
+    const newPath=await cloudinary.uploader.upload(path)
+    console.log('newpath',newPath)
+
+    fs.unlinkSync(path)
+  
+  res.status(200).json({
+    message : 'Image uploaded successfully',
+    data :newPath
+   })
+  }else {
+    res.status(405).json({ 
+      err:"Images not uploaded successfully"
+    })
   }
+  
+  // if (!req.file) {
+  //   console.log("No file received");
+  //   return res.send({
+  //     success: false
+  //   });
+  // } else {
+  //   console.log("file received");
+  //   return res.send(req.file.originalname);
+  // }
 });
 
 app.use("/", studentRouter);
