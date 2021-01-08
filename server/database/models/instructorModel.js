@@ -23,7 +23,16 @@ var instructorSchema = mongoose.Schema({
   location: String,
   experience: Array,
   social: Object,
-  role: String,
+  role: {
+    type: String,
+    enum: ["instructor", "student", "admin"],
+    default: "instructor"
+  },
+  status: {
+    type: String,
+    enum: ["active", "banned", "unverified"],
+    default: "active"
+  },
   store: [{ type: mongoose.Schema.Types.ObjectId, ref: "course" }],
   provider: String
 });

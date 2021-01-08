@@ -267,6 +267,11 @@
               </select>
               <!-- <small class="text-danger" [class.d-none]="role.valid ||role.untouched">Please choose your role</small> -->
               <br />
+              <p style="color: red" *ngIf="isBanned">
+                This account has been banned
+              </p>
+              <br />
+
               <button
                 id="logSub"
                 type="submit"

@@ -13,15 +13,15 @@ export class HomeUserComponent implements OnInit {
   user: any = JSON.parse(localStorage.getItem('user') || '{}');
   courses: any = [];
   ready: Boolean = false;
-  instructors: any =[];
+  instructors: any = [];
   paypal: boolean = false;
   instructorCount: any;
   courseCount: any;
+  studentCount: any;
   selectedCourse: any;
   lib: any = [];
   query: string = '';
 
-  
   constructor(
     private storeService: StoreService,
     private instructorService: InstructorService,
@@ -33,33 +33,41 @@ export class HomeUserComponent implements OnInit {
   ngOnInit() {
     console.log('initializing');
 
-    this.storeService.getService().subscribe((res) => {
-      this.courses=res
+    this.storeService.getService().subscribe((res: any) => {
+      this.courses = res;
       this.courseCount = res.length;
 
-       this.courses=this.courses.map((course:any)=>{
-         var sum=0
-         course.rates.map((rate:any)=>{
-            sum=sum+rate.rates
-         })
-         course['averagerate']=sum/course.rates.length.toFixed(2)
-         console.log(course)
-         return course
-       }).sort(function(a:any,b:any){return b.averagerate-a.averagerate})
+      this.courses = this.courses
+        .map((course: any) => {
+          var sum = 0;
+          course.rates.map((rate: any) => {
+            sum = sum + rate.rates;
+          });
+          course['averagerate'] = (sum / course.rates.length).toFixed(2);
+
+          console.log(course);
+          return course;
+        })
+        .sort(function (a: any, b: any) {
+          return b.averagerate - a.averagerate;
+        });
     });
-    console.log('courses',this.courses);
+    console.log('courses', this.courses);
 
     // this.ready = true;
     this.instructorService.getAllInstructors().subscribe((res: any) => {
       this.instructorCount = res.length;
-      this.instructors = res
+      this.instructors = res;
     });
-   
+
+    this.studentService.getAllStudents().subscribe((res: any) => {
+      this.studentCount = res.length;
+    });
+
     if (this.user.role === 'student') {
       for (var ele of this.user.library) {
         this.lib.push(ele._id);
       }
-      console.log(this.lib);
     }
   }
 
@@ -91,17 +99,13 @@ export class HomeUserComponent implements OnInit {
   Logout() {
     localStorage.clear();
   }
-  getcourses(){
-    this.router.navigate(['/viewcourses']);  
-    
+  getcourses() {
+    this.router.navigate(['/viewcourses']);
   }
-  getInstructors(){
-    this.router.navigate(['/viewinstructors']);  
-
-
+  getInstructors() {
+    this.router.navigate(['/viewinstructors']);
   }
   getresult(query: any) {
     this.router.navigate(['/result', query]);
   }
-  
 }
