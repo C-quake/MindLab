@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,8 +16,7 @@ import {
   SocialLoginModule,
   SocialAuthServiceConfig,
 } from 'angularx-social-login';
-import { ChatComponent } from './components/chat/chat.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChatComponent } from './components/chat/chat.component'
 import { NgxPayPalModule } from 'ngx-paypal';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { StoreComponent } from './components/store/store.component';
@@ -26,9 +26,9 @@ import { LibraryComponent } from './components/library/library.component';
 import { PaypalComponent } from './components/paypal/paypal.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ResultComponent } from './components/result/result.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { EditComponent } from './components/edit/edit.component';
 import { DoughnutChartComponent } from './components/doughnut-chart/doughnut-chart.component';
-import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { ViewcoursesComponent } from './components/viewcourses/viewcourses.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ViewinstructorsComponent } from './components/viewinstructors/viewinstructors.component';
@@ -51,6 +51,10 @@ import { ChartsModule } from 'ng2-charts';
     StoreComponent,
     NewcourseComponent,
     CourseDetailsComponent,
+    LibraryComponent,
+    PaypalComponent,
+    ResultComponent,
+    AdminDashboardComponent,
     ChatComponent,
     ResultComponent,
     LibraryComponent,
@@ -76,7 +80,6 @@ import { ChartsModule } from 'ng2-charts';
     NgxPayPalModule,
     NgbModule,
     ChartsModule,
-    IvyCarouselModule,
     NgxPaginationModule
 
   

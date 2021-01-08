@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ProfileService } from '../../services/profile.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -18,17 +19,35 @@ export class ProfileComponent implements OnInit {
   token: any;
   imgSelectErr: boolean = false;
 
-  constructor(private profileService: ProfileService,private router:Router) {}
+  constructor(
+    private profileService: ProfileService,
+    private router: Router,
+    private activateroute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    this.profileService
-      .getUserById(this.user._id, this.user.role)
-      .subscribe((data: any) => {
-        this.updateUser(data);
-        this.experiences = this.user.experience;
-        console.log(this.user);
-      });
+    if (
+      (this.activateroute.snapshot.params.id,
+      this.activateroute.snapshot.params.role)
+    ) {
+      this.profileService
+        .getUserById(
+          this.activateroute.snapshot.params.id,
+          this.activateroute.snapshot.params.role
+        )
+        .subscribe((data: any) => {
+          this.user = data;
+          this.experiences = this.user.experience;
+        });
+    } else {
+      this.profileService
+        .getUserById(this.user._id, this.user.role)
+        .subscribe((data: any) => {
+          this.updateUser(data);
+          this.experiences = this.user.experience;
+          console.log(this.user);
+        });
+    }
   }
   onChange(img: any) {
     this.image = img.files[0].name.toLowerCase();
@@ -116,10 +135,9 @@ export class ProfileComponent implements OnInit {
   Logout() {
     localStorage.clear();
   }
-  getresult(query:any){
-    this.router.navigate(['/result',query])
+
+  getresult(query: any) {
+    this.router.navigate(['/result', query]);
   }
-  getVipSession(){
-    
-  }
+  getVipSession() {}
 }

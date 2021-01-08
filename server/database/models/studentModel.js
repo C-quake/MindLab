@@ -24,7 +24,16 @@ var studentSchema = mongoose.Schema({
   location: String,
   experience: Array,
   social: Object,
-  role: String,
+  role: {
+    type: String,
+    enum: ["instructor", "student", "admin"],
+    default: "student"
+  },
+  status: {
+    type: String,
+    enum: ["active", "banned", "unverified"],
+    default: "active"
+  },
   provider: String
 });
 studentSchema.methods.isValid = function (hashedpassword) {

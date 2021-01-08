@@ -6,7 +6,7 @@ import { InstructorService } from '../../services/instructor-service.service';
 import { StudentService } from '../../services/student.service';
 import { StoreService } from '../../services/store.service';
 
-@Component({
+@Component({ 
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.css'],
@@ -52,7 +52,7 @@ export class BarChartComponent {
     return this.instructorService.getAllInstructors();
   }
   allstudent() {
-    return this.studentService.findStudents();
+    return this.studentService.getAllStudents();
   }
   allcouses() {
     return this.storeservice.getService();

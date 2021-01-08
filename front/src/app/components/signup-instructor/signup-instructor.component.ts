@@ -10,6 +10,8 @@ import { GoogleLoginProvider } from 'angularx-social-login';
   styleUrls: ['./signup-instructor.component.css'],
 })
 export class SignupInstructorComponent implements OnInit {
+  isBanned: boolean = false;
+
   constructor(
     private instructorService: InstructorService,
     private router: Router,
@@ -27,6 +29,11 @@ export class SignupInstructorComponent implements OnInit {
         .findInstructor(user.email)
         .subscribe((res: any) => {
           if (res) {
+            if (res.message) {
+              this.isBanned = true;
+              return;
+            }
+
             res.image =
               '../../../assets/images/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg';
             localStorage.setItem('user', JSON.stringify(res));
@@ -36,7 +43,6 @@ export class SignupInstructorComponent implements OnInit {
           } else {
             user.username = user.name;
             user.image = user.photoUrl;
-            user.role = 'instructor';
             user.social = {
               facebook: '',
               twitter: '',
@@ -79,7 +85,6 @@ export class SignupInstructorComponent implements OnInit {
         github: '',
       },
       store: [],
-      role: 'instructor',
     };
     this.instructorService.addInstructor(obj).subscribe((res) => {
       this.router.navigate(['/login']).then(() => {

@@ -1,0 +1,250 @@
+<header
+  class="l-header"
+  [ngClass]="isExpanded ? 'sidebar-is-expanded test2' : 'sidebar-is-reduced'"
+>
+  <div class="l-header__inner clearfix">
+    <div class="c-header-icon js-hamburger" (click)="toggleClass()">
+      <div class="hamburger-toggle" [ngClass]="isExpanded ? 'is-opened' : ''">
+        <span class="bar-top"></span><span class="bar-mid"></span
+        ><span class="bar-bot"></span>
+      </div>
+    </div>
+    <div class="c-header-icon has-dropdown">
+      <span class="c-badge c-badge--header-icon animated shake">87</span
+      ><i class="fa fa-bell"></i>
+      <div class="c-dropdown c-dropdown--notifications">
+        <div class="c-dropdown__header"></div>
+        <div class="c-dropdown__content"></div>
+      </div>
+    </div>
+    <div class="c-search">
+      <input
+        class="c-search__input u-input"
+        placeholder="Search..."
+        type="text"
+        ngModel
+        (ngModelChange)="search($event)"
+      />
+    </div>
+    <div class="header-icons-group">
+      <div class="c-header-icon logout" (click)="Logout()">
+        <i class="fa fa-power-off"></i>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="l-sidebar" [ngClass]="isExpanded ? 'test' : ''">
+  <div class="logo">
+    <div class="logo__txt">
+      <img src="../../../assets/images/favicon.ico" />
+    </div>
+  </div>
+  <div class="l-sidebar__content">
+    <nav class="c-menu js-menu">
+      <ul class="u-list">
+        <li
+          class="c-menu__item"
+          data-toggle="tooltip"
+          title="Instructors"
+          (click)="changeDisplay('instructors')"
+        >
+          <div class="c-menu__item__inner">
+            <i class="fa fa-university"></i>
+            <div class="c-menu-item__title"><span>Instructors</span></div>
+          </div>
+        </li>
+        <li
+          (click)="changeDisplay('students')"
+          class="c-menu__item has-submenu"
+          data-toggle="tooltip"
+          title="Students"
+        >
+          <div class="c-menu__item__inner">
+            <i class="fa fa-graduation-cap"></i>
+            <div class="c-menu-item__title"><span>Students</span></div>
+          </div>
+        </li>
+
+        <li
+          (click)="changeDisplay('courses')"
+          class="c-menu__item has-submenu"
+          data-toggle="tooltip"
+          title="Courses"
+        >
+          <div class="c-menu__item__inner">
+            <i class="fa fa-book"></i>
+            <div class="c-menu-item__title"><span>Courses</span></div>
+          </div>
+        </li>
+        <li
+          (click)="changeDisplay('stat')"
+          class="c-menu__item has-submenu"
+          data-toggle="tooltip"
+          title="Statistics"
+        >
+          <div class="c-menu__item__inner">
+            <i class="fa fa-bar-chart"></i>
+            <div class="c-menu-item__title"><span>Statistics</span></div>
+          </div>
+        </li>
+        <li
+          class="c-menu__item has-submenu"
+          data-toggle="tooltip"
+          title="Settings"
+        >
+          <div class="c-menu__item__inner">
+            <i class="fa fa-cogs"></i>
+            <div class="c-menu-item__title"><span>Settings</span></div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div
+  style="margin: 7%"
+  id="content"
+  [ngClass]="
+    isExpanded
+      ? 'sidebar-is-expanded content-expanded'
+      : 'sidebar-is-reduced content-reduced'
+  "
+>
+  <div *ngIf="display === 'instructors'">
+    <h1>Instructors</h1>
+    <div style="border: 1px solid gray; margin: 2%"></div>
+    <div style="margin: 10px; display: flex; color: #102c58">
+      <h3>Username</h3>
+      <h3 style="position: absolute; left: 30%">Email</h3>
+      <h3 style="position: absolute; left: 65%">Status</h3>
+      <h3 style="position: absolute; left: 85%">Action</h3>
+    </div>
+    <div class="row-element" *ngFor="let user of result || instructors">
+      <h3 (click)="getProfile(user._id, user.role)">{{ user.username }}</h3>
+      <h3 style="position: absolute; left: 30%">{{ user.email }}</h3>
+      <h3 style="position: absolute; left: 65%">{{ user.status }}</h3>
+      <button
+        *ngIf="user.status === 'banned'"
+        (click)="changeStatus(user._id, user.role, 'active')"
+        style="
+          position: absolute;
+          left: 85%;
+          margin-top: 0.7%;
+          border: 0px;
+          background-color: rgb(100, 212, 100);
+          color: white;
+          width: 70px;
+          height: 40px;
+        "
+      >
+        Unban
+      </button>
+      <button
+        *ngIf="user.status === 'active'"
+        (click)="changeStatus(user._id, user.role, 'banned')"
+        style="
+          position: absolute;
+          left: 85%;
+          margin-top: 0.7%;
+          border: 0px;
+          background-color: red;
+          color: white;
+          width: 70px;
+          height: 40px;
+        "
+      >
+        <i class="fa fa-ban"> Ban</i>
+      </button>
+    </div>
+
+    <!-- Students -->
+  </div>
+
+  <!-- students -->
+  <div *ngIf="display === 'students'">
+    <h1>Students</h1>
+    <div style="border: 1px solid gray; margin: 2%"></div>
+    <div style="margin: 10px; display: flex; color: #102c58">
+      <h3>Username</h3>
+      <h3 style="position: absolute; left: 30%">Email</h3>
+      <h3 style="position: absolute; left: 65%">Status</h3>
+      <h3 style="position: absolute; left: 85%">Action</h3>
+    </div>
+    <div class="row-element" *ngFor="let user of result || students">
+      <h3 (click)="getProfile(user._id, user.role)">{{ user.username }}</h3>
+      <h3 style="position: absolute; left: 30%">{{ user.email }}</h3>
+      <h3 style="position: absolute; left: 65%">{{ user.status }}</h3>
+      <button
+        *ngIf="user.status === 'banned'"
+        (click)="changeStatus(user._id, user.role, 'active')"
+        style="
+          position: absolute;
+          left: 85%;
+          margin-top: 0.7%;
+          border: 0px;
+          background-color: rgb(100, 212, 100);
+          color: white;
+          width: 70px;
+          height: 40px;
+        "
+      >
+        Unban
+      </button>
+      <button
+        *ngIf="user.status === 'active'"
+        (click)="changeStatus(user._id, user.role, 'banned')"
+        style="
+          position: absolute;
+          left: 85%;
+          margin-top: 0.7%;
+          border: 0px;
+          background-color: red;
+          color: white;
+          width: 70px;
+          height: 40px;
+        "
+      >
+        <i class="fa fa-ban"> Ban</i>
+      </button>
+    </div>
+  </div>
+
+  <!-- courses -->
+  <div *ngIf="display === 'courses'">
+    <h1>Courses</h1>
+    <div style="border: 1px solid gray; margin: 2%"></div>
+    <div style="margin: 10px; display: flex; color: #102c58">
+      <h3>Title</h3>
+      <h3 style="position: absolute; left: 30%">Poster</h3>
+      <h3 style="position: absolute; left: 65%">type</h3>
+      <h3 style="position: absolute; left: 85%">Action</h3>
+    </div>
+    <div class="row-element" *ngFor="let course of result || courses">
+      <h3 (click)="getCourse(course._id)">{{ course.title }}</h3>
+      <h3 style="position: absolute; left: 30%">
+        {{ course.IdInstructor.username }}
+      </h3>
+      <h3 style="position: absolute; left: 65%">{{ course.type }}</h3>
+      <button
+        (click)="deleteCourse(course._id)"
+        style="
+          position: absolute;
+          left: 85%;
+          margin-top: 0.7%;
+          border: 0px;
+          background-color: red;
+          color: white;
+          width: 70px;
+          height: 40px;
+        "
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+
+  <!-- chart -->
+  <div *ngIf="display === 'stat'">
+    <app-statistic></app-statistic>
+  </div>
+</div>
