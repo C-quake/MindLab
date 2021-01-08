@@ -19,7 +19,8 @@ import { StudentGuard } from './guards/student.guard';
 import { InstructorGuard } from './guards/instructor.guard';
 import { HomeGuard } from './guards/home.guard';
 import { ResultComponent } from './components/result/result.component';
-
+import {ViewcoursesComponent} from './components/viewcourses/viewcourses.component';
+import { ViewinstructorsComponent } from './components/viewinstructors/viewinstructors.component';
 const routes: Routes = [
   { path: 'chat', component: ChatComponent },
   { path: '', component: HomeComponent, canActivate: [HomeGuard] },
@@ -51,6 +52,8 @@ const routes: Routes = [
   { path: 'admin', component: AdminDashboardComponent },
   { path: 'result/:query', component: ResultComponent },
   { path: 'edit/:id', component: EditComponent },
+  { path:'viewcourses' , component:  ViewcoursesComponent},
+  { path:'viewinstructors' , component:  ViewinstructorsComponent}
 ];
 
 @NgModule({
