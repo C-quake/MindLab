@@ -77,6 +77,7 @@
           </div>
         </li>
         <li
+          (click)="changeDisplay('stat')"
           class="c-menu__item has-submenu"
           data-toggle="tooltip"
           title="Statistics"
@@ -240,5 +241,10 @@
         Delete
       </button>
     </div>
+  </div>
+
+  <!-- chart -->
+  <div *ngIf="display === 'stat'">
+    <app-statistic></app-statistic>
   </div>
 </div>
