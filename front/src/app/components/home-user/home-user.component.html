@@ -143,7 +143,6 @@
                 <li>
                   <div class="yamm-content clearfix">
                     <div class="row-fluid">
-                    
                       <div class="col-md-6 col-sm-6">
                         <div class="menu-widget text-center">
                           <div class="image-wrap entry">
@@ -171,29 +170,31 @@
               </ul>
             </li>
             <li class="dropdown hassubmenu"></li>
-         
+
             <li><a (click)="Logout()" href="">Log Out</a></li>
-            <li>   <div>
-              <form
-                class="form-inline pull-right"
-                style="margin-top: 5px; margin-left: 20px"
-              >
-                <input
-                  type="text"
-                  class="form-control"
-                  [(ngModel)]="query"
-                  placeholder="Search"
-                  name="query"
-                />
-                <button
-                  class="btn btn-outline-success"
-                  (click)="getresult(query)"
-                  type="submit"
+            <li>
+              <div>
+                <form
+                  class="form-inline pull-right"
+                  style="margin-top: 5px; margin-left: 20px"
                 >
-                  Search
-                </button>
-              </form>
-            </div> </li>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="query"
+                    placeholder="Search"
+                    name="query"
+                  />
+                  <button
+                    class="btn btn-outline-success"
+                    (click)="getresult(query)"
+                    type="submit"
+                  >
+                    Search
+                  </button>
+                </form>
+              </div>
+            </li>
             <li class="iconitem">
               <a href="#" data-toggle="modal" data-target="#login-modal"
                 ><i class="fa fa-search"></i
@@ -210,7 +211,7 @@
 
   <!-- here carousel -->
   <section class="section gb">
-          <div class="container">
+    <div class="container">
       <div class="section-title text-center">
         <h3>Recent Courses</h3>
         <p>
@@ -223,10 +224,10 @@
       <div style="display: flex">
         <div
           class="caro-item"
-          *ngFor="let course of courses; let i=index"
+          *ngFor="let course of courses; let i = index"
           style="width: 272px; margin: 2%"
         >
-          <div class="course-box" *ngIf="i<4">
+          <div class="course-box" *ngIf="i < 4">
             <div
               class="image-wrap entry"
               style="cursor: pointer"
@@ -276,7 +277,7 @@
               <div class="pull-left">
                 <ul class="list-inline">
                   <li>
-                    <a>{{course.averagerate}}</a>
+                    <a>{{ course.averagerate }}</a>
                   </li>
                 </ul>
               </div>
@@ -293,11 +294,13 @@
                 </ul>
               </div>
               <div class="rating">
-                <ngb-rating [(rate)]="course.averagerate" [showHalfStars]="true" [max]="5" style="font-size: 20px;
-                color: #FFC107;
-                "  [readonly]="true"></ngb-rating>
-
-              </div> 
+                <ngb-rating
+                  [(rate)]="course.averagerate"
+                  [max]="5"
+                  style="font-size: 20px; color: #ffc107"
+                  [readonly]="true"
+                ></ngb-rating>
+              </div>
               <!-- end left -->
             </div>
             <!-- end footer -->
@@ -305,25 +308,22 @@
           <!-- end box -->
         </div>
         <!-- end col -->
-
       </div>
       <!-- end row -->
       <div style="margin-left: 17%; margin-top: 10%" *ngIf="paypal">
         <app-paypal
           [selected]="selectedCourse"
           [addToLibrary]="addToLibrary"
-          
         ></app-paypal>
       </div>
 
       <hr class="invis" />
 
       <div class="section-button text-center">
-        <a  class="btn btn-primary" (click)="getcourses()">View All Courses</a>
+        <a class="btn btn-primary" (click)="getcourses()">View All Courses</a>
       </div>
     </div>
     <!-- end container -->
-   
   </section>
   <!-- end of carousel -->
 
@@ -332,7 +332,7 @@
       <div class="row">
         <div class="col-lg-4 col-md-4">
           <div class="stat-count">
-            <h4 class="stat-timer">{{ studentscount }}</h4>
+            <h4 class="stat-timer">{{ studentCount }}</h4>
             <h3>
               <i
                 class="flaticon-black-graduation-cap-tool-of-university-student-for-head"
@@ -350,7 +350,7 @@
 
         <div class="col-lg-4 col-md-4">
           <div class="stat-count">
-            <h4 class="stat-timer">{{courseCount}}</h4>
+            <h4 class="stat-timer">{{ courseCount }}</h4>
             <h3><i class="flaticon-online-course"></i> Courses</h3>
             <p>
               Quisque porttitor eros quis leo pulvinar, at hendrerit sapien
@@ -390,30 +390,30 @@
       </div>
       <!-- end title -->
 
-       <div class="row">
-        <div class="col-md-4" *ngFor="let instructor of instructors ; let i=index">
-          <div class="box testimonial" *ngIf="i<3">
+      <div class="row">
+        <div
+          class="col-md-4"
+          *ngFor="let instructor of instructors; let i = index"
+        >
+          <div class="box testimonial" *ngIf="i < 3">
             <p class="testiname">
               <strong>
-                <img
-                  src="{{ instructor.image }}"
-                  alt=""
-                  class="img-circle"
-                />
+                <img src="{{ instructor.image }}" alt="" class="img-circle" />
                 {{ instructor.username }}
               </strong>
             </p>
             <p>
               {{ instructor.about }}
             </p>
-            
           </div>
         </div>
+      </div>
     </div>
-  </div>
     <br /><br />
     <div class="section-button text-center">
-      <a  class="btn btn-primary" (click)="getInstructors()">View All Instructors</a>
+      <a class="btn btn-primary" (click)="getInstructors()"
+        >View All Instructors</a
+      >
     </div>
 
     <!-- end container -->

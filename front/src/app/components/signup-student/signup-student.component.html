@@ -265,6 +265,10 @@
                 />Sign in with Google</span
               >
             </button>
+            <p style="color: red" *ngIf="isBanned">
+              This account has been banned
+            </p>
+
           </div>
           <!-- end col -->
         </div>

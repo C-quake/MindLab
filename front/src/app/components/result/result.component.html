@@ -125,22 +125,25 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-
           <div class="logo-normal">
             <a class="navbar-brand" href="index.html"
               ><img src="../../assets/images/logo-dark.png" alt=""
             /></a>
           </div>
-
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="index.html">Home</a></li>
-            <li><a href='store' >Store</a></li>
-            <li><a href='profile'>Profile</a></li>
+            <li><a href="store">Store</a></li>
+            <li><a href="profile">Profile</a></li>
             <li>
-              <a><i class="fa fa-sign-out" style="color: red; font-size:30px"></i></a>
+              <a
+                ><i
+                  class="fa fa-sign-out"
+                  style="color: red; font-size: 30px"
+                ></i
+              ></a>
             </li>
           </ul>
         </div>
@@ -151,41 +154,55 @@
   </header>
   <br /><br />
 
-
   <div>
     <div class="container p-0">
-
       <h1 class="h3 mb-3">Courses</h1>
 
       <div class="row">
         <div class="col-12 col-md-6 col-lg-3" *ngFor="let course of results">
           <div class="card">
             <div class="card-header px-4 pt-4">
-
               <h3 class="card-title mb-0">Title :{{ course.title }}</h3>
               <div class="badge bg-success my-2">Free/Pro</div>
 
+              <video
+                id="vid1"
+                width="100%"
+                height="200"
+                controls
+                style="margin: 10px 0"
+              >
+                <source
+                  src="assets/uploads/courses/{{ course.video }}"
+                  type="video/mp4"
+                />
+              </video>
 
-          <video  id="vid1" width="100%" height="200" controls  style="margin:10px 0">
-            <source  src="assets/uploads/courses/{{course.video}}"  type="video/mp4">
-          </video>
-
-
-          <span
-          data-toggle="modal"
-          data-target="#modal-lg"
-          (click)="getfile(course.pdf)"
-          ><i class="fa fa-file-pdf-o" style="color:red;text-align:center;margin-left:110px;font-size:30px;" aria-hidden="true"></i></span
-        >
-
-        <div class="card-body px-4 pt-2">
-          <a class="btn btn-secondary btn-lg" style="background-color: #55acee;margin-left:40px" role="button"(click)="getCourse(course._id)">Details</a
-        >
-         </div>
-        </div>
-
-
-
+              <span
+                data-toggle="modal"
+                data-target="#modal-lg"
+                (click)="getfile(course.pdf)"
+                ><i
+                  class="fa fa-file-pdf-o"
+                  style="
+                    color: red;
+                    text-align: center;
+                    margin-left: 110px;
+                    font-size: 30px;
+                  "
+                  aria-hidden="true"
+                ></i
+              ></span>
+              <div class="card-body px-4 pt-2">
+                <a
+                  class="btn btn-secondary btn-lg"
+                  style="background-color: #55acee; margin-left: 40px"
+                  role="button"
+                  (click)="getCourse(course._id)"
+                  >Details</a
+                >
+              </div>
+            </div>
           </div>
         </div>
         <div class="modal fade" id="modal-lg" #modall>

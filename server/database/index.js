@@ -3,6 +3,7 @@ var mongoose = require("mongoose");
 var { Instructor } = require("./models/instructorModel");
 var { Student } = require("./models/studentModel");
 var { CourseModel } = require("./models/courseModel");
+var { Admin } = require("./models/adminModel");
 
 mongoose.connect("mongodb+srv://hbib:hbib@cluster0.m3m3t.mongodb.net/mindlab", {
   useNewUrlParser: true,
@@ -57,9 +58,6 @@ exports.getInstructorById = function (id) {
 exports.getAllInstructors = function () {
   return Instructor.find();
 };
-exports.getAllStudents = function () {
-  return Student.find();
-};
 
 exports.getInstructorByEmail = function (email) {
   return Instructor.findOne({ email: email }).populate("store");
@@ -75,58 +73,81 @@ exports.findCourseById = function (id) {
 exports.updateCourse = function (id, course) {
   return CourseModel.findByIdAndUpdate(id, course);
 };
-exports.getCourseById= function (id){
+
+exports.getCourseById = function (id) {
   return CourseModel.findOne({ _id: id });
-}
+};
+
 exports.getStudentByEmail = function (email) {
   return Student.findOne({ email: email }).populate("library");
 };
 
-exports.findCourseById = function (id) {
+exports.getAdminByEmail = function (email) {
+  return Admin.find({ email: email });
+};
+
+exports.insertAdmin = function (user) {
+  return Admin.create(user);
+};
+
+exports.courseComment = function (id, comment) {
+  return CourseModel.findByIdAndUpdate(
+    id,
+    {
+      $push: {
+        comments: {
+          commenterId: comment.commenterId,
+          commenterUsername: comment.commenterUsername,
+          text: comment.text,
+          timestamp: new Date().getTime()
+        }
+      }
+    },
+    { new: true }
+  );
+};
+exports.editcommentCourse = function (id) {
   return CourseModel.findById(id);
 };
-exports.courseComment=function (id, comment){
+exports.deletecommentCourse = function (id, comment) {
   return CourseModel.findByIdAndUpdate(
     id,
     {
-      $push:{ 
-        comments:{
-          commenterId:comment.commenterId,
-          commenterUsername:comment.commenterUsername,
-          text:comment.text,
-          timestamp:new Date().getTime()
+      $pull: {
+        comments: {
+          _id: comment.commentId
         }
       }
     },
-    {new:true})
-    
-}
-exports.editcommentCourse= function (id){
-  return CourseModel.findById(id)
-}
-exports.deletecommentCourse=function (id,comment){
-  return CourseModel.findByIdAndUpdate(id,{
-    $pull:{
-      comments:{
-        _id:comment.commentId
-      }
-    }
-  },{new:true})
-}
-exports.courserate=function (id,rate){
+    { new: true }
+  );
+};
+exports.courserate = function (id, rate) {
   return CourseModel.findByIdAndUpdate(
     id,
     {
-      $push:{ 
-        rates:{
-          raterId:rate.raterId,
-          rates:rate.rates
+      $push: {
+        rates: {
+          raterId: rate.raterId,
+          rates: rate.rates
         }
       }
     },
-    {new:true})
-    
-}
-exports.ditrateCourse= function (id){
-  return CourseModel.findById(id)
-}
+    { new: true }
+  );
+};
+exports.ditrateCourse = function (id) {
+  return CourseModel.findById(id);
+};
+
+exports.getAllStudents = function () {
+  return Student.find();
+};
+
+exports.changeInstructorStatus = function (id, status) {
+  return Instructor.findByIdAndUpdate(id, status);
+};
+
+exports.changeStudentStatus = function (id, status) {
+  return Student.findByIdAndUpdate(id, status);
+};

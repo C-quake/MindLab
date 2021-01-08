@@ -102,8 +102,9 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/home">Home</a></li>
-          <li><a (click)="getVipSession()" >VIP Session</a></li>
+         
           <li><a (click)="Logout()" href="">Log Out</a></li>
+          <li><a (click)="getVipSession()" *ngIf="user.role==='student'">VIP Session</a></li>
           <li> <div>
             <form class="form-inline pull-right" style="margin-top: 5px">
               <input type="text" class="form-control" [(ngModel)]="query" placeholder="Search" name="query" >
