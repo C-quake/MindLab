@@ -138,7 +138,10 @@ export class ProfileComponent implements OnInit {
   }
 
   getresult(query: any) {
-    this.router.navigate(['/result', query]);
+    this.router.navigate(['/result', query])
+    .then(()=>{
+      window.location.reload();
+
+    })
   }
-  getVipSession() {}
 }

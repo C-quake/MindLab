@@ -34,6 +34,9 @@ export class ViewinstructorsComponent implements OnInit {
   Logout() {
     localStorage.clear();
   }
+  getresult(query: any) {
+    this.router.navigate(['/result', query]);
+  }
 
   getAllInstructors(){
     this.instructorService.getAllInstructors().subscribe((res: any) => {

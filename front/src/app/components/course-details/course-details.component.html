@@ -4,11 +4,6 @@
   integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA="
   crossorigin="anonymous"
 />
-<link
-  href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-  rel="stylesheet"
-  id="bootstrap-css"
-/>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
@@ -152,6 +147,29 @@
             <li><a href="/store">Store</a></li>
             <li><a href="/profile">Profile</a></li>
             <li><a (click)="Logout()" href="">Log Out</a></li>
+            <li>
+              <div>
+                <form
+                  class="form-inline pull-right"
+                  style="margin-top: 5px; margin-left: 20px"
+                >
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="query"
+                    placeholder="Search"
+                    name="query"
+                  />
+                  <button
+                    class="btn btn-outline-success"
+                    (click)="getresult(query)"
+                    type="submit"
+                  >
+                    Search
+                  </button>
+                </form>
+              </div>
+            </li>
           </ul>
         </div>
       </nav>
@@ -273,33 +291,6 @@
                     [checked]="rating === 5"
                   />
                   <label title="Rocks!" (click)="onClick(5)">5 stars</label>
-
-                  <input
-                    type="radio"
-                    [name]="inputName"
-                    value="4"
-                    [checked]="rating === 4"
-                  />
-                  <label title="Pretty good" (click)="onClick(4)"
-                    >4 stars</label
-                  >
-
-                  <input
-                    type="radio"
-                    [name]="inputName"
-                    value="3"
-                    [checked]="rating === 3"
-                  />
-                  <label title="Meh" (click)="onClick(3)">3 stars</label>
-
-                  <input
-                    type="radio"
-                    [name]="inputName"
-                    value="2"
-                    [checked]="rating === 2"
-                  />
-                  <label title="Kinda bad" (click)="onClick(2)">2 stars</label>
-
                   <input
                     type="radio"
                     [name]="inputName"

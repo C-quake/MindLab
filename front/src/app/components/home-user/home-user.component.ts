@@ -43,7 +43,7 @@ export class HomeUserComponent implements OnInit {
           course.rates.map((rate: any) => {
             sum = sum + rate.rates;
           });
-          course['averagerate'] = (sum / course.rates.length).toFixed(2);
+          course['averagerate'] = (sum / course.rates.length).toFixed(1);
 
           console.log(course);
           return course;
@@ -100,12 +100,20 @@ export class HomeUserComponent implements OnInit {
     localStorage.clear();
   }
   getcourses() {
-    this.router.navigate(['/viewcourses']);
+    this.router.navigate(['/viewcourses']).then(() => {
+      window.location.reload();
+    });
   }
   getInstructors() {
-    this.router.navigate(['/viewinstructors']);
+    this.router.navigate(['/viewinstructors']).then(() => {
+      window.location.reload();
+    });
   }
   getresult(query: any) {
-    this.router.navigate(['/result', query]);
+    this.router.navigate(['/result', query])
+    .then(()=>{
+      window.location.reload();
+
+    })
   }
 }
