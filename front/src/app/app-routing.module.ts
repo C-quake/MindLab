@@ -49,6 +49,7 @@ const routes: Routes = [
   { path: 'library', component: LibraryComponent, canActivate: [StudentGuard] },
   { path: 'paypal', component: PaypalComponent },
   { path: 'result/:query', component: ResultComponent },
+
   { path: 'admin', component: AdminDashboardComponent },
   { path: 'result/:query', component: ResultComponent },
   { path: 'edit/:id', component: EditComponent },
