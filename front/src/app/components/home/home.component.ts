@@ -10,9 +10,5 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 export class HomeComponent implements OnInit {
   constructor(private storeService: StoreService) {}
 
-  ngOnInit(): void {
-    this.storeService.getService().subscribe((res) => {
-      localStorage.setItem('courses', JSON.stringify(res));
-    });
-  }
+  ngOnInit(): void {}
 }

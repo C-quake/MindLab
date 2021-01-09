@@ -38,7 +38,7 @@ export class DoughnutChartComponent {
     return this.instructorService.getAllInstructors();
   }
   allstudent() {
-    return this.studentService.findStudents();
+    return this.studentService.getAllStudents();
   }
   allcouses() {
     return this.storeservice.getService();

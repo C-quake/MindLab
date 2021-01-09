@@ -16,6 +16,7 @@ export class CourseDetailsComponent implements OnInit {
   @Input() itemId: number;
   @Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
   inputName: string;
+  starRating: any;
 
   id: any;
   file: any;
@@ -37,6 +38,7 @@ export class CourseDetailsComponent implements OnInit {
     private StoreService: StoreService,
     private sanitizer: DomSanitizer,
     private router: Router,
+
     private InstructorService: InstructorService,
     private detailsService: DetailsService,
     private StudentService: StudentService
@@ -63,7 +65,7 @@ export class CourseDetailsComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
 
     console.log('user', this.user._id);
-    this.StudentService.findStudents().subscribe((res) => {
+    this.StudentService.getAllStudents().subscribe((res) => {
       this.students = res;
       console.log('students', this.students);
       for (var i = 0; i < this.students.length; i++) {
