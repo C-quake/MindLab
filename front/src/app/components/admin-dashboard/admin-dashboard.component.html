@@ -120,7 +120,9 @@
       <h3 style="position: absolute; left: 85%">Action</h3>
     </div>
     <div class="row-element" *ngFor="let user of result || instructors">
-      <h3 (click)="getProfile(user._id, user.role)">{{ user.username }}</h3>
+      <h3 (click)="getProfile(user._id, user.role)" class="clickable">
+        {{ user.username }}
+      </h3>
       <h3 style="position: absolute; left: 30%">{{ user.email }}</h3>
       <h3 style="position: absolute; left: 65%">{{ user.status }}</h3>
       <button
@@ -171,7 +173,9 @@
       <h3 style="position: absolute; left: 85%">Action</h3>
     </div>
     <div class="row-element" *ngFor="let user of result || students">
-      <h3 (click)="getProfile(user._id, user.role)">{{ user.username }}</h3>
+      <h3 (click)="getProfile(user._id, user.role)" class="clickable">
+        {{ user.username }}
+      </h3>
       <h3 style="position: absolute; left: 30%">{{ user.email }}</h3>
       <h3 style="position: absolute; left: 65%">{{ user.status }}</h3>
       <button
@@ -220,7 +224,9 @@
       <h3 style="position: absolute; left: 85%">Action</h3>
     </div>
     <div class="row-element" *ngFor="let course of result || courses">
-      <h3 (click)="getCourse(course._id)">{{ course.title }}</h3>
+      <h3 (click)="getCourse(course._id)" class="clickable">
+        {{ course.title }}
+      </h3>
       <h3 style="position: absolute; left: 30%">
         {{ course.IdInstructor.username }}
       </h3>

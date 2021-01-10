@@ -14,11 +14,9 @@ export class HomeUserComponent implements OnInit {
   courses: any = [];
   ready: Boolean = false;
   instructors: any = [];
-  paypal: boolean = false;
   instructorCount: any;
   courseCount: any;
   studentCount: any;
-  selectedCourse: any;
   lib: any = [];
   query: string = '';
 
@@ -91,21 +89,26 @@ export class HomeUserComponent implements OnInit {
       .subscribe(() => this.router.navigate(['library']));
   }
 
-  switchPaypal(bool: boolean, course: any) {
-    this.paypal = bool;
-    this.selectedCourse = course;
+  switchPaypal(id: any) {
+    this.router.navigate(['/paypal', id]);
   }
 
   Logout() {
     localStorage.clear();
   }
   getcourses() {
-    this.router.navigate(['/viewcourses']);
+    this.router.navigate(['/viewcourses']).then(() => {
+      location.reload();
+    });
   }
   getInstructors() {
-    this.router.navigate(['/viewinstructors']);
+    this.router.navigate(['/viewinstructors']).then(() => {
+      location.reload();
+    });
   }
   getresult(query: any) {
-    this.router.navigate(['/result', query]);
+    this.router.navigate(['/result', query]).then(() => {
+      location.reload();
+    });
   }
 }

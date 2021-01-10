@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LibraryComponent implements OnInit {
   user: any = JSON.parse(localStorage.getItem('user') || '{}');
+  query: any;
   constructor(private studentService: StudentService, private router: Router) {}
 
   ngOnInit(): void {}
@@ -19,5 +20,10 @@ export class LibraryComponent implements OnInit {
   }
   Logout() {
     localStorage.clear();
+  }
+  getresult(query: any) {
+    this.router.navigate(['/result', query]).then(() => {
+      location.reload();
+    });
   }
 }
