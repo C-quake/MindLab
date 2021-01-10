@@ -61,7 +61,7 @@ export class StoreComponent implements OnInit {
     console.log(f);
     this.file = '';
     this.file = this.sanitizer.bypassSecurityTrustResourceUrl(
-      'assets/uploads/courses/' + f
+      "http://res.cloudinary.com/dtl8igxn0/image/upload/v1610292027/nfn1hakqfibttdnsdxbe.pdf"
     );
   }
 

@@ -49,7 +49,14 @@ export class HomeUserComponent implements OnInit {
           return course;
         })
         .sort(function (a: any, b: any) {
-          return b.averagerate - a.averagerate;
+          if(a.averagerate === "NaN" ) { 
+
+            return 1
+          }else if( b.averagerate === "NaN"){
+             return -1
+          }else {
+          return b.averagerate - a.averagerate 
+          }
         });
     });
     console.log('courses', this.courses);
@@ -110,10 +117,8 @@ export class HomeUserComponent implements OnInit {
     });
   }
   getresult(query: any) {
-    this.router.navigate(['/result', query])
-    .then(()=>{
+    this.router.navigate(['/result', query]).then(() => {
       window.location.reload();
-
-    })
+    });
   }
 }

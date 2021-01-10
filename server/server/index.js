@@ -10,6 +10,7 @@ var upload = multer({ dest: "uploads/" });
 const PORT = process.env.PORT || 3000;
 var server = http.createServer(app);
 var io = require("socket.io").listen(server);
+app.use(express.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -65,7 +66,14 @@ app.post("/image", upload.single("file"), (req, res) => {
     return res.send(req.file.originalname);
   }
 });
-
+app.use(function (req, res, next) {
+  res.removeHeader('X-Powered-By');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
 app.use("/", studentRouter);
 
 app.use("/", instructorRouter);

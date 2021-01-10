@@ -41,14 +41,12 @@ export class ProfileComponent implements OnInit {
           this.experiences = this.user.experience;
         });
     } else {
-
       this.user = JSON.parse(localStorage.getItem('user') || '{}');
       this.profileService
         .getUserById(this.user._id, this.user.role)
         .subscribe((data: any) => {
           this.updateUser(data);
           this.experiences = this.user.experience;
-
         });
     }
   }
@@ -140,10 +138,11 @@ export class ProfileComponent implements OnInit {
   }
 
   getresult(query: any) {
-    this.router.navigate(['/result', query])
-    .then(()=>{
+    this.router.navigate(['/result', query]).then(() => {
       window.location.reload();
-
-    })
+    });
+  }
+  getVipSession() {
+    window.open('http://localhost:3001', '_blank');
   }
 }

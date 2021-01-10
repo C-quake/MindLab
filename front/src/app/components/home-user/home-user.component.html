@@ -196,8 +196,7 @@
               </div>
             </li>
             <li class="iconitem">
-              <a href="#" data-toggle="modal" data-target="#login-modal"
-                ></a>
+              <a href="#" data-toggle="modal" data-target="#login-modal"></a>
             </li>
             <li class="iconitem"></li>
           </ul>
@@ -234,8 +233,10 @@
             >
               <video
                 class="courseVid"
-                src="../../../assets/uploads/courses/{{ course.video }}"
+                src="{{ course.video }}"
+                type="video/mp4"
               ></video>
+
               <div class="magnifier">
                 <a title=""><i class="flaticon-add"></i></a>
               </div>
