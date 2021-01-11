@@ -24,7 +24,7 @@ export class BarChartComponent {
   barChartPlugins = [];
   instructor: any = [];
   student: any = [];
-
+  barChartData:any;
   constructor(
     private instructorService: InstructorService,
     private studentService: StudentService,

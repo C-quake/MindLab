@@ -58,4 +58,10 @@ export class ResultComponent implements OnInit {
   getCourse(id: any) {
     this.router.navigate(['/coursedetails', id]);
   }
+  Logout() {
+    localStorage.clear();
+  }
+  getresult(query: any) {
+    this.router.navigate(['/result', query]);
+  }
 }

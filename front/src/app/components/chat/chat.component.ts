@@ -8,7 +8,7 @@ import { ChatService } from '../../services/chat.service';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent  {
-
+ usernameIn:any;
   message:any;
   messages:string[] = [];
   username:string = "";

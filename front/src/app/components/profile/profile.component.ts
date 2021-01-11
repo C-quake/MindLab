@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   addExperience: boolean = false;
   token: any;
   imgSelectErr: boolean = false;
+  query: any;
 
   constructor(
     private profileService: ProfileService,
@@ -40,12 +41,12 @@ export class ProfileComponent implements OnInit {
           this.experiences = this.user.experience;
         });
     } else {
+      this.user = JSON.parse(localStorage.getItem('user') || '{}');
       this.profileService
         .getUserById(this.user._id, this.user.role)
         .subscribe((data: any) => {
           this.updateUser(data);
           this.experiences = this.user.experience;
-          console.log(this.user);
         });
     }
   }
@@ -137,7 +138,11 @@ export class ProfileComponent implements OnInit {
   }
 
   getresult(query: any) {
-    this.router.navigate(['/result', query]);
+    this.router.navigate(['/result', query]).then(() => {
+      window.location.reload();
+    });
   }
-  getVipSession() {}
+  getVipSession() {
+    window.open('http://localhost:3001', '_blank');
+  }
 }

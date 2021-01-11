@@ -137,14 +137,13 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="store">Store</a></li>
             <li><a href="profile">Profile</a></li>
-            <li>
-              <a
-                ><i
-                  class="fa fa-sign-out"
-                  style="color: red; font-size: 30px"
-                ></i
-              ></a>
-            </li>
+           <li><a (click)="Logout()" href="">Log Out</a></li>
+           <li> <div>
+            <form class="form-inline pull-right" style="margin-top: 5px">
+              <input type="text" class="form-control" [(ngModel)]="query" placeholder="Search" name="query" >
+              <button class="btn btn-outline-success" (click)="getresult(query)" type="submit">Search</button>
+           </form>
+          </div></li>
           </ul>
         </div>
       </nav>
