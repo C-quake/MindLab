@@ -15,7 +15,7 @@ export class DoughnutChartComponent {
   instructor: any = [];
   student: any = [];
   doughnutChartLabels: Label[] = ['Instructor', 'Student', 'Courses'];
-
+  doughnutChartData: any;
   doughnutChartType: ChartType = 'doughnut';
   doughnutChartData:any;
   constructor(

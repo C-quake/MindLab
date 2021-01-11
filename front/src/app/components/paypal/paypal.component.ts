@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { StoreService } from '../../services/store.service';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { ProfileService } from '../../services/profile.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -10,23 +11,43 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class PaypalComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
-
+  course: any;
   @Input() selected: any;
-  @Input() addToLibrary: any;
   lib: any = [];
   constructor(
     private profileService: ProfileService,
-    private _router: Router
+    private router: Router,
+    private activateroute: ActivatedRoute,
+    private storeService: StoreService
   ) {}
 
   user: any = JSON.parse(localStorage.getItem('user') || '{}');
   showSuccess: boolean = false;
 
   ngOnInit(): void {
-    this.initConfig();
+    var id = this.activateroute.snapshot.params.id;
+    this.storeService.getCourseById(id).subscribe((res: any) => {
+      this.course = res;
+      this.initConfig();
+    });
+
     for (var ele of this.user.library) {
       this.lib.push(ele._id);
     }
+  }
+
+  addToLibrary(course: any) {
+    this.lib.push(course._id);
+    this.user.library.push(course);
+    console.log(this.lib);
+    localStorage.setItem('user', JSON.stringify(this.user));
+    this.profileService
+      .update(this.user._id, { library: this.lib })
+      .subscribe(() =>
+        this.router.navigate(['library']).then(() => {
+          location.reload();
+        })
+      );
   }
 
   private initConfig(): void {
@@ -40,11 +61,11 @@ export class PaypalComponent implements OnInit {
             {
               amount: {
                 currency_code: 'EUR',
-                value: this.selected.price,
+                value: this.course.price,
                 breakdown: {
                   item_total: {
                     currency_code: 'EUR',
-                    value: this.selected.price,
+                    value: this.course.price,
                   },
                 },
               },
@@ -55,7 +76,7 @@ export class PaypalComponent implements OnInit {
                   category: 'DIGITAL_GOODS',
                   unit_amount: {
                     currency_code: 'EUR',
-                    value: this.selected.price,
+                    value: this.course.price,
                   },
                 },
               ],
@@ -85,7 +106,7 @@ export class PaypalComponent implements OnInit {
       onClientAuthorization: (data) => {
         console.log('purchased', data);
         this.showSuccess = true;
-        this.addToLibrary(this.selected);
+        this.addToLibrary(this.course);
       },
       onCancel: (data, actions) => {
         console.log('OnCancel', data, actions);

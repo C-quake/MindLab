@@ -41,6 +41,8 @@ import { ChartsModule } from 'ng2-charts';
 import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
 import { Cloudinary } from 'cloudinary-core';
 
+import { NotFoundComponent } from './components/not-found/not-found.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +71,7 @@ import { Cloudinary } from 'cloudinary-core';
     PieChartComponent,
     ViewcoursesComponent,
     ViewinstructorsComponent,
+    NotFoundComponent,
 
   ],
 

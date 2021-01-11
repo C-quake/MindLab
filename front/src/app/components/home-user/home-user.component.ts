@@ -14,11 +14,9 @@ export class HomeUserComponent implements OnInit {
   courses: any = [];
   ready: Boolean = false;
   instructors: any = [];
-  paypal: boolean = false;
   instructorCount: any;
   courseCount: any;
   studentCount: any;
-  selectedCourse: any;
   lib: any = [];
   query: string = '';
 
@@ -95,12 +93,15 @@ export class HomeUserComponent implements OnInit {
     localStorage.setItem('user', JSON.stringify(this.user));
     this.profileService
       .update(this.user._id, { library: this.lib })
-      .subscribe(() => this.router.navigate(['library']));
+      .subscribe(() =>
+        this.router.navigate(['library']).then(() => {
+          location.reload();
+        })
+      );
   }
 
-  switchPaypal(bool: boolean, course: any) {
-    this.paypal = bool;
-    this.selectedCourse = course;
+  switchPaypal(id: any) {
+    this.router.navigate(['/paypal', id]);
   }
 
   Logout() {
@@ -108,17 +109,20 @@ export class HomeUserComponent implements OnInit {
   }
   getcourses() {
     this.router.navigate(['/viewcourses']).then(() => {
-      window.location.reload();
+
+      location.reload();
     });
   }
   getInstructors() {
     this.router.navigate(['/viewinstructors']).then(() => {
-      window.location.reload();
+
+      location.reload();
     });
   }
   getresult(query: any) {
     this.router.navigate(['/result', query]).then(() => {
-      window.location.reload();
+
+      location.reload();
     });
   }
 }

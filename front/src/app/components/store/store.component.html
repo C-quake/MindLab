@@ -1,5 +1,5 @@
 <div id="preloader">
-  <img class="preloader" src="images/loader.gif" alt="" />
+  <img class="preloader" src="../../../assets/images/loader.gif" alt="" />
 </div>
 <!-- end loader -->
 <!-- END LOADER -->
@@ -156,7 +156,6 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="index.html">Home</a></li>
-            <li><a href="store">Store</a></li>
             <li><a href="profile">Profile</a></li>
 
             <li><a (click)="Logout()" href="">Log Out</a></li>
@@ -175,7 +174,9 @@
         <i class="fa fa-plus"></i> New Course</a
       >
       <h1 class="h3 mb-3">Courses</h1>
-
+      <p *ngIf="!user.store.length" style="margin-bottom: 70vh">
+        you currenty have no courses posted yet.
+      </p>
       <div class="row">
         <div class="col-12 col-md-6 col-lg-3" *ngFor="let course of user.store">
           <div class="card">
