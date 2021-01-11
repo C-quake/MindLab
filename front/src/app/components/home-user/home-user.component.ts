@@ -86,7 +86,11 @@ export class HomeUserComponent implements OnInit {
     localStorage.setItem('user', JSON.stringify(this.user));
     this.profileService
       .update(this.user._id, { library: this.lib })
-      .subscribe(() => this.router.navigate(['library']));
+      .subscribe(() =>
+        this.router.navigate(['library']).then(() => {
+          location.reload();
+        })
+      );
   }
 
   switchPaypal(id: any) {
