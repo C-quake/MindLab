@@ -41,13 +41,20 @@ export class HomeUserComponent implements OnInit {
           course.rates.map((rate: any) => {
             sum = sum + rate.rates;
           });
-          course['averagerate'] = (sum / course.rates.length).toFixed(2);
+          course['averagerate'] = (sum / course.rates.length).toFixed(1);
 
           console.log(course);
           return course;
         })
         .sort(function (a: any, b: any) {
-          return b.averagerate - a.averagerate;
+          if(a.averagerate === "NaN" ) { 
+
+            return 1
+          }else if( b.averagerate === "NaN"){
+             return -1
+          }else {
+          return b.averagerate - a.averagerate 
+          }
         });
     });
     console.log('courses', this.courses);
@@ -102,16 +109,19 @@ export class HomeUserComponent implements OnInit {
   }
   getcourses() {
     this.router.navigate(['/viewcourses']).then(() => {
+
       location.reload();
     });
   }
   getInstructors() {
     this.router.navigate(['/viewinstructors']).then(() => {
+
       location.reload();
     });
   }
   getresult(query: any) {
     this.router.navigate(['/result', query]).then(() => {
+
       location.reload();
     });
   }

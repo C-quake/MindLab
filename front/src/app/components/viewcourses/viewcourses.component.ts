@@ -16,7 +16,8 @@ export class ViewcoursesComponent implements OnInit {
   page = 1;
   count = 0;
   query: string = '';
-  file: any;
+  file:any
+
   tableSize = 7;
   tableSizes = [3, 6, 9, 12];
   courses: any = [];
@@ -24,7 +25,8 @@ export class ViewcoursesComponent implements OnInit {
   paypal: boolean = false;
   selectedCourse: any;
   lib: any = [];
-  currentIndex: any;
+  currentIndex:any;
+
   constructor(
     private sanitizer: DomSanitizer,
     private storeService: StoreService,
@@ -33,7 +35,7 @@ export class ViewcoursesComponent implements OnInit {
     private instructorService: InstructorService
   ) {}
 
-  ngOnInit() {
+  ngOnInit() { 
     console.log('initializing');
     this.getAllcourses();
     if (this.user.role === 'student') {
@@ -111,4 +113,5 @@ export class ViewcoursesComponent implements OnInit {
       'assets/uploads/courses/' + f
     );
   }
+
 }

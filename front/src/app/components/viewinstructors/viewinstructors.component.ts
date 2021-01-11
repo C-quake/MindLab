@@ -13,9 +13,10 @@ import { InstructorService } from '../../services/instructor-service.service';
 })
 export class ViewinstructorsComponent implements OnInit {
   user: any = JSON.parse(localStorage.getItem('user') || '{}');
-  page = 1;
-  count = 0;
+  page = 1; 
+  count = 0; 
   tableSize = 7;
+
   tableSizes = [3, 6, 9, 12];
   currentIndex: any;
 
@@ -32,6 +33,9 @@ export class ViewinstructorsComponent implements OnInit {
   }
   Logout() {
     localStorage.clear();
+  }
+  getresult(query: any) {
+    this.router.navigate(['/result', query]);
   }
 
   getAllInstructors() {

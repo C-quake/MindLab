@@ -26,6 +26,7 @@ export class CourseDetailsComponent implements OnInit {
   user: any;
   show: boolean = false;
   text: any;
+  query:any
   comments: any = [];
   rates: any = [];
   edit: boolean = false;
@@ -230,5 +231,12 @@ export class CourseDetailsComponent implements OnInit {
 
   Logout() {
     localStorage.clear();
+  }
+  getresult(query: any) {
+    this.router.navigate(['/result', query])
+    .then(()=>{
+      window.location.reload();
+
+    })
   }
 }

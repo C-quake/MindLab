@@ -6,6 +6,7 @@ import { ChatService } from '../../services/chat.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
 })
+
 export class ChatComponent {
   message: any;
   messages: string[] = [];

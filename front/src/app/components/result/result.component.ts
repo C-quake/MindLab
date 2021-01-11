@@ -69,4 +69,10 @@ export class ResultComponent implements OnInit {
   Logout() {
     localStorage.clear();
   }
+  Logout() {
+    localStorage.clear();
+  }
+  getresult(query: any) {
+    this.router.navigate(['/result', query]);
+  }
 }
