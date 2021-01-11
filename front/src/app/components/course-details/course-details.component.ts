@@ -8,16 +8,16 @@ import { StudentService } from '../../services/student.service';
 import { InstructorService } from '../../services/instructor-service.service';
 @Component({
   selector: 'app-course-details',
-  templateUrl: './course-details.component.html', 
+  templateUrl: './course-details.component.html',
   styleUrls: ['./course-details.component.css'],
 })
 export class CourseDetailsComponent implements OnInit {
-  @Input() rating: number;
-  @Input() itemId: number;
+  @Input() rating: any;
+  @Input() itemId: any;
   @Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
-  inputName: string;
+  inputName: any;
   starRating: any;
-
+  query: any;
   id: any;
   file: any;
   video: any;
@@ -77,7 +77,7 @@ export class CourseDetailsComponent implements OnInit {
       console.log('instructors', this.instructors);
       for (var i = 0; i < this.instructors.length; i++) {
         this.users.push(this.instructors[i]);
-      }  
+      }
     });
     this.users = this.instructors;
     console.log('users', this.users);
@@ -142,7 +142,7 @@ export class CourseDetailsComponent implements OnInit {
 
             this.courses.forEach((elm: any) => {
               if (elm._id === this.id) {
-                this.comments = elm.comments; 
+                this.comments = elm.comments;
                 console.log(this.comments);
                 this.course = elm;
                 console.log('elm', elm);
@@ -220,6 +220,12 @@ export class CourseDetailsComponent implements OnInit {
   update(value: any) {
     this.starRating = value;
     console.log(this.starRating);
+  }
+
+  getresult(query: any) {
+    this.router.navigate(['/result', query]).then(() => {
+      location.reload();
+    });
   }
 
   Logout() {

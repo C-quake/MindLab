@@ -467,3 +467,9 @@ main.l-main .page-title {
   -o-transition: padding 0.5s ease-in-out;
   transition: padding 0.5s ease-in-out;
 }
+
+.clickable:hover {
+  color: rgb(0, 110, 255);
+  cursor: pointer;
+  text-decoration: underline;
+}

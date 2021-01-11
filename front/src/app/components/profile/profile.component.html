@@ -102,24 +102,42 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/home">Home</a></li>
-
-         
-          <li><a (click)="Logout()" href="">Log Out</a></li>
-          <li><a (click)="getVipSession()" *ngIf="user.role==='student'">VIP Session</a></li>
-          <li> <div>
-            <form class="form-inline pull-right" style="margin-top: 5px">
-              <input type="text" class="form-control" [(ngModel)]="query" placeholder="Search" name="query" >
-              <button class="btn btn-outline-success" (click)="getresult(query)" type="submit">Search</button>
-           </form>
-          </div></li>
-          <li class="iconitem">
-            <a href="#" data-toggle="modal" data-target="#login-modal"
-             > </a>
+          <li>
+            <a href="/library" *ngIf="user.role === 'student'">Library</a>
           </li>
-          <li class="iconitem"></li>
+          <li>
+            <a href="/store" *ngIf="user.role === 'instructor'">Store</a>
+          </li>
+          <li *ngIf="user.role === 'instructor'">
+            <a (click)="getVipSession()" *ngIf="user.role === 'student'"
+              >VIP Session</a
+            >
+          </li>
+
+          <li><a (click)="Logout()" href="">Log Out</a></li>
+          <li>
+            <div>
+              <form
+                class="form-inline pull-right"
+                style="margin-top: 5px; margin-left: 20px"
+              >
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="query"
+                  placeholder="Search"
+                  name="query"
+                />
+                <i
+                  class="fa fa-search"
+                  (click)="getresult(query)"
+                  style="cursor: pointer; margin-left: 10px"
+                ></i>
+              </form>
+            </div>
+          </li>
         </ul>
       </div>
-
     </nav>
     <!-- end navbar -->
   </div>
@@ -236,6 +254,7 @@
             [style.background-color]="!update ? 'white' : '#1abc9c'"
           >
             <a
+              *ngIf="isCurrentUser"
               id="update"
               aria-expanded="false"
               class="nav-link"
@@ -254,7 +273,7 @@
               </h5>
 
               <ul class="list-unstyled timeline-sm">
-                <h5 *ngIf="!user.experience.length">
+                <h5 *ngIf="!user.experience.length && isCurrentUser">
                   You have no registered experience yet,
                   <a (click)="addExperience = true" style="cursor: pointer"
                     >click here to add</a
@@ -268,6 +287,7 @@
                   </p>
                   <br />
                   <i
+                    *ngIf="isCurrentUser"
                     class="fa fa-trash"
                     (click)="deleteExp(x.id)"
                     style="cursor: pointer; font-size: 23px"
@@ -345,7 +365,9 @@
               <br /><br />
               <button
                 class="btn btn-success waves-effect waves-light mt-2"
-                *ngIf="!addExperience && user.experience.length"
+                *ngIf="
+                  !addExperience && user.experience.length && isCurrentUser
+                "
                 (click)="addExperience = true"
               >
                 Click To Add Experiences

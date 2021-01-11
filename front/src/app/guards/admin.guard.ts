@@ -12,13 +12,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
-export class StudentGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   constructor(public auth: AuthGuard, private router: Router) {}
-
   user = JSON.parse(localStorage.getItem('user') || '{}');
 
   canActivate() {
-    if (this.auth.canActivate() && this.user.role === 'student') {
+    if (this.auth.canActivate() && this.user.role === 'admin') {
       return true;
     }
     this.router.navigate(['404']);
