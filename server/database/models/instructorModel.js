@@ -33,7 +33,6 @@ var instructorSchema = mongoose.Schema({
     enum: ["active", "banned", "unverified"],
     default: "active"
   },
-  store: [{ type: mongoose.Schema.Types.ObjectId, ref: "course" }],
   provider: String
 });
 
