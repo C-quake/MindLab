@@ -151,3 +151,7 @@ exports.changeInstructorStatus = function (id, status) {
 exports.changeStudentStatus = function (id, status) {
   return Student.findByIdAndUpdate(id, status);
 };
+
+exports.findCourseByInstructor = function (id) {
+  return CourseModel.find({ IdInstructor: id });
+};

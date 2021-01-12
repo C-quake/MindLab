@@ -49,7 +49,6 @@ export class SignupInstructorComponent implements OnInit {
               linkedin: '',
               github: '',
             };
-            user.store = [];
             this.instructorService.addInstructor(user).subscribe((res) => {
               localStorage.setItem('user', JSON.stringify(res));
               this.router.navigate(['/home']).then(() => {
@@ -84,7 +83,6 @@ export class SignupInstructorComponent implements OnInit {
         linkedin: '',
         github: '',
       },
-      store: [],
     };
     this.instructorService.addInstructor(obj).subscribe((res) => {
       this.router.navigate(['/login']).then(() => {

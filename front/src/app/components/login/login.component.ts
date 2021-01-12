@@ -69,7 +69,6 @@ export class LoginComponent implements OnInit {
                 linkedin: '',
                 github: '',
               };
-              user.store = [];
               this.instructorService.addInstructor(user).subscribe((res) => {
                 localStorage.setItem('user', JSON.stringify(res));
                 this._router.navigate(['/home']).then(() => {
