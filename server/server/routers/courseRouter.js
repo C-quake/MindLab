@@ -4,10 +4,9 @@ const mongoose = require("mongoose");
 var Course = require("../../database/index");
 var { CourseModel } = require("../../database/models/courseModel");
 const multer = require("multer");
+const cloudinary = require("cloudinary").v2;
 
 const DIR = "../front/src/assets/uploads/courses/";
-var name_file;
-var videofile;
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, DIR);
@@ -19,6 +18,7 @@ const storage = multer.diskStorage({
     cb(null, fileName);
   }
 });
+// const storage = multer.diskStorage({});
 
 // Multer Mime Type Validation
 var upload = multer({
@@ -30,21 +30,40 @@ var upload = multer({
     cb(null, true);
   }
 });
+cloudinary.config({
+  cloud_name: "dtl8igxn0",
+  api_key: "737957125387357",
+  api_secret: "eyMhNYy2H39QyH-q5olfImKsquI"
+});
 
-router.route("/api/newCourse").post(upload.array("file", 2), (req, res) => {
-  const reqFiles = [];
+router.route("/api/newCourse").post(upload.array("file", 2), async (req, res) => {
   const url = req.protocol + "://" + req.get("host");
-  for (var i = 0; i < req.files.length; i++) {
-    reqFiles.push(req.files[i].filename);
+
+  const video = await cloudinary.uploader.upload(req.files[0].path, {
+    resource_type: "video"
+  },
+  function(err, data) {
+    if (err) return res.send(err)
+    console.log('file uploaded to Cloudinary')
+    // remove file from server
+    const fs = require('fs')
+    fs.unlinkSync(req.files[0].path)
+    // return image details
+    res.json(data)
   }
-  console.log(req.files);
+  )
+  // const pdf = await cloudinary.uploader.upload(req.files[1].path);
+  // console.log("pdf",pdf);
+  // console.log("video",video);
+
+
   const product = new CourseModel({
     _id: new mongoose.Types.ObjectId(),
     IdInstructor: req.body.IdInstructor,
     title: req.body.title,
     description: req.body.description,
-    video: reqFiles[0],
-    pdf: reqFiles[1],
+    video: video.url,
+    pdf: req.files[1].filename,
     category: req.body.category,
     type: req.body.type,
     price: req.body.price

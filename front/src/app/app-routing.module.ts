@@ -1,3 +1,5 @@
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AdminGuard } from './guards/admin.guard';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PaypalComponent } from './components/paypal/paypal.component';
@@ -19,7 +21,7 @@ import { StudentGuard } from './guards/student.guard';
 import { InstructorGuard } from './guards/instructor.guard';
 import { HomeGuard } from './guards/home.guard';
 import { ResultComponent } from './components/result/result.component';
-import {ViewcoursesComponent} from './components/viewcourses/viewcourses.component';
+import { ViewcoursesComponent } from './components/viewcourses/viewcourses.component';
 import { ViewinstructorsComponent } from './components/viewinstructors/viewinstructors.component';
 import { NotifictaionsComponent } from './components/notifictaions/notifictaions.component';
 
@@ -50,13 +52,19 @@ const routes: Routes = [
     canActivate: [InstructorGuard],
   },
   { path: 'library', component: LibraryComponent, canActivate: [StudentGuard] },
-  { path: 'paypal', component: PaypalComponent },
+  { path: 'paypal/:id', component: PaypalComponent },
   { path: 'result/:query', component: ResultComponent },
-  { path: 'admin', component: AdminDashboardComponent },
+  {
+    path: 'admin',
+    component: AdminDashboardComponent,
+    canActivate: [AdminGuard],
+  },
   { path: 'result/:query', component: ResultComponent },
   { path: 'edit/:id', component: EditComponent },
-  { path:'viewcourses' , component:  ViewcoursesComponent},
-  { path:'viewinstructors' , component:  ViewinstructorsComponent}
+  { path: 'viewcourses', component: ViewcoursesComponent },
+  { path: 'viewinstructors', component: ViewinstructorsComponent },
+  { path: '404', component: NotFoundComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 <div id="preloader">
-  <img class="preloader" src="images/loader.gif" alt="" />
+  <img class="preloader" src="../../../assets/images/loader.gif" alt="" />
 </div>
 <!-- end loader -->
 <!-- END LOADER -->
@@ -135,15 +135,37 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="index.html">Home</a></li>
-            <li><a href="store">Store</a></li>
-            <li><a href="profile">Profile</a></li>
+
             <li>
-              <a
-                ><i
-                  class="fa fa-sign-out"
-                  style="color: red; font-size: 30px"
-                ></i
-              ></a>
+              <a href="/profile" *ngIf="user.role !== 'admin'">Profile</a>
+            </li>
+            <li>
+              <a href="/library" *ngIf="user.role === 'student'">Library</a>
+            </li>
+            <li>
+              <a href="/store" *ngIf="user.role === 'instructor'">Store</a>
+            </li>
+            <li><a (click)="Logout()" href="">Log Out</a></li>
+            <li>
+              <div>
+                <form
+                  class="form-inline pull-right"
+                  style="margin-top: 5px; margin-left: 20px"
+                >
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="query"
+                    placeholder="Search"
+                    name="query"
+                  />
+                  <i
+                    class="fa fa-search"
+                    (click)="getresult(query)"
+                    style="cursor: pointer; margin-left: 10px"
+                  ></i>
+                </form>
+              </div>
             </li>
           </ul>
         </div>

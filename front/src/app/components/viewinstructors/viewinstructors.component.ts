@@ -6,7 +6,6 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { InstructorService } from '../../services/instructor-service.service';
 
-
 @Component({
   selector: 'app-viewinstructors',
   templateUrl: './viewinstructors.component.html',
@@ -14,48 +13,45 @@ import { InstructorService } from '../../services/instructor-service.service';
 })
 export class ViewinstructorsComponent implements OnInit {
   user: any = JSON.parse(localStorage.getItem('user') || '{}');
-  page = 1;
-  count = 0;
+  page = 1; 
+  count = 0; 
   tableSize = 7;
+
   tableSizes = [3, 6, 9, 12];
-  
-  instructors:any =[]
+  currentIndex: any;
+
+  instructors: any = [];
   constructor(
     private sanitizer: DomSanitizer,
     private storeService: StoreService,
     private router: Router,
-    private instructorService : InstructorService 
+    private instructorService: InstructorService
   ) {}
 
   ngOnInit(): void {
-   this.getAllInstructors()
-  
+    this.getAllInstructors();
   }
   Logout() {
     localStorage.clear();
   }
+  getresult(query: any) {
+    this.router.navigate(['/result', query]);
+  }
 
-  getAllInstructors(){
+  getAllInstructors() {
     this.instructorService.getAllInstructors().subscribe((res: any) => {
-      this.instructors = res
+      this.instructors = res;
     });
   }
- 
 
-  
-  onTableDataChange(event:any){
+  onTableDataChange(event: any) {
     this.page = event;
-    this.getAllInstructors()
-  }  
+    this.getAllInstructors();
+  }
 
-  onTableSizeChange(event:any): void {
+  onTableSizeChange(event: any): void {
     this.tableSize = event.target.value;
     this.page = 1;
-    this.getAllInstructors()
-  }  
-  
-
-  
+    this.getAllInstructors();
+  }
 }
-
-

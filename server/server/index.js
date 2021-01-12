@@ -16,6 +16,7 @@ const fs = require('fs')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -144,19 +145,29 @@ app.post('/api/sendemail',(req,res) => {
     })
 })
 
+app.post("/image", upload.single("file"), (req, res) => {
+  if (!req.file) {
+    console.log("No file received");
+    return res.send({
+      success: false
+    });
+  } else {
+    console.log("file received");
+    return res.send(req.file.originalname);
+  }
+});
+app.use(function (req, res, next) {
+  res.removeHeader('X-Powered-By');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
+app.use("/", studentRouter);
 
 
-// app.post("/image", upload.single("file"), (req, res) => {
-//   if (!req.file) {
-//     console.log("No file received");
-//     return res.send({
-//       success: false
-//     });
-//   } else {
-//     console.log("file received");
-//     return res.send(req.file.originalname);
-//   }
-// });
+
 
 // live chat part 
 io.on("connection", function (socket) {

@@ -7,12 +7,13 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthGuard } from './auth.guard';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StudentGuard implements CanActivate {
-  constructor(public auth: AuthGuard) {}
+  constructor(public auth: AuthGuard, private router: Router) {}
 
   user = JSON.parse(localStorage.getItem('user') || '{}');
 
@@ -20,6 +21,7 @@ export class StudentGuard implements CanActivate {
     if (this.auth.canActivate() && this.user.role === 'student') {
       return true;
     }
+    this.router.navigate(['404']);
     return false;
   }
 }

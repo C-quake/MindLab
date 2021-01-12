@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./result.component.css'],
 })
 export class ResultComponent implements OnInit {
-  query: string;
+  user: any = JSON.parse(localStorage.getItem('user') || '{}');
+  query: any;
   file: any;
   video: any;
   courses: any = [];
@@ -56,6 +57,17 @@ export class ResultComponent implements OnInit {
     );
   }
   getCourse(id: any) {
-    this.router.navigate(['/coursedetails', id]);
+    this.router.navigate(['/coursedetails', id]).then(() => {
+      location.reload();
+    });
   }
+  getresult(query: any) {
+    this.router.navigate(['/result', query]).then(() => {
+      location.reload();
+    });
+  }
+  Logout() {
+    localStorage.clear();
+  }
+  
 }

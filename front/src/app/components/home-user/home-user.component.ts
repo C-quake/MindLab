@@ -14,11 +14,9 @@ export class HomeUserComponent implements OnInit {
   courses: any = [];
   ready: Boolean = false;
   instructors: any = [];
-  paypal: boolean = false;
   instructorCount: any;
   courseCount: any;
   studentCount: any;
-  selectedCourse: any;
   lib: any = [];
   query: string = '';
 
@@ -43,13 +41,20 @@ export class HomeUserComponent implements OnInit {
           course.rates.map((rate: any) => {
             sum = sum + rate.rates;
           });
-          course['averagerate'] = (sum / course.rates.length).toFixed(2);
+          course['averagerate'] = (sum / course.rates.length).toFixed(1);
 
           console.log(course);
           return course;
         })
         .sort(function (a: any, b: any) {
-          return b.averagerate - a.averagerate;
+          if(a.averagerate === "NaN" ) { 
+
+            return 1
+          }else if( b.averagerate === "NaN"){
+             return -1
+          }else {
+          return b.averagerate - a.averagerate 
+          }
         });
     });
     console.log('courses', this.courses);
@@ -88,25 +93,37 @@ export class HomeUserComponent implements OnInit {
     localStorage.setItem('user', JSON.stringify(this.user));
     this.profileService
       .update(this.user._id, { library: this.lib })
-      .subscribe(() => this.router.navigate(['library']));
+      .subscribe(() =>
+        this.router.navigate(['library']).then(() => {
+          location.reload();
+        })
+      );
   }
 
-  switchPaypal(bool: boolean, course: any) {
-    this.paypal = bool;
-    this.selectedCourse = course;
+  switchPaypal(id: any) {
+    this.router.navigate(['/paypal', id]);
   }
 
   Logout() {
     localStorage.clear();
   }
   getcourses() {
-    this.router.navigate(['/viewcourses']);
+    this.router.navigate(['/viewcourses']).then(() => {
+
+      location.reload();
+    });
   }
   getInstructors() {
-    this.router.navigate(['/viewinstructors']);
+    this.router.navigate(['/viewinstructors']).then(() => {
+
+      location.reload();
+    });
   }
   getresult(query: any) {
-    this.router.navigate(['/result', query]);
+    this.router.navigate(['/result', query]).then(() => {
+
+      location.reload();
+    });
   }
   goToChat(){
     this.router.navigate(['/chat']);

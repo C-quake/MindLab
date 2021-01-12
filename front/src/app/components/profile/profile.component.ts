@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   token: any;
   imgSelectErr: boolean = false;
   query: any;
+  isCurrentUser: boolean = true;
 
   constructor(
     private profileService: ProfileService,
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit {
       (this.activateroute.snapshot.params.id,
       this.activateroute.snapshot.params.role)
     ) {
+      this.isCurrentUser = false;
       this.profileService
         .getUserById(
           this.activateroute.snapshot.params.id,
@@ -138,11 +140,17 @@ export class ProfileComponent implements OnInit {
   }
 
   getresult(query: any) {
-    this.router.navigate(['/result', query]);
+    this.router.navigate(['/result', query]).then(() => {
+      window.location.reload();
+    });
   }
-  getVipSession() {}
+  getVipSession() {
+    window.open('http://localhost:3001', '_blank');
 
+  }
   sendNotif(){
-    this.router.navigate(['/notifications']);
+    this.router.navigate(['/notifications']).then(() => {
+      window.location.reload();
+  })
   }
 }
