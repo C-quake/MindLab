@@ -23,7 +23,7 @@ export class StoreComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('here',this.user.store)
+    console.log('here', this.user.store);
     for (var ele of this.user.store) {
       this.store.push(ele._id);
     }
@@ -61,12 +61,11 @@ export class StoreComponent implements OnInit {
     console.log(f);
     this.file = '';
     this.file = this.sanitizer.bypassSecurityTrustResourceUrl(
-      'assets/uploads/courses/' + f
+      "http://res.cloudinary.com/dtl8igxn0/image/upload/v1610292027/nfn1hakqfibttdnsdxbe.pdf"
     );
   }
 
   getCourse(id: any) {
-
     this.router.navigate(['/coursedetails', id]);
   }
 

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,13 +16,7 @@ import {
   SocialLoginModule,
   SocialAuthServiceConfig,
 } from 'angularx-social-login';
-
-import { EditCourseComponent } from './components/edit-course/edit-course.component';
-import { UsersListComponent } from './component/users-list/users-list.component';
-import { ChatWindowComponent } from './component/chat-window/chat-window.component';
-import { ChatNamePopupComponent } from './component/chat-name-popup/chat-name-popup.component';
 import { ChatComponent } from './components/chat/chat.component'
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { NgxPayPalModule } from 'ngx-paypal';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { StoreComponent } from './components/store/store.component';
@@ -31,8 +26,23 @@ import { LibraryComponent } from './components/library/library.component';
 import { PaypalComponent } from './components/paypal/paypal.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ResultComponent } from './components/result/result.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { EditComponent } from './components/edit/edit.component';
+import { DoughnutChartComponent } from './components/doughnut-chart/doughnut-chart.component';
+import { ViewcoursesComponent } from './components/viewcourses/viewcourses.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ViewinstructorsComponent } from './components/viewinstructors/viewinstructors.component';
 
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+
+import { StatisticComponent } from './components/statistic/statistic.component';
+import { BarChartComponent } from './components/bar-chart/bar-chart.component';
+import { ChartsModule } from 'ng2-charts';
+import { NotifictaionsComponent } from './components/notifictaions/notifictaions.component';
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
+import { Cloudinary } from 'cloudinary-core';
+
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -46,17 +56,24 @@ import { EditComponent } from './components/edit/edit.component';
     StoreComponent,
     NewcourseComponent,
     CourseDetailsComponent,
-    EditCourseComponent,
-    UsersListComponent,
-    ChatWindowComponent,
-    ChatNamePopupComponent,
+    LibraryComponent,
+    PaypalComponent,
+    ResultComponent,
+    AdminDashboardComponent,
     ChatComponent,
     ResultComponent,
     LibraryComponent,
     PaypalComponent,
     ResultComponent,
     EditComponent,
-
+    StatisticComponent,
+    BarChartComponent,
+    DoughnutChartComponent,
+    PieChartComponent,
+    ViewcoursesComponent,
+    ViewinstructorsComponent,
+    NotifictaionsComponent,
+    NotFoundComponent,
 
   ],
 
@@ -67,7 +84,14 @@ import { EditComponent } from './components/edit/edit.component';
     HttpClientModule,
     ReactiveFormsModule,
     SocialLoginModule,
+    NgxPayPalModule,
     NgbModule,
+    ChartsModule,
+    NgxPaginationModule,
+    CloudinaryModule.forRoot({Cloudinary}, { cloud_name: 'dtl8igxn0' } as CloudinaryConfiguration),
+
+
+
   ],
 
   providers: [

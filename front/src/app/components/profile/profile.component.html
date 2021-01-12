@@ -102,77 +102,51 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/home">Home</a></li>
-          <li class="dropdown yamm-fw yamm-half">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle active"
-              >Mega Menu <b class="fa fa-angle-down"></b
-            ></a>
-            <ul class="dropdown-menu">
-              <li>
-                <div class="yamm-content clearfix">
-                  <div class="row-fluid">
-                    <div class="col-md-6 col-sm-6">
-                      <h4>Course Pages</h4>
-                      <ul>
-                        <li><a href="#">Courses Name 01</a></li>
-                        <li><a href="#">Courses Name 02</a></li>
-                        <li><a href="#">Courses Name 03</a></li>
-                        <li><a href="#">Courses Name 04</a></li>
-                        <li><a href="#">Courses Name 05</a></li>
-                        <li><a href="#">Courses Name 06</a></li>
-                        <li><a href="#">Courses Name 07</a></li>
-                        <li><a href="#">Courses Name 08</a></li>
-                        <li><a href="#">Courses Name 09</a></li>
-                      </ul>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                      <div class="menu-widget text-center">
-                        <div class="image-wrap entry">
-                          <img
-                            src="../../../assets/upload/course_01.jpg"
-                            alt=""
-                            class="img-responsive"
-                          />
-                          <div class="magnifier">
-                            <a href="#" title=""
-                              ><i class="flaticon-add"></i
-                            ></a>
-                          </div>
-                        </div>
-
-                        <!-- end image-wrap -->
-                        <h5><a href="#">Learning Bootstrap Framework</a></h5>
-                        <small>$22.00</small>
-                        <a href="#" class="menu-button">View Course</a>
-                      </div>
-                      <!-- end widget -->
-                    </div>
-                  </div>
-
-                </div>
-              </li>
-            </ul>
+          <li>
+            <a href="/library" *ngIf="user.role === 'student'">Library</a>
           </li>
+          <li>
+            <a href="/store" *ngIf="user.role === 'instructor'">Store</a>
+          </li>
+          <li *ngIf="user.role === 'instructor'">
+            <a (click)="getVipSession()" *ngIf="user.role === 'student'"
+              >VIP Session</a
+            >
+          </li>
+
           <li><a (click)="Logout()" href="">Log Out</a></li>
-          <li class="iconitem">
-            <a href="#" data-toggle="modal" data-target="#login-modal"
-              ><i class="fa fa-search"></i
-            ></a>
+
+          <li>
+            <div>
+              <form
+                class="form-inline pull-right"
+                style="margin-top: 5px; margin-left: 20px"
+              >
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="query"
+                  placeholder="Search"
+                  name="query"
+                />
+                <i
+                  class="fa fa-search"
+                  (click)="getresult(query)"
+                  style="cursor: pointer; margin-left: 10px"
+                ></i>
+              </form>
+            </div>
+
           </li>
-          <li class="iconitem"></li>
         </ul>
       </div>
-      <div>
-        <form class="form-inline pull-right" style="margin-top: 5px">
-          <input type="text" class="form-control" [(ngModel)]="query" placeholder="Search" name="query" >
-          <button class="btn btn-outline-success" (click)="getresult(query)" type="submit">Search</button>
-       </form>
-      </div>
+
     </nav>
     <!-- end navbar -->
   </div>
   <!-- end container -->
 </header>
-<div class="container">
+<div class="container" *ngIf="user">
   <div class="row">
     <div class="col-lg-4 col-xl-4">
       <div class="card-box text-center">
@@ -193,9 +167,9 @@
         <button
           type="button"
           class="btn btn-danger btn-xs waves-effect mb-2 waves-light"
-          id="msgbtn"
+          id="msgbtn" (click)="sendNotif()"
         >
-          Message
+          send E-mail
         </button>
 
         <div class="text-left mt-3">
@@ -283,6 +257,7 @@
             [style.background-color]="!update ? 'white' : '#1abc9c'"
           >
             <a
+              *ngIf="isCurrentUser"
               id="update"
               aria-expanded="false"
               class="nav-link"
@@ -301,7 +276,7 @@
               </h5>
 
               <ul class="list-unstyled timeline-sm">
-                <h5 *ngIf="!user.experience.length">
+                <h5 *ngIf="!user.experience.length && isCurrentUser">
                   You have no registered experience yet,
                   <a (click)="addExperience = true" style="cursor: pointer"
                     >click here to add</a
@@ -315,6 +290,7 @@
                   </p>
                   <br />
                   <i
+                    *ngIf="isCurrentUser"
                     class="fa fa-trash"
                     (click)="deleteExp(x.id)"
                     style="cursor: pointer; font-size: 23px"
@@ -392,7 +368,9 @@
               <br /><br />
               <button
                 class="btn btn-success waves-effect waves-light mt-2"
-                *ngIf="!addExperience && user.experience.length"
+                *ngIf="
+                  !addExperience && user.experience.length && isCurrentUser
+                "
                 (click)="addExperience = true"
               >
                 Click To Add Experiences

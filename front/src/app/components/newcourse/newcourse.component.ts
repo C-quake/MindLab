@@ -88,6 +88,7 @@ export class NewcourseComponent implements OnInit {
         this.loginForm.value.price || 0
       )
       .subscribe((res: any) => {
+        console.log("course added")
         this.videInput();
         this.store.push(res._id);
         this.user.store.push(res);

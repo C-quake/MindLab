@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
@@ -8,11 +9,13 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private storeService: StoreService) {}
+  constructor(private storeService: StoreService, private router: Router) {}
+  query: any;
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    this.storeService.getService().subscribe((res) => {
-      localStorage.setItem('courses', JSON.stringify(res));
+  getresult(query: any) {
+    this.router.navigate(['/result', query]).then(() => {
+      location.reload();
     });
   }
 }

@@ -1,16 +1,19 @@
 <link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
-integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA="
-crossorigin="anonymous"
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+  integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA="
+  crossorigin="anonymous"
 />
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!-- <link
+  href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/> -->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-
 <div id="preloader">
-  <img class="preloader" src="images/loader.gif" alt="" />
+  <img class="preloader" src="../../../assets/images/loader.gif" alt="" />
 </div>
 <!-- end loader -->
 <!-- END LOADER -->
@@ -146,10 +149,36 @@ crossorigin="anonymous"
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="index.html">Home</a></li>
-            <li><a routerLink='/store' >Store</a></li>
-            <li><a routerLink='/profile'>Profile</a></li>
             <li>
-              <a><i class="fa fa-sign-out" style="color: red; font-size:30px"></i></a>
+              <a href="/profile" *ngIf="user.role !== 'admin'">Profile</a>
+            </li>
+            <li>
+              <a href="/library" *ngIf="user.role === 'student'">Library</a>
+            </li>
+            <li>
+              <a href="/store" *ngIf="user.role === 'instructor'">Store</a>
+            </li>
+            <li><a (click)="Logout()" href="">Log Out</a></li>
+            <li>
+              <div>
+                <form
+                  class="form-inline pull-right"
+                  style="margin-top: 5px; margin-left: 20px"
+                >
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="query"
+                    placeholder="Search"
+                    name="query"
+                  />
+                  <i
+                    class="fa fa-search"
+                    (click)="getresult(query)"
+                    style="cursor: pointer; margin-left: 10px"
+                  ></i>
+                </form>
+              </div>
             </li>
           </ul>
         </div>
@@ -169,18 +198,30 @@ crossorigin="anonymous"
       <div class="row">
         <div class="col-md-9 mb40">
           <article>
-            <video  src="assets/uploads/courses/{{course.video}}" width="100%" height="100%" controls  style="margin:10px 0">
-            </video>
-
+            <video
+              src="{{ course.video }}"
+              width="100%"
+              height="100%"
+              controls
+              style="margin: 10px 0"
+            ></video>
 
             <span
-
               data-toggle="modal"
               data-target="#modal-lg"
               (click)="getfile(course.pdf)"
-              >Click here to open PDF  <i class="fa fa-file-pdf-o" style="color:red;text-align:center;margin-left:0px;font-size:30px;" aria-hidden="true"></i></span
-            >
-
+              >Click here to open PDF
+              <i
+                class="fa fa-file-pdf-o"
+                style="
+                  color: red;
+                  text-align: center;
+                  margin-left: 0px;
+                  font-size: 30px;
+                "
+                aria-hidden="true"
+              ></i
+            ></span>
             <div class="modal fade" id="modal-lg" #modall>
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -239,85 +280,158 @@ crossorigin="anonymous"
                 {{ course.description }}
               </p>
               <div *ngIf="show">
-              <a    class="btn btn-primary a-btn-slide-text">
-                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                <span><strong (click)="editCourse(course._id)">Edit</strong></span>
-            </a>
-          </div>
-         <div >
-          <fieldset  class="rating">
-            <input type="radio" [name]="inputName"  value="5" [checked]="rating===5" />
-            <label title="Rocks!" (click)='onClick(5)'>5 stars</label>
+                <a class="btn btn-primary a-btn-slide-text">
+                  <span
+                    class="glyphicon glyphicon-edit"
+                    aria-hidden="true"
+                  ></span>
+                  <span
+                    ><strong (click)="editCourse(course._id)"
+                      >Edit</strong
+                    ></span
+                  >
+                </a>
+              </div>
+              <div>
+                <fieldset class="rating">
+                  <input
+                    type="radio"
+                    [name]="inputName"
+                    value="5"
+                    [checked]="rating === 5"
+                  />
+                  <label title="Rocks!" (click)="onClick(5)">5 stars</label>
 
-            <input type="radio" [name]="inputName" value="4" [checked]="rating===4" />
-            <label title="Pretty good" (click)='onClick(4)'>4 stars</label>
+                  <input
+                    type="radio"
+                    [name]="inputName"
+                    value="4"
+                    [checked]="rating === 4"
+                  />
+                  <label title="Pretty good" (click)="onClick(4)"
+                    >4 stars</label
+                  >
 
-            <input type="radio" [name]="inputName" value="3" [checked]="rating===3" />
-            <label title="Meh" (click)='onClick(3)'>3 stars</label>
+                  <input
+                    type="radio"
+                    [name]="inputName"
+                    value="3"
+                    [checked]="rating === 3"
+                  />
+                  <label title="Meh" (click)="onClick(3)">3 stars</label>
 
-            <input type="radio" [name]="inputName" value="2" [checked]="rating===2" />
-            <label title="Kinda bad" (click)='onClick(2)'>2 stars</label>
+                  <input
+                    type="radio"
+                    [name]="inputName"
+                    value="2"
+                    [checked]="rating === 2"
+                  />
+                  <label title="Kinda bad" (click)="onClick(2)">2 stars</label>
 
-            <input type="radio" [name]="inputName" value="1" [checked]="rating===1" />
-            <label title="Sucks big time" (click)='onClick(1)'>1 star</label>
-          </fieldset>
-        </div>
+                  <input
+                    type="radio"
+                    [name]="inputName"
+                    value="4"
+                    [checked]="rating === 4"
+                  />
+                  <label title="Pretty good" (click)="onClick(4)"
+                    >4 stars</label
+                  >
+
+                  <input
+                    type="radio"
+                    [name]="inputName"
+                    value="3"
+                    [checked]="rating === 3"
+                  />
+                  <label title="Meh" (click)="onClick(3)">3 stars</label>
+
+                  <input
+                    type="radio"
+                    [name]="inputName"
+                    value="2"
+                    [checked]="rating === 2"
+                  />
+                  <label title="Kinda bad" (click)="onClick(2)">2 stars</label>
+                  <input
+                    type="radio"
+                    [name]="inputName"
+                    value="1"
+                    [checked]="rating === 1"
+                  />
+                  <label title="Sucks big time" (click)="onClick(1)"
+                    >1 star</label
+                  >
+                </fieldset>
+              </div>
               <hr class="mb40" />
               <hr class="mb40" />
               <h4 class="mb40 text-uppercase font500">Comments</h4>
-              <div class="media mb40"  *ngFor="let comment of comments">
+              <div class="media mb40" *ngFor="let comment of comments">
                 <!-- <i class="d-flex mr-3 fa fa-user-circle-o fa-3x"></i> -->
-                 <div *ngFor="let user of users">
-                <img *ngIf="user._id === comment.commenterId"
-                src="{{ user.image }}"
-                class="ratio img-responsive img-circle"
-                alt="profile-image" style="width:50px;"
-              />
-            </div>
-
+                <div *ngFor="let user of users">
+                  <img
+                    *ngIf="user._id === comment.commenterId"
+                    src="{{ user.image }}"
+                    class="ratio img-responsive img-circle"
+                    alt="profile-image"
+                    style="width: 50px"
+                  />
+                </div>
 
                 <div class="media-body">
                   <h5 class="mt-0 font400 clearfix">
                     <a href="#" class="float-right">Reply</a>
-                      {{comment.commenterUsername}}
-                    </h5>
-               {{comment.text}}
+                    {{ comment.commenterUsername }}
+                  </h5>
+                  {{ comment.text }}
                 </div>
-                <i class="far fa-trash-alt" *ngIf="user._id === comment.commenterId" (click)="deleteComment(comment)"></i>
-                <i class="fas fa-edit" *ngIf="user._id === comment.commenterId" (click)="change()"></i>
-                <form  *ngIf="edit && comment.commenterId === user._id" (ngSubmit)="editComment(comment)" className="edit-comment-form">
-                  <label htmlFor="text"  (click)="change()" >
-                    Edit
-                  </label>
+                <i
+                  class="far fa-trash-alt"
+                  *ngIf="user._id === comment.commenterId"
+                  (click)="deleteComment(comment)"
+                ></i>
+                <i
+                  class="fas fa-edit"
+                  *ngIf="user._id === comment.commenterId"
+                  (click)="change()"
+                ></i>
+                <form
+                  *ngIf="edit && comment.commenterId === user._id"
+                  (ngSubmit)="editComment(comment)"
+                  className="edit-comment-form"
+                >
+                  <label htmlFor="text" (click)="change()"> Edit </label>
                   <br />
                   <input
                     type="text"
                     name="text"
-                    defaultValue={{comment.text}}
+                    defaultValue="{{ comment.text }}"
                     [(ngModel)]="text"
                   />
 
-                    <input type="submit"  value="save modification" />
+                  <input type="submit" value="save modification" />
                 </form>
-
               </div>
 
               <h4 class="mb40 text-uppercase font500">Post a comment</h4>
-              <form >
-
-
+              <form>
                 <div class="form-group">
                   <label>Comment</label>
                   <textarea
-
                     class="form-control"
                     rows="5"
                     placeholder="Comment"
                     [(ngModel)]="text"
-                  name="text"></textarea>
+                    name="text"
+                  ></textarea>
                 </div>
                 <div class="clearfix float-right">
-                  <button type="button" class="btn btn-primary btn-lg" (click)="postComment()">
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-lg"
+                    (click)="postComment()"
+                  >
                     Submit
                   </button>
                 </div>
@@ -447,4 +561,3 @@ crossorigin="anonymous"
   </div>
   <!-- end container -->
 </div>
-<!-- end copy -->

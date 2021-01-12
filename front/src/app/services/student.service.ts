@@ -12,7 +12,10 @@ export class StudentService {
   findStudent(email: string) {
     return this.http.get('http://localhost:3000/api/studentemail/' + email);
   }
-  findStudents() {
+  changeStudentStatus(id: string, status: any) {
+    return this.http.put('http://localhost:3000/api/student/ban/' + id, status);
+  }
+  getAllStudents() {
     return this.http.get('http://localhost:3000/api/student');
   }
 }

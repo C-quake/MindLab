@@ -18,4 +18,11 @@ export class InstructorService {
   getAllInstructors() {
     return this.http.get('http://localhost:3000/api/instructor');
   }
+
+  changeInstructorStatus(id: string, status: any) {
+    return this.http.put(
+      'http://localhost:3000/api/instructor/ban/' + id,
+      status
+    );
+  }
 }

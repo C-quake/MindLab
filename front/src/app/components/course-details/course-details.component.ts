@@ -12,11 +12,12 @@ import { InstructorService } from '../../services/instructor-service.service';
   styleUrls: ['./course-details.component.css'],
 })
 export class CourseDetailsComponent implements OnInit {
-  @Input() rating: number;
-  @Input() itemId: number;
+  @Input() rating: any;
+  @Input() itemId: any;
   @Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
-  inputName: string;
-
+  inputName: any;
+  starRating: any;
+  query: any;
   id: any;
   file: any;
   video: any;
@@ -25,6 +26,7 @@ export class CourseDetailsComponent implements OnInit {
   user: any;
   show: boolean = false;
   text: any;
+  query:any
   comments: any = [];
   rates: any = [];
   edit: boolean = false;
@@ -37,47 +39,44 @@ export class CourseDetailsComponent implements OnInit {
     private StoreService: StoreService,
     private sanitizer: DomSanitizer,
     private router: Router,
+
     private InstructorService: InstructorService,
     private detailsService: DetailsService,
     private StudentService: StudentService
   ) {}
 
   ngOnInit(): void {
-
     this.id = this.activateroute.snapshot.params.id;
-    this.StoreService.getService()
-    .subscribe(
-    (data) => {
+    this.StoreService.getService().subscribe((data) => {
       this.courses = data;
       console.log('courses', this.courses);
 
       this.courses.forEach((elm: any) => {
-        if(elm._id === this.id){
-          this.comments=elm.comments
-          this.rates=elm.rates
-          console.log(this.comments)
+        if (elm._id === this.id) {
+          this.comments = elm.comments;
+          this.rates = elm.rates;
+          console.log(this.comments);
           // this.course = elm;
           console.log('elm', elm);
         }
-
       });
-    })
+    });
     this.inputName = this.itemId + '_rating';
 
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
 
     console.log('user', this.user._id);
-    this.StudentService.findStudents().subscribe((res) => {
+    this.StudentService.getAllStudents().subscribe((res) => {
       this.students = res;
       console.log('students', this.students);
-      for(var i=0;i<this.students.length;i++){
+      for (var i = 0; i < this.students.length; i++) {
         this.users.push(this.students[i]);
       }
     });
     this.InstructorService.getAllInstructors().subscribe((res) => {
       this.instructors = res;
       console.log('instructors', this.instructors);
-      for(var i=0;i<this.instructors.length;i++){
+      for (var i = 0; i < this.instructors.length; i++) {
         this.users.push(this.instructors[i]);
       }
     });
@@ -89,7 +88,6 @@ export class CourseDetailsComponent implements OnInit {
       if (this.user._id === this.course.IdInstructor) {
         this.show = !this.show;
       }
-
     });
   }
   onClick(rating: number): void {
@@ -225,7 +223,20 @@ export class CourseDetailsComponent implements OnInit {
     console.log(this.starRating);
   }
 
+  getresult(query: any) {
+    this.router.navigate(['/result', query]).then(() => {
+      location.reload();
+    });
+  }
+
   Logout() {
     localStorage.clear();
+  }
+  getresult(query: any) {
+    this.router.navigate(['/result', query])
+    .then(()=>{
+      window.location.reload();
+
+    })
   }
 }

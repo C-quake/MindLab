@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ProfileService } from '../../services/profile.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -17,18 +18,39 @@ export class ProfileComponent implements OnInit {
   addExperience: boolean = false;
   token: any;
   imgSelectErr: boolean = false;
+  query: any;
+  isCurrentUser: boolean = true;
 
-  constructor(private profileService: ProfileService,private router:Router) {}
+  constructor(
+    private profileService: ProfileService,
+    private router: Router,
+    private activateroute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    this.profileService
-      .getUserById(this.user._id, this.user.role)
-      .subscribe((data: any) => {
-        this.updateUser(data);
-        this.experiences = this.user.experience;
-        console.log(this.user);
-      });
+    if (
+      (this.activateroute.snapshot.params.id,
+      this.activateroute.snapshot.params.role)
+    ) {
+      this.isCurrentUser = false;
+      this.profileService
+        .getUserById(
+          this.activateroute.snapshot.params.id,
+          this.activateroute.snapshot.params.role
+        )
+        .subscribe((data: any) => {
+          this.user = data;
+          this.experiences = this.user.experience;
+        });
+    } else {
+      this.user = JSON.parse(localStorage.getItem('user') || '{}');
+      this.profileService
+        .getUserById(this.user._id, this.user.role)
+        .subscribe((data: any) => {
+          this.updateUser(data);
+          this.experiences = this.user.experience;
+        });
+    }
   }
   onChange(img: any) {
     this.image = img.files[0].name.toLowerCase();
@@ -116,7 +138,19 @@ export class ProfileComponent implements OnInit {
   Logout() {
     localStorage.clear();
   }
-  getresult(query:any){
-    this.router.navigate(['/result',query])
+
+  getresult(query: any) {
+    this.router.navigate(['/result', query]).then(() => {
+      window.location.reload();
+    });
+  }
+  getVipSession() {
+    window.open('http://localhost:3001', '_blank');
+
+  }
+  sendNotif(){
+    this.router.navigate(['/notifications']).then(() => {
+      window.location.reload();
+  })
   }
 }

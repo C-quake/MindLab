@@ -11,15 +11,15 @@ import { Router } from '@angular/router';
 })
 export class HomeUserComponent implements OnInit {
   user: any = JSON.parse(localStorage.getItem('user') || '{}');
-  courses: any = {};
-  // courses: any = JSON.parse(localStorage.getItem('courses') || '{}');
+  courses: any = [];
   ready: Boolean = false;
-  instructors: any;
+  instructors: any = [];
   instructorCount: any;
   courseCount: any;
-  paypal: boolean = false;
-  selectedCourse: any;
+  studentCount: any;
   lib: any = [];
+  query: string = '';
+
   constructor(
     private storeService: StoreService,
     private instructorService: InstructorService,
@@ -31,24 +31,48 @@ export class HomeUserComponent implements OnInit {
   ngOnInit() {
     console.log('initializing');
 
-    this.storeService.getService().subscribe((res) => {
+    this.storeService.getService().subscribe((res: any) => {
       this.courses = res;
-      console.log(this.courses);
+      this.courseCount = res.length;
+
+      this.courses = this.courses
+        .map((course: any) => {
+          var sum = 0;
+          course.rates.map((rate: any) => {
+            sum = sum + rate.rates;
+          });
+          course['averagerate'] = (sum / course.rates.length).toFixed(1);
+
+          console.log(course);
+          return course;
+        })
+        .sort(function (a: any, b: any) {
+          if(a.averagerate === "NaN" ) { 
+
+            return 1
+          }else if( b.averagerate === "NaN"){
+             return -1
+          }else {
+          return b.averagerate - a.averagerate 
+          }
+        });
     });
+    console.log('courses', this.courses);
 
     // this.ready = true;
     this.instructorService.getAllInstructors().subscribe((res: any) => {
       this.instructorCount = res.length;
-      this.instructors = res.slice(0, 3);
+      this.instructors = res;
     });
-    this.storeService.getService().subscribe((res: any) => {
-      this.courseCount = res.length;
+
+    this.studentService.getAllStudents().subscribe((res: any) => {
+      this.studentCount = res.length;
     });
+
     if (this.user.role === 'student') {
       for (var ele of this.user.library) {
         this.lib.push(ele._id);
       }
-      console.log(this.lib);
     }
   }
 
@@ -69,15 +93,39 @@ export class HomeUserComponent implements OnInit {
     localStorage.setItem('user', JSON.stringify(this.user));
     this.profileService
       .update(this.user._id, { library: this.lib })
-      .subscribe(() => this.router.navigate(['library']));
+      .subscribe(() =>
+        this.router.navigate(['library']).then(() => {
+          location.reload();
+        })
+      );
   }
 
-  switchPaypal(bool: boolean, course: any) {
-    this.paypal = bool;
-    this.selectedCourse = course;
+  switchPaypal(id: any) {
+    this.router.navigate(['/paypal', id]);
   }
 
   Logout() {
     localStorage.clear();
+  }
+  getcourses() {
+    this.router.navigate(['/viewcourses']).then(() => {
+
+      location.reload();
+    });
+  }
+  getInstructors() {
+    this.router.navigate(['/viewinstructors']).then(() => {
+
+      location.reload();
+    });
+  }
+  getresult(query: any) {
+    this.router.navigate(['/result', query]).then(() => {
+
+      location.reload();
+    });
+  }
+  goToChat(){
+    this.router.navigate(['/chat']);
   }
 }
