@@ -13,7 +13,7 @@ export class StoreService {
   constructor(private httpClient: HttpClient) {
     this.http = httpClient;
   }
-  getService():Observable<any> {
+  getService(): Observable<any> {
     return this.http.get(this.urlApi);
   }
 
@@ -23,5 +23,9 @@ export class StoreService {
 
   deleteService(id: String) {
     return this.http.delete('http://localhost:3000/api/course/' + id);
+  }
+
+  getCoursesByInstructor(id: any) {
+    return this.http.get('http://localhost:3000/api/course/instructor/' + id);
   }
 }

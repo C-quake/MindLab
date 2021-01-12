@@ -169,7 +169,6 @@
               <a href="#" data-toggle="modal" data-target="#login-modal"></a>
             </li>
             <li class="iconitem"></li>
-
           </ul>
         </div>
       </nav>
@@ -202,11 +201,12 @@
               style="cursor: pointer"
               (click)="getCourse(course._id)"
             >
-              <video
+              <img
                 class="courseVid"
-                src="{{ course.video }}"
-                type="video/mp4"
-              ></video>
+                src="{{
+                  course.video.slice(0, course.video.length - 3) + 'jpg'
+                }}"
+              />
 
               <div class="magnifier">
                 <a title=""><i class="flaticon-add"></i></a>
@@ -284,7 +284,7 @@
       <hr class="invis" />
 
       <div class="section-button text-center">
-        <a class="btn btn-primary" (click)="getcourses()">View All Courses</a>
+        <a class="btn btn-primary" (click)="getcourses()" style="margin-left:120px">View All Courses</a>
       </div>
     </div>
     <!-- end container -->
@@ -361,8 +361,8 @@
         >
           <div class="box testimonial" *ngIf="i < 3">
             <p class="testiname">
-              <strong>
-                <img src="{{ instructor.image }}" alt="" class="img-circle" />
+              <strong (click)="getProfile(instructor._id, instructor.role)">
+                <img src="{{ instructor.image }}" alt="" class="img-circle"   (click)="getProfile(instructor._id, instructor.role)"/>
                 {{ instructor.username }}
               </strong>
             </p>
@@ -382,6 +382,8 @@
 
     <!-- end container -->
   </section>
+  <div class="chat0" style="text-align:center" (click)='goToChat()'>Join Mindlab Chat And Share Your Experience With Others</div>
+  <div class="chat" (click)='goToChat()'></div>
 
   <footer class="section footer noover">
     <div class="container">

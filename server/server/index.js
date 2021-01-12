@@ -10,6 +10,12 @@ var upload = multer({ dest: "uploads/" });
 const PORT = process.env.PORT || 3000;
 var server = http.createServer(app);
 var io = require("socket.io").listen(server);
+var nodemailer = require('nodemailer');
+const fs = require('fs')
+
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(express.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
@@ -24,6 +30,44 @@ var courseRouter = require("./routers/courseRouter");
 
 const DIR = "../front/src/assets/images";
 var name_file;
+
+
+
+
+app.use("/", studentRouter);
+
+app.use("/", instructorRouter);
+
+app.use("/", courseRouter);
+
+app.use("/api/admin", adminRouter);
+
+
+
+
+
+
+
+// email part 
+var to;
+var subject;
+var description;
+// var file;
+// var path;
+
+var Storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, DIR);
+  },
+    filename: function(req, file, callback) {
+        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+    }
+});
+
+var upload0 = multer({
+    storage: Storage
+}).single("image"); //Field name and max count
+
 
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
@@ -55,7 +99,53 @@ var upload = multer({
   }
 });
 
-app.post("/image", upload.single("file"), (req, res) => {
+app.post('/api/sendemail',(req,res) => {
+  upload0(req,res,function(err){
+        if(err){
+            console.log(err)
+            return res.end("Something went wrong!");
+        }else{
+            to = req.body.to
+            subject = req.body.subject
+            description = req.body.description
+            // file= req.body.file
+            console.log(to)
+            console.log(subject)
+            console.log(description)
+            // console.log(file)
+            
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user: 'mindlabsiteweb@gmail.com',
+                  pass: 'mindlab123'
+                }
+              });
+              
+              var mailOptions = {
+                from: 'mindlabsiteweb@gmail.com',
+                to: to,
+                subject:subject,
+                text:description,
+              //   attachments: [
+              //     {
+              //      file: file
+              //     }
+              //  ]
+              };
+              
+              transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                  console.log(error);
+                } else {
+                  console.log('Email sent: ' + info.response);
+                                 }
+              });
+        }
+    })
+})
+
+app.post("/image", upload.single("file"), async (req, res) => {
   if (!req.file) {
     console.log("No file received");
     return res.send({
@@ -63,7 +153,9 @@ app.post("/image", upload.single("file"), (req, res) => {
     });
   } else {
     console.log("file received");
-    return res.send(req.file.originalname);
+    const image = await cloudinary.uploader.upload(req.file.path, {resource_type: "image"})
+
+    return res.send(image.url);
   }
 });
 app.use(function (req, res, next) {
@@ -76,13 +168,10 @@ app.use(function (req, res, next) {
 });
 app.use("/", studentRouter);
 
-app.use("/", instructorRouter);
 
-app.use("/", courseRouter);
 
-app.use("/api/admin", adminRouter);
 
-// live chat part noor
+// live chat part 
 io.on("connection", function (socket) {
   console.log("user connected");
 
@@ -94,6 +183,12 @@ io.on("connection", function (socket) {
     console.log("user disconnected");
   });
 });
+
+
+
+
+
+
 server.listen(PORT, function () {
   console.log(`started on port ${PORT}`);
 });
