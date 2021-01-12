@@ -1,23 +1,3 @@
-<!-- <header>
-  <h2>Mind Lab chat {{username}}</h2>
-</header>
-<div class="chat-app">
-  <div class="messages">
-    <div *ngFor="let message of messages" class="message">
-    {{message}}
-    </div>
-  </div>
-  <div *ngIf="username == ''" id="username-div">
-    <input [ngStyle]="usernameValidatation ? {'border':'2px solid red'} : null" id="username-input" [(ngModel)]="usernameIn" type="name" placeholder="   You sould type your username for chatting!">
-    <br/>
-    <button (click)="getUsername(usernameIn)" class="button">Enter</button>
-
-  </div>
-  <div class="inputs">
-    <input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" class="message-input" />
-    <button (click)="username != '' ? sendMessage(): validatorAlert()" class="button">Send</button>
-  </div>
-</div> -->
 <div id="preloader">
   <img class="preloader" src="images/loader.gif" alt="" />
 </div>
@@ -253,48 +233,180 @@
     </div>
     <!-- end container -->
   </header>
-  <br /><br />
-  <br /><br />
 
-<div class="chat_window">
-  <div class="top_menu">
-    <div class="buttons">
-      <div class="button close"></div>
-      <div class="button minimize"></div>
-      <div class="button maximize"></div>
+
+<!-- here teh form start -->
+ <div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h1>send email</h1>
+
+      <form action="" method="POST" [formGroup]="emailForm">
+
+
+        <div class="form-group">
+          <label for="title">to : <span class="require">*</span></label>
+          <input
+            type="text"
+            formControlName="to"
+            class="form-control"
+            name="to"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="title">subject <span class="require">*</span></label>
+          <input
+            type="text"
+            formControlName="subject"
+            class="form-control"
+            name="subject"
+            placeholder="from"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">body</label>
+          <textarea
+            rows="5"
+            formControlName="description"
+            class="form-control"
+            name="description"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <p><span class="require">*</span> - required fields</p>
+        </div>
+
+       
+
+
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" (click)="sendMail()">
+            send
+          </button>
+          <button class="btn btn-default">Cancel</button>
+        </div>
+      </form>
     </div>
-    <div class="title">Mind Lab Chat {{username}}</div>
   </div>
-  <div class="chat-app">
-    <div class="messages">
-      <div *ngFor="let message of messages" class="message">
-      {{message}}
+</div>
+
+<!-- here the form ends -->
+
+<footer class="section footer noover">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-4">
+        <div class="widget clearfix">
+          <h3 class="widget-title">Subscribe Our Newsletter</h3>
+          <div class="newsletter-widget">
+            <p>
+              You can opt out of our newsletters at any time.<br />
+              See our <a href="#">privacy policy</a>.
+            </p>
+            <form class="form-inline" role="search">
+              <div class="form-1">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter email here.."
+                />
+                <button type="submit" class="btn btn-primary">
+                  <i class="fa fa-paper-plane-o"></i>
+                </button>
+              </div>
+            </form>
+            <img src="images/payments.png" alt="" class="img-responsive" />
+          </div>
+          <!-- end newsletter -->
+        </div>
+        <!-- end widget -->
+      </div>
+      <!-- end col -->
+
+      <div class="col-lg-3 col-md-3">
+        <div class="widget clearfix">
+          <h3 class="widget-title">Join us today</h3>
+          <p>
+            Would you like to earn your profits by joining our team? Join us
+            without losing time.
+          </p>
+          <a href="#" class="readmore">Became a Teacher</a>
+        </div>
+        <!-- end widget -->
+      </div>
+      <!-- end col -->
+
+      <div class="col-lg-3 col-md-3">
+        <div class="widget clearfix">
+          <h3 class="widget-title">Popular Tags</h3>
+          <div class="tags-widget">
+            <ul class="list-inline">
+              <li><a href="#">course</a></li>
+              <li><a href="#">web design</a></li>
+              <li><a href="#">development</a></li>
+              <li><a href="#">language</a></li>
+              <li><a href="#">teacher</a></li>
+              <li><a href="#">speaking</a></li>
+              <li><a href="#">material</a></li>
+              <li><a href="#">css3</a></li>
+              <li><a href="#">html</a></li>
+              <li><a href="#">learning</a></li>
+            </ul>
+          </div>
+          <!-- end list-widget -->
+        </div>
+        <!-- end widget -->
+      </div>
+      <!-- end col -->
+
+      <div class="col-lg-2 col-md-2">
+        <div class="widget clearfix">
+          <h3 class="widget-title">Support</h3>
+          <div class="list-widget">
+            <ul>
+              <li><a href="#">Terms of Use</a></li>
+              <li><a href="#">Copyrights</a></li>
+              <li><a href="#">Create a Ticket</a></li>
+              <li><a href="#">Pricing & Plans</a></li>
+              <li><a href="#">Carrier</a></li>
+              <li><a href="#">Trademark</a></li>
+            </ul>
+          </div>
+          <!-- end list-widget -->
+        </div>
+        <!-- end widget -->
+      </div>
+      <!-- end col -->
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container -->
+</footer>
+<!-- end footer -->
+
+<div class="copyrights">
+  <div class="container">
+    <div class="clearfix">
+      <div class="pull-left">
+        <div class="cop-logo">
+          <a href="#"><img src="images/logo.png" alt="" /></a>
+        </div>
+      </div>
+
+      <div class="pull-right">
+        <div class="footer-links">
+          <ul class="list-inline">
+            <li>Design : <a href="https://html.design">HTML.Design</a></li>
+          </ul>
+        </div>
       </div>
     </div>
-    <div *ngIf="username == ''" id="username-div">
-      <br/>
-      <input [ngStyle]="usernameValidatation ? {'border':'2px solid red'} : null" id="username-input" [(ngModel)]="usernameIn" type="name" placeholder="   You sould type your username for chatting!">
-      <br/>
-      <br/>
-      <button (click)="getUsername(usernameIn)" class="but">Enter</button>
-
-    </div>
-  <ul class="messages"></ul>
-  <div class="bottom_wrapper clearfix">
-    <div class="message_input_wrapper">
-      <input class="message_input" placeholder="Type your message here..." [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" class="message-input" />
-    </div>
-    <div class="send_message">
-      <div class="icon"></div>
-      <div class="text" (click)="username != '' ? sendMessage(): validatorAlert()" class="button">Send</div>
-    </div>
   </div>
+  <!-- end container -->
 </div>
-<div class="message_template">
-  <li class="message">
-    <div class="avatar"></div>
-    <div class="text_wrapper"><div class="text"></div></div>
-  </li>
-</div>
+<!-- end copy -->
 
 

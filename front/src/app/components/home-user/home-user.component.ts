@@ -125,4 +125,7 @@ export class HomeUserComponent implements OnInit {
       location.reload();
     });
   }
+  goToChat(){
+    this.router.navigate(['/chat']);
+  }
 }

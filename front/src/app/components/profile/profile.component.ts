@@ -148,4 +148,9 @@ export class ProfileComponent implements OnInit {
     window.open('http://localhost:3001', '_blank');
 
   }
+  sendNotif(){
+    this.router.navigate(['/notifications']).then(() => {
+      window.location.reload();
+  })
+  }
 }
