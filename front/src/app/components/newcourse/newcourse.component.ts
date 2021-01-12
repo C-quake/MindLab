@@ -62,17 +62,12 @@ export class NewcourseComponent implements OnInit {
   //   );
   // }
   onSelectVideo(event: any) {
-    console.log(event.target.files);
-
     this.files.push(event.target.files[0]);
   }
   onSelectPdf(event: any) {
-    console.log(event.target.files);
     this.files.push(event.target.files[0]);
   }
   addCourse() {
-    console.log(this.files);
-    console.log(this.loginForm.get('type').value);
     this.loginForm.video = this.files[1];
     this.loginForm.pdf = this.files[0];
 
@@ -88,22 +83,15 @@ export class NewcourseComponent implements OnInit {
         this.loginForm.value.price || 0
       )
       .subscribe((res: any) => {
-        this.videInput();
+        console.log('course added', res);
         this.store.push(res._id);
         this.user.store.push(res);
         localStorage.setItem('user', JSON.stringify(this.user));
         this.profileService
           .update(this.user._id, { store: this.store })
-          .subscribe(() => console.log('profile updated'));
+          .subscribe(() => {
+            console.log('profile updated');
+          });
       });
-  }
-  videInput() {
-    this.loginForm.value.title = '';
-    this.loginForm.value.description = '';
-    this.loginForm.pdf = '';
-    this.loginForm.video = '';
-    this.loginForm.value.selectedOption = '';
-    this.loginForm.value.type = '';
-    this.loginForm.value.price = '';
   }
 }

@@ -115,6 +115,7 @@
           </li>
 
           <li><a (click)="Logout()" href="">Log Out</a></li>
+
           <li>
             <div>
               <form
@@ -135,9 +136,11 @@
                 ></i>
               </form>
             </div>
+
           </li>
         </ul>
       </div>
+
     </nav>
     <!-- end navbar -->
   </div>
@@ -164,9 +167,9 @@
         <button
           type="button"
           class="btn btn-danger btn-xs waves-effect mb-2 waves-light"
-          id="msgbtn"
+          id="msgbtn" (click)="sendNotif()"
         >
-          Message
+          send E-mail
         </button>
 
         <div class="text-left mt-3">

@@ -17,7 +17,6 @@ export class DoughnutChartComponent {
   doughnutChartLabels: Label[] = ['Instructor', 'Student', 'Courses'];
   doughnutChartData: any;
   doughnutChartType: ChartType = 'doughnut';
-
   constructor(
     private instructorService: InstructorService,
     private studentService: StudentService,

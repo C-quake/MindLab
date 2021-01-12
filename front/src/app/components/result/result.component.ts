@@ -69,4 +69,5 @@ export class ResultComponent implements OnInit {
   Logout() {
     localStorage.clear();
   }
+  
 }

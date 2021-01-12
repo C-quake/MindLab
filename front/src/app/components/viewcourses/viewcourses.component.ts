@@ -17,6 +17,7 @@ export class ViewcoursesComponent implements OnInit {
   count = 0;
   query: string = '';
   file: any;
+
   tableSize = 7;
   tableSizes = [3, 6, 9, 12];
   courses: any = [];
@@ -25,6 +26,7 @@ export class ViewcoursesComponent implements OnInit {
   selectedCourse: any;
   lib: any = [];
   currentIndex: any;
+
   constructor(
     private sanitizer: DomSanitizer,
     private storeService: StoreService,
@@ -79,12 +81,11 @@ export class ViewcoursesComponent implements OnInit {
     localStorage.setItem('user', JSON.stringify(this.user));
     this.profileService
       .update(this.user._id, { library: this.lib })
-      .subscribe(() => this.router.navigate(['library']));
+      .subscribe();
   }
 
-  switchPaypal(bool: boolean, course: any) {
-    this.paypal = bool;
-    this.selectedCourse = course;
+  switchPaypal(id: any) {
+    this.router.navigate(['/paypal', id]);
   }
 
   Logout() {

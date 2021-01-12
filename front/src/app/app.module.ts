@@ -38,6 +38,10 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { StatisticComponent } from './components/statistic/statistic.component';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 import { ChartsModule } from 'ng2-charts';
+import { NotifictaionsComponent } from './components/notifictaions/notifictaions.component';
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
+import { Cloudinary } from 'cloudinary-core';
+
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
@@ -68,6 +72,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     PieChartComponent,
     ViewcoursesComponent,
     ViewinstructorsComponent,
+    NotifictaionsComponent,
     NotFoundComponent,
 
   ],
@@ -82,9 +87,11 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     NgxPayPalModule,
     NgbModule,
     ChartsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    CloudinaryModule.forRoot({Cloudinary}, { cloud_name: 'dtl8igxn0' } as CloudinaryConfiguration),
 
-  
+
+
   ],
 
   providers: [

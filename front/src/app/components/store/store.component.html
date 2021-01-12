@@ -143,13 +143,11 @@
               placeholder="Search"
               name="query"
             />
-            <button
-              class="btn btn-outline-success"
+            <i
+              class="fa fa-search"
               (click)="getresult(query)"
-              type="submit"
-            >
-              Search
-            </button>
+              style="cursor: pointer; margin-left: 10px"
+            ></i>
           </form>
         </div>
 
@@ -169,16 +167,16 @@
   <br /><br />
 
   <div>
-    <div class="container p-0">
+    <div class="container p-0" *ngIf="store">
       <a class="btn btn-primary float-right mt-n1" href="/newcourse">
         <i class="fa fa-plus"></i> New Course</a
       >
       <h1 class="h3 mb-3">Courses</h1>
-      <p *ngIf="!user.store.length" style="margin-bottom: 70vh">
+      <p *ngIf="!store.length" style="margin-bottom: 70vh">
         you currenty have no courses posted yet.
       </p>
       <div class="row">
-        <div class="col-12 col-md-6 col-lg-3" *ngFor="let course of user.store">
+        <div class="col-12 col-md-6 col-lg-3" *ngFor="let course of store">
           <div class="card">
             <div class="card-header px-4 pt-4">
               <button
@@ -200,10 +198,7 @@
                 controls
                 style="margin: 10px 0"
               >
-                <source
-                  src="assets/uploads/courses/{{ course.video }}"
-                  type="video/mp4"
-                />
+                <source src="{{ course.video }}" type="video/mp4" />
               </video>
 
               <span
