@@ -128,4 +128,9 @@ export class HomeUserComponent implements OnInit {
   goToChat(){
     this.router.navigate(['/chat']);
   }
+  getProfile(id: any, role: any) {
+    this.router.navigate(['/profile', role, id]).then(() => {
+      window.location.reload();
+    });
+  }
 }

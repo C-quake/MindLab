@@ -145,7 +145,7 @@ app.post('/api/sendemail',(req,res) => {
     })
 })
 
-app.post("/image", upload.single("file"), (req, res) => {
+app.post("/image", upload.single("file"), async (req, res) => {
   if (!req.file) {
     console.log("No file received");
     return res.send({
@@ -153,7 +153,9 @@ app.post("/image", upload.single("file"), (req, res) => {
     });
   } else {
     console.log("file received");
-    return res.send(req.file.originalname);
+    const image = await cloudinary.uploader.upload(req.file.path, {resource_type: "image"})
+
+    return res.send(image.url);
   }
 });
 app.use(function (req, res, next) {

@@ -54,4 +54,9 @@ export class ViewinstructorsComponent implements OnInit {
     this.page = 1;
     this.getAllInstructors();
   }
+  getProfile(id: any, role: any) {
+    this.router.navigate(['/profile', role, id]).then(() => {
+      window.location.reload();
+    });
+  }
 }

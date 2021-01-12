@@ -284,7 +284,7 @@
       <hr class="invis" />
 
       <div class="section-button text-center">
-        <a class="btn btn-primary" (click)="getcourses()">View All Courses</a>
+        <a class="btn btn-primary" (click)="getcourses()" style="margin-left:120px">View All Courses</a>
       </div>
     </div>
     <!-- end container -->
@@ -361,8 +361,8 @@
         >
           <div class="box testimonial" *ngIf="i < 3">
             <p class="testiname">
-              <strong>
-                <img src="{{ instructor.image }}" alt="" class="img-circle" />
+              <strong (click)="getProfile(instructor._id, instructor.role)">
+                <img src="{{ instructor.image }}" alt="" class="img-circle"   (click)="getProfile(instructor._id, instructor.role)"/>
                 {{ instructor.username }}
               </strong>
             </p>

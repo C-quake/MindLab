@@ -7,20 +7,8 @@ const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 
 const DIR = "../front/src/assets/uploads/courses/";
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, DIR);
-  },
-  filename: (req, file, cb) => {
-    const fileName = file.originalname.toLowerCase().split(" ").join("-");
-    name_file = fileName;
-    //videofile = videoName;
-    cb(null, fileName);
-  }
-});
-// const storage = multer.diskStorage({});
+const storage = multer.diskStorage({});
 
-// Multer Mime Type Validation
 var upload = multer({
   storage: storage,
   limits: {
@@ -36,46 +24,37 @@ cloudinary.config({
   api_secret: "eyMhNYy2H39QyH-q5olfImKsquI"
 });
 
-router
-  .route("/api/newCourse")
-  .post(upload.array("file", 2), async (req, res) => {
-    const url = req.protocol + "://" + req.get("host");
+router.route("/api/newCourse").post(upload.array("file", 2), async (req, res) => {
+  const url = req.protocol + "://" + req.get("host");
 
-    const video = await cloudinary.uploader.upload(
-      req.files[0].path,
-      {
-        resource_type: "video"
-      },
-      function (err, data) {
-        if (err) return res.send(err);
-        console.log("file uploaded to Cloudinary");
-        // remove file from server
-        const fs = require("fs");
-        fs.unlinkSync(req.files[0].path);
-        // return image details
-      }
-    );
-    // const pdf = await cloudinary.uploader.upload(req.files[1].path);
-    // console.log("pdf",pdf);
-    // console.log("video",video);
+  const video = await cloudinary.uploader.upload(req.files[0].path, {
+    resource_type: "video"
+  })
+ 
+  const pdf = await cloudinary.uploader.upload(req.files[1].path, {resource_type: "image"})
 
-    const product = new CourseModel({
-      _id: new mongoose.Types.ObjectId(),
-      IdInstructor: req.body.IdInstructor,
-      title: req.body.title,
-      description: req.body.description,
-      video: video.url,
-      pdf: req.files[1].filename,
-      category: req.body.category,
-      type: req.body.type,
-      price: req.body.price
-    });
-
-    Course.addCourse(product).then((data, err) => {
-      if (err) return res.send(err);
-      res.send(data);
-    });
+  const product = new CourseModel({
+    _id: new mongoose.Types.ObjectId(),
+    IdInstructor: req.body.IdInstructor,
+    title: req.body.title,
+    description: req.body.description,
+    video: video.url, 
+    pdf: pdf.url,
+    category: req.body.category,
+    type: req.body.type,
+    price: req.body.price
   });
+
+  Course.addCourse(product)
+    .then((data, err) => {
+      if (err) res.send(err);
+      console.log(data);
+      res.send(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 router.route("/api/allcourses").get(function (req, res) {
   Course.findCourses()
@@ -173,24 +152,26 @@ router.route("/api/course/edit-rate/:id").patch((req, res) => {
 
 router
   .route("/api/update/course/:id")
-  .put(upload.array("file", 2), (req, res) => {
-    const reqFiles = [];
+  .put(upload.array("file", 2),async (req, res) => {
     const url = req.protocol + "://" + req.get("host");
-    for (var i = 0; i < req.files.length; i++) {
-      reqFiles.push(req.files[i].filename);
-    }
-    console.log(req.files);
-    console.log(req.params.id);
-    const product = {
-      IdInstructor: req.body.IdInstructor,
-      title: req.body.title,
-      description: req.body.description,
-      video: reqFiles[0],
-      pdf: reqFiles[1],
-      category: req.body.category,
-      type: req.body.type,
-      price: req.body.price
-    };
+try{
+  const video = await cloudinary.uploader.upload(req.files[0].path, {
+    resource_type: "video"
+  })
+ 
+  const pdf = await cloudinary.uploader.upload(req.files[1].path, {resource_type: "image"})
+
+  const product = new CourseModel({
+    IdInstructor: req.body.IdInstructor,
+    title: req.body.title,
+    description: req.body.description,
+    video: video.url, 
+    pdf: pdf.url,
+    category: req.body.category,
+    type: req.body.type,
+    price: req.body.price
+  });
+
 
     Course.updateCourse(req.params.id, product)
       .then((data, err) => {
@@ -201,6 +182,9 @@ router
       .catch((err) => {
         console.log(err);
       });
+    }catch(err){
+      console.log(err);
+    }
   });
 
 router.route("/api/course/instructor/:id").get((req, res) => {

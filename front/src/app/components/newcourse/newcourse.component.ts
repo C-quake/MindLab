@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { NewCourseService } from '../../services/new-course.service';
 import { ProfileService } from '../../services/profile.service';
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-newcourse',
   templateUrl: './newcourse.component.html',
@@ -35,7 +36,8 @@ export class NewcourseComponent implements OnInit {
   user: any = JSON.parse(localStorage.getItem('user') || '{}');
   constructor(
     private service: NewCourseService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private router : Router
   ) {
     this.loginForm = new FormGroup({
       title: new FormControl(null, Validators.required),
@@ -91,6 +93,8 @@ export class NewcourseComponent implements OnInit {
           .update(this.user._id, { store: this.store })
           .subscribe(() => {
             console.log('profile updated');
+            this.router.navigate(['/store']);
+
           });
       });
   }
