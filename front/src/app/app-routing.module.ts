@@ -21,7 +21,10 @@ import { HomeGuard } from './guards/home.guard';
 import { ResultComponent } from './components/result/result.component';
 import {ViewcoursesComponent} from './components/viewcourses/viewcourses.component';
 import { ViewinstructorsComponent } from './components/viewinstructors/viewinstructors.component';
+import { NotifictaionsComponent } from './components/notifictaions/notifictaions.component';
+
 const routes: Routes = [
+  {path:'notifications', component: NotifictaionsComponent},
   { path: 'chat', component: ChatComponent },
   { path: '', component: HomeComponent, canActivate: [HomeGuard] },
   { path: 'login', component: LoginComponent, canActivate: [HomeGuard] },

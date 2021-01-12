@@ -108,4 +108,7 @@ export class HomeUserComponent implements OnInit {
   getresult(query: any) {
     this.router.navigate(['/result', query]);
   }
+  goToChat(){
+    this.router.navigate(['/chat']);
+  }
 }

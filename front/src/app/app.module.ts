@@ -38,6 +38,7 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { StatisticComponent } from './components/statistic/statistic.component';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 import { ChartsModule } from 'ng2-charts';
+import { NotifictaionsComponent } from './components/notifictaions/notifictaions.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { ChartsModule } from 'ng2-charts';
     PieChartComponent,
     ViewcoursesComponent,
     ViewinstructorsComponent,
+    NotifictaionsComponent,
 
   ],
 

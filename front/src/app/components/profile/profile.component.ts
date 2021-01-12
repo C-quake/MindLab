@@ -141,4 +141,8 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/result', query]);
   }
   getVipSession() {}
+
+  sendNotif(){
+    this.router.navigate(['/notifications']);
+  }
 }
