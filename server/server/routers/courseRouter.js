@@ -36,46 +36,40 @@ cloudinary.config({
   api_secret: "eyMhNYy2H39QyH-q5olfImKsquI"
 });
 
-router
-  .route("/api/newCourse")
-  .post(upload.array("file", 2), async (req, res) => {
-    const url = req.protocol + "://" + req.get("host");
-
-    const video = await cloudinary.uploader.upload(
+router.route("/api/newCourse").post(upload.array("file", 2), (req, res) => {
+  cloudinary.uploader
+    .upload(
       req.files[0].path,
       {
         resource_type: "video"
       },
-      function (err, data) {
-        if (err) return res.send(err);
-        console.log("file uploaded to Cloudinary");
-        // remove file from server
+      function () {
         const fs = require("fs");
         fs.unlinkSync(req.files[0].path);
-        // return image details
       }
-    );
-    // const pdf = await cloudinary.uploader.upload(req.files[1].path);
-    // console.log("pdf",pdf);
-    // console.log("video",video);
+    )
+    .then((video) => {
+      const product = new CourseModel({
+        _id: new mongoose.Types.ObjectId(),
+        IdInstructor: req.body.IdInstructor,
+        title: req.body.title,
+        description: req.body.description,
+        video: video.url,
+        pdf: req.files[1].filename,
+        category: req.body.category,
+        type: req.body.type,
+        price: req.body.price
+      });
 
-    const product = new CourseModel({
-      _id: new mongoose.Types.ObjectId(),
-      IdInstructor: req.body.IdInstructor,
-      title: req.body.title,
-      description: req.body.description,
-      video: video.url,
-      pdf: req.files[1].filename,
-      category: req.body.category,
-      type: req.body.type,
-      price: req.body.price
+      Course.addCourse(product).then((data, err) => {
+        if (err) console.log(err);
+        res.send({ message: "course added" });
+      });
     });
-
-    Course.addCourse(product).then((data, err) => {
-      if (err) return res.send(err);
-      res.send(data);
-    });
-  });
+  // const pdf = await cloudinary.uploader.upload(req.files[1].path);
+  // console.log("pdf",pdf);
+  // console.log("video",video);
+});
 
 router.route("/api/allcourses").get(function (req, res) {
   Course.findCourses()

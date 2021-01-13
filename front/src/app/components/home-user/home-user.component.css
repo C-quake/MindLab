@@ -15,19 +15,19 @@
   width: 272px;
   height: 153px;
 }
-.chat{
-  background: url('../../../assets/images/chat.jpg');
+.chat {
+  background: url("../../../assets/images/chat.jpg");
   background-size: 800px;
   background-position: center; /* Center the image */
   background-repeat: no-repeat;
   height: 500px;
   cursor: pointer;
+  background-color: white;
 }
-.chat0{
+.chat0 {
   cursor: pointer;
-  font-weight:bold;
+  font-weight: bold;
   font-size: 30px;
-  padding:20px;
-  color:rgb(56, 50, 51);
-
+  padding: 20px;
+  color: rgb(56, 50, 51);
 }

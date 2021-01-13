@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   AbstractControl,
   FormGroup,
@@ -14,8 +15,8 @@ import { ProfileService } from '../../services/profile.service';
 })
 export class NewcourseComponent implements OnInit {
   files: any = [];
-  store: any = [];
-  categories = [
+  isLoading: boolean = false;
+  categories: any = [
     'Math',
     'physics',
     'chemistry',
@@ -35,7 +36,8 @@ export class NewcourseComponent implements OnInit {
   user: any = JSON.parse(localStorage.getItem('user') || '{}');
   constructor(
     private service: NewCourseService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private router: Router
   ) {
     this.loginForm = new FormGroup({
       title: new FormControl(null, Validators.required),
@@ -50,17 +52,7 @@ export class NewcourseComponent implements OnInit {
   Logout() {
     localStorage.clear();
   }
-  ngOnInit(): void {
-    for (var ele of this.user.store) {
-      this.store.push(ele._id);
-    }
-  }
-  // isValid(controlName: String) {
-  //   return (
-  //     this.loginForm.get(controlName).invalid &&
-  //     this.loginForm.get(controlName).touched
-  //   );
-  // }
+  ngOnInit(): void {}
   onSelectVideo(event: any) {
     this.files.push(event.target.files[0]);
   }
@@ -68,6 +60,7 @@ export class NewcourseComponent implements OnInit {
     this.files.push(event.target.files[0]);
   }
   addCourse() {
+    this.isLoading = true;
     this.loginForm.video = this.files[1];
     this.loginForm.pdf = this.files[0];
 
@@ -82,16 +75,6 @@ export class NewcourseComponent implements OnInit {
         this.loginForm.value.type,
         this.loginForm.value.price || 0
       )
-      .subscribe((res: any) => {
-        console.log('course added', res);
-        this.store.push(res._id);
-        this.user.store.push(res);
-        localStorage.setItem('user', JSON.stringify(this.user));
-        this.profileService
-          .update(this.user._id, { store: this.store })
-          .subscribe(() => {
-            console.log('profile updated');
-          });
-      });
+      .subscribe();
   }
 }

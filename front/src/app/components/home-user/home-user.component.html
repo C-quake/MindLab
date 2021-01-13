@@ -182,14 +182,10 @@
     <div class="container">
       <div class="section-title text-center">
         <h3>Recent Courses</h3>
-        <p>
-          Maecenas sit amet tristique turpis. Quisque porttitor eros quis leo
-          pulvinar, at hendrerit sapien iaculis. Donec consectetur accumsan
-          arcu, sit amet fringilla ex ultricies.
-        </p>
+        <br /><br />
       </div>
       <!-- end title -->
-      <div style="display: flex">
+      <div style="display: flex; margin-right: 66%">
         <div
           class="caro-item"
           *ngFor="let course of courses; let i = index"
@@ -347,10 +343,7 @@
     <div class="container">
       <div class="section-title text-center">
         <h3>Our Instructors</h3>
-        <p>
-          Here you can see three of our best instructors that are devoted to
-          help you achieve your dreams and have a great time learning
-        </p>
+        <br /><br />
       </div>
       <!-- end title -->
 
@@ -382,8 +375,10 @@
 
     <!-- end container -->
   </section>
-  <div class="chat0" style="text-align:center" (click)='goToChat()'>Join Mindlab Chat And Share Your Experience With Others</div>
-  <div class="chat" (click)='goToChat()'></div>
+  <div class="chat0" style="text-align: center" (click)="goToChat()">
+    Join Mindlab Chat And Share Your Experience With Others
+  </div>
+  <div class="chat" (click)="goToChat()"></div>
 
   <footer class="section footer noover">
     <div class="container">
