@@ -47,13 +47,12 @@ export class HomeUserComponent implements OnInit {
           return course;
         })
         .sort(function (a: any, b: any) {
-          if(a.averagerate === "NaN" ) { 
-
-            return 1
-          }else if( b.averagerate === "NaN"){
-             return -1
-          }else {
-          return b.averagerate - a.averagerate 
+          if (a.averagerate === 'NaN') {
+            return 1;
+          } else if (b.averagerate === 'NaN') {
+            return -1;
+          } else {
+            return b.averagerate - a.averagerate;
           }
         });
     });
@@ -109,23 +108,27 @@ export class HomeUserComponent implements OnInit {
   }
   getcourses() {
     this.router.navigate(['/viewcourses']).then(() => {
-
       location.reload();
     });
   }
   getInstructors() {
     this.router.navigate(['/viewinstructors']).then(() => {
-
       location.reload();
     });
   }
   getresult(query: any) {
     this.router.navigate(['/result', query]).then(() => {
-
       location.reload();
     });
   }
-  goToChat(){
-    this.router.navigate(['/chat']);
+  goToChat() {
+    this.router.navigate(['/chat']).then(() => {
+      location.reload();
+    });
+  }
+  getProfile(id: any, role: any) {
+    this.router.navigate(['/profile', role, id]).then(() => {
+      window.location.reload();
+    });
   }
 }

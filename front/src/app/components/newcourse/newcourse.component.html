@@ -159,7 +159,7 @@
       <div class="col-md-8 col-md-offset-2">
         <h1>Add Course</h1>
 
-        <form action="" method="POST" [formGroup]="loginForm">
+        <form [formGroup]="loginForm">
           <!-- <div class="form-group has-error">
     		        <label for="slug">Title <span class="require">*</span> </label>
     		        <input type="text" class="form-control" name="slug" />
@@ -210,11 +210,7 @@
                 Please Choose...
               </option>
 
-              <option
-                *ngFor="let cat of categories"
-                value="cat"
-                [ngValue]="cat"
-              >
+              <option *ngFor="let cat of categories" [ngValue]="cat">
                 {{ cat }}
               </option>
               <!-- <option value="Instructor">Instructor</option>
@@ -262,13 +258,18 @@
             <p><span class="require">*</span> - required fields</p>
           </div>
 
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary" (click)="addCourse()">
-              Create
+          <div style="display: flex">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="addCourse()"
+              *ngIf="!isLoading"
+            >
+              send
             </button>
+            <img *ngIf="isLoading" src="../../../assets/images/loader.gif" />
           </div>
         </form>
-        <button class="btn btn-default" href="/store">Cancel</button>
       </div>
     </div>
   </div>
