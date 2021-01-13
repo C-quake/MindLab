@@ -10,9 +10,8 @@ var upload = multer({ dest: "uploads/" });
 const PORT = process.env.PORT || 3000;
 var server = http.createServer(app);
 var io = require("socket.io").listen(server);
-var nodemailer = require('nodemailer');
-const fs = require('fs')
-
+var nodemailer = require("nodemailer");
+const fs = require("fs");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -31,9 +30,6 @@ var courseRouter = require("./routers/courseRouter");
 const DIR = "../front/src/assets/images";
 var name_file;
 
-
-
-
 app.use("/", studentRouter);
 
 app.use("/", instructorRouter);
@@ -42,13 +38,7 @@ app.use("/", courseRouter);
 
 app.use("/api/admin", adminRouter);
 
-
-
-
-
-
-
-// email part 
+// email part
 var to;
 var subject;
 var description;
@@ -59,15 +49,14 @@ var Storage = multer.diskStorage({
   destination: function (req, file, callback) {
     callback(null, DIR);
   },
-    filename: function(req, file, callback) {
-        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
-    }
+  filename: function (req, file, callback) {
+    callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+  }
 });
 
 var upload0 = multer({
-    storage: Storage
+  storage: Storage
 }).single("image"); //Field name and max count
-
 
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
@@ -99,51 +88,46 @@ var upload = multer({
   }
 });
 
-app.post('/api/sendemail',(req,res) => {
-  upload0(req,res,function(err){
-        if(err){
-            console.log(err)
-            return res.end("Something went wrong!");
-        }else{
-            to = req.body.to
-            subject = req.body.subject
-            description = req.body.description
-            // file= req.body.file
-            console.log(to)
-            console.log(subject)
-            console.log(description)
-            // console.log(file)
-            
-            var transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                  user: 'mindlabsiteweb@gmail.com',
-                  pass: 'mindlab123'
-                }
-              });
-              
-              var mailOptions = {
-                from: 'mindlabsiteweb@gmail.com',
-                to: to,
-                subject:subject,
-                text:description,
-              //   attachments: [
-              //     {
-              //      file: file
-              //     }
-              //  ]
-              };
-              
-              transporter.sendMail(mailOptions, function(error, info){
-                if (error) {
-                  console.log(error);
-                } else {
-                  console.log('Email sent: ' + info.response);
-                                 }
-              });
+app.post("/api/sendemail", (req, res) => {
+  upload0(req, res, function (err) {
+    if (err) {
+      console.log(err);
+      return res.end("Something went wrong!");
+    } else {
+      to = req.body.to;
+      subject = req.body.subject;
+      description = req.body.description;
+
+      var transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "mindlabsiteweb@gmail.com",
+          pass: "mindlab123"
         }
-    })
-})
+      });
+
+      var mailOptions = {
+        from: "mindlabsiteweb@gmail.com",
+        to: to,
+        subject: subject,
+        text: description
+        //   attachments: [
+        //     {
+        //      file: file
+        //     }
+        //  ]
+      };
+
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          res.send({ "Email sent: ": info.response });
+        }
+      });
+    }
+  });
+});
 
 app.post("/image", upload.single("file"), async (req, res) => {
   if (!req.file) {
@@ -159,19 +143,22 @@ app.post("/image", upload.single("file"), async (req, res) => {
   }
 });
 app.use(function (req, res, next) {
-  res.removeHeader('X-Powered-By');
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.removeHeader("X-Powered-By");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type,Authorization"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
 app.use("/", studentRouter);
 
-
-
-
-// live chat part 
+// live chat part
 io.on("connection", function (socket) {
   console.log("user connected");
 
@@ -183,11 +170,6 @@ io.on("connection", function (socket) {
     console.log("user disconnected");
   });
 });
-
-
-
-
-
 
 server.listen(PORT, function () {
   console.log(`started on port ${PORT}`);

@@ -24,7 +24,6 @@ export class StoreComponent implements OnInit {
   ngOnInit(): void {
     this.storeService.getCoursesByInstructor(this.user._id).subscribe((res) => {
       this.store = res;
-      console.log(this.store);
     });
   }
 

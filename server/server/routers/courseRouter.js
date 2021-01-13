@@ -24,37 +24,42 @@ cloudinary.config({
   api_secret: "eyMhNYy2H39QyH-q5olfImKsquI"
 });
 
-router.route("/api/newCourse").post(upload.array("file", 2), async (req, res) => {
-  const url = req.protocol + "://" + req.get("host");
+router
+  .route("/api/newCourse")
+  .post(upload.array("file", 2), async (req, res) => {
+    console.log("here");
+    const url = req.protocol + "://" + req.get("host");
 
-  const video = await cloudinary.uploader.upload(req.files[0].path, {
-    resource_type: "video"
-  })
- 
-  const pdf = await cloudinary.uploader.upload(req.files[1].path, {resource_type: "image"})
-
-  const product = new CourseModel({
-    _id: new mongoose.Types.ObjectId(),
-    IdInstructor: req.body.IdInstructor,
-    title: req.body.title,
-    description: req.body.description,
-    video: video.url, 
-    pdf: pdf.url,
-    category: req.body.category,
-    type: req.body.type,
-    price: req.body.price
-  });
-
-  Course.addCourse(product)
-    .then((data, err) => {
-      if (err) res.send(err);
-      console.log(data);
-      res.send(data);
-    })
-    .catch((err) => {
-      console.log(err);
+    const video = await cloudinary.uploader.upload(req.files[0].path, {
+      resource_type: "video"
     });
-});
+
+    const pdf = await cloudinary.uploader.upload(req.files[1].path, {
+      resource_type: "image"
+    });
+
+    const product = new CourseModel({
+      _id: new mongoose.Types.ObjectId(),
+      IdInstructor: req.body.IdInstructor,
+      title: req.body.title,
+      description: req.body.description,
+      video: video.url,
+      pdf: pdf.url,
+      category: req.body.category,
+      type: req.body.type,
+      price: req.body.price
+    });
+
+    Course.addCourse(product)
+      .then((data, err) => {
+        if (err) res.send(err);
+        console.log(data);
+        res.send(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 
 router.route("/api/allcourses").get(function (req, res) {
   Course.findCourses()
@@ -152,37 +157,38 @@ router.route("/api/course/edit-rate/:id").patch((req, res) => {
 
 router
   .route("/api/update/course/:id")
-  .put(upload.array("file", 2),async (req, res) => {
+  .put(upload.array("file", 2), async (req, res) => {
     const url = req.protocol + "://" + req.get("host");
-try{
-  const video = await cloudinary.uploader.upload(req.files[0].path, {
-    resource_type: "video"
-  })
- 
-  const pdf = await cloudinary.uploader.upload(req.files[1].path, {resource_type: "image"})
-
-  const product = new CourseModel({
-    IdInstructor: req.body.IdInstructor,
-    title: req.body.title,
-    description: req.body.description,
-    video: video.url, 
-    pdf: pdf.url,
-    category: req.body.category,
-    type: req.body.type,
-    price: req.body.price
-  });
-
-
-    Course.updateCourse(req.params.id, product)
-      .then((data, err) => {
-        if (err) res.send(err);
-        console.log(data);
-        res.send(data);
-      })
-      .catch((err) => {
-        console.log(err);
+    try {
+      const video = await cloudinary.uploader.upload(req.files[0].path, {
+        resource_type: "video"
       });
-    }catch(err){
+
+      const pdf = await cloudinary.uploader.upload(req.files[1].path, {
+        resource_type: "image"
+      });
+
+      const product = new CourseModel({
+        IdInstructor: req.body.IdInstructor,
+        title: req.body.title,
+        description: req.body.description,
+        video: video.url,
+        pdf: pdf.url,
+        category: req.body.category,
+        type: req.body.type,
+        price: req.body.price
+      });
+
+      Course.updateCourse(req.params.id, product)
+        .then((data, err) => {
+          if (err) res.send(err);
+          console.log(data);
+          res.send(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
       console.log(err);
     }
   });
