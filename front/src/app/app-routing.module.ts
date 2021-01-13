@@ -26,7 +26,7 @@ import { ViewinstructorsComponent } from './components/viewinstructors/viewinstr
 import { NotifictaionsComponent } from './components/notifictaions/notifictaions.component';
 
 const routes: Routes = [
-  {path:'notifications', component: NotifictaionsComponent},
+  { path: 'notifications/:email', component: NotifictaionsComponent },
   { path: 'chat', component: ChatComponent },
   { path: '', component: HomeComponent, canActivate: [HomeGuard] },
   { path: 'login', component: LoginComponent, canActivate: [HomeGuard] },
@@ -53,7 +53,6 @@ const routes: Routes = [
   },
   { path: 'library', component: LibraryComponent, canActivate: [StudentGuard] },
   { path: 'paypal/:id', component: PaypalComponent },
-  { path: 'result/:query', component: ResultComponent },
   {
     path: 'admin',
     component: AdminDashboardComponent,

@@ -146,11 +146,10 @@ export class ProfileComponent implements OnInit {
   }
   getVipSession() {
     window.open('http://localhost:3001', '_blank');
-
   }
-  sendNotif(){
-    this.router.navigate(['/notifications']).then(() => {
+  sendNotif(email: any) {
+    this.router.navigate(['/notifications', email]).then(() => {
       window.location.reload();
-  })
+    });
   }
 }

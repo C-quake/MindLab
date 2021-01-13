@@ -136,11 +136,9 @@
                 ></i>
               </form>
             </div>
-
           </li>
         </ul>
       </div>
-
     </nav>
     <!-- end navbar -->
   </div>
@@ -157,21 +155,22 @@
         />
         <h4 class="mb-0">{{ user.username }}</h4>
         <p class="text-muted">{{ user.role }}</p>
-
-        <button
-          type="button"
-          class="btn btn-success btn-xs waves-effect mb-2 waves-light"
-        >
-          Follow
-        </button>
-        <button
-          type="button"
-          class="btn btn-danger btn-xs waves-effect mb-2 waves-light"
-          id="msgbtn" (click)="sendNotif()"
-        >
-          send E-mail
-        </button>
-
+        <div *ngIf="!isCurrentUser">
+          <button
+            type="button"
+            class="btn btn-success btn-xs waves-effect mb-2 waves-light"
+          >
+            Follow
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger btn-xs waves-effect mb-2 waves-light"
+            id="msgbtn"
+            (click)="sendNotif(user.email)"
+          >
+            send E-mail
+          </button>
+        </div>
         <div class="text-left mt-3">
           <h4 class="font-13 text-uppercase">About Me :</h4>
           <p class="text-muted font-13 mb-3">

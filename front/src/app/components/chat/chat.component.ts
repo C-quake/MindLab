@@ -6,8 +6,8 @@ import { ChatService } from '../../services/chat.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
 })
-
 export class ChatComponent {
+  user: any = JSON.parse(localStorage.getItem('user') || '{}');
   message: any;
   messages: string[] = [];
   username: string = '';
@@ -27,6 +27,8 @@ export class ChatComponent {
   validatorAlert() {
     this.usernameValidatation = true;
   }
+
+
 
   getUsername(username: string = '') {
     if (username != '') this.username = username;

@@ -18,8 +18,7 @@ export class ViewcoursesComponent implements OnInit {
   query: string = '';
   file: any;
 
-  tableSize = 7;
-  tableSizes = [3, 6, 9, 12];
+  tableSize = 4;
   courses: any = [];
   ready: Boolean = false;
   paypal: boolean = false;
@@ -36,13 +35,11 @@ export class ViewcoursesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('initializing');
     this.getAllcourses();
     if (this.user.role === 'student') {
       for (var ele of this.user.library) {
         this.lib.push(ele._id);
       }
-      console.log(this.lib);
     }
   }
   getAllcourses() {
@@ -55,14 +52,12 @@ export class ViewcoursesComponent implements OnInit {
             sum = sum + rate.rates;
           });
           course['averagerate'] = sum / course.rates.length.toFixed(2);
-          console.log(course);
           return course;
         })
         .sort(function (a: any, b: any) {
           return b.averagerate - a.averagerate;
         });
     });
-    console.log('courses', this.courses);
   }
   getReady() {
     this.ready = true;
