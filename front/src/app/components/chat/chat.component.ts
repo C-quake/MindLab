@@ -28,9 +28,7 @@ export class ChatComponent {
     this.usernameValidatation = true;
   }
 
-  Logout() {
-    localStorage.clear();
-  }
+
 
   getUsername(username: string = '') {
     if (username != '') this.username = username;
