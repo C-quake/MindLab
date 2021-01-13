@@ -50,11 +50,14 @@ export class ResultComponent implements OnInit {
   }
 
   getfile(f: any) {
-    console.log(f);
     this.file = '';
-    this.file = this.sanitizer.bypassSecurityTrustResourceUrl(
-      'assets/uploads/courses/' + f
-    );
+    // this.file = this.sanitizer.bypassSecurityTrustResourceUrl(
+    //   'assets/uploads/courses/' + f    );
+    const imgpdf=f.slice(0,-3)+'jpg'
+
+    this.file =imgpdf
+    console.log(this.file);
+
   }
   getCourse(id: any) {
     this.router.navigate(['/coursedetails', id]).then(() => {

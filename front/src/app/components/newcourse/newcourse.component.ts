@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import {
   AbstractControl,
   FormGroup,
@@ -8,6 +7,7 @@ import {
 } from '@angular/forms';
 import { NewCourseService } from '../../services/new-course.service';
 import { ProfileService } from '../../services/profile.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-newcourse',
   templateUrl: './newcourse.component.html',
@@ -75,6 +75,10 @@ export class NewcourseComponent implements OnInit {
         this.loginForm.value.type,
         this.loginForm.value.price || 0
       )
-      .subscribe();
+      .subscribe(() => {
+        this.router.navigate(['store']).then(() => {
+          location.reload();
+        });
+      });
   }
 }

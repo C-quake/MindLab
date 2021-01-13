@@ -17,7 +17,6 @@ export class CourseDetailsComponent implements OnInit {
   @Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
   inputName: any;
   starRating: any;
-  query: any;
   id: any;
   file: any;
   video: any;
@@ -119,11 +118,14 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   getfile(f: any) {
-    console.log(f);
     this.file = '';
-    this.file = this.sanitizer.bypassSecurityTrustResourceUrl(
-      'assets/uploads/courses/' + f
-    );
+    // this.file = this.sanitizer.bypassSecurityTrustResourceUrl(
+    //   'assets/uploads/courses/' + f    );
+    const imgpdf=f.slice(0,-3)+'jpg'
+
+    this.file =imgpdf
+    console.log(this.file);
+
   }
   editCourse(id: any) {
     this.router.navigate(['/edit', id]);
@@ -232,11 +234,5 @@ export class CourseDetailsComponent implements OnInit {
   Logout() {
     localStorage.clear();
   }
-  getresult(query: any) {
-    this.router.navigate(['/result', query])
-    .then(()=>{
-      window.location.reload();
-
-    })
-  }
+ 
 }

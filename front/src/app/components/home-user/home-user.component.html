@@ -352,7 +352,12 @@
           class="col-md-4"
           *ngFor="let instructor of instructors; let i = index"
         >
-          <div class="box testimonial" *ngIf="i < 3">
+          <div
+            class="box testimonial"
+            *ngIf="i < 3"
+            (click)="getProfile(instructor._id, instructor.role)"
+            style="cursor: pointer"
+          >
             <p class="testiname">
               <strong>
                 <img src="{{ instructor.image }}" alt="" class="img-circle" />

@@ -126,4 +126,9 @@ export class HomeUserComponent implements OnInit {
       location.reload();
     });
   }
+  getProfile(id: any, role: any) {
+    this.router.navigate(['/profile', role, id]).then(() => {
+      window.location.reload();
+    });
+  }
 }

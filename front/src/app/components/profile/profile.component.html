@@ -109,7 +109,7 @@
             <a href="/store" *ngIf="user.role === 'instructor'">Store</a>
           </li>
           <li *ngIf="user.role === 'instructor'">
-            <a (click)="getVipSession()" *ngIf="user.role === 'student'"
+            <a (click)="getVipSession()" 
               >VIP Session</a
             >
           </li>

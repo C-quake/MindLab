@@ -43,4 +43,7 @@ export class ChatComponent {
       this.messages.push(message);
     });
   }
+  Logout() {
+    localStorage.clear();
+  }
 }
