@@ -387,8 +387,7 @@
                   accept="image/png, image/jpeg"
                   id="file"
                   class="file"
-                  #img
-                  (change)="onChange(img)"
+                  (change)="onChange($event)"
                 />
                 <label for="file">Select file</label>
                 <button
