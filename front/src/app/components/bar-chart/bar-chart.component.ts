@@ -24,7 +24,7 @@ export class BarChartComponent {
   barChartPlugins = [];
   instructor: any = [];
   student: any = [];
-  barChartData:any;
+  barChartData: any;
 
   constructor(
     private instructorService: InstructorService,
@@ -37,10 +37,6 @@ export class BarChartComponent {
       this.allstudent(),
       this.allcouses(),
     ]).subscribe((data: any) => {
-      console.log(data[0].length);
-      console.log(data[1].length);
-      console.log(data[2].length);
-
       this.barChartData = [
         {
           data: [data[0].length, data[1].length, data[2].length],
