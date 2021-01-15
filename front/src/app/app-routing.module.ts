@@ -54,7 +54,7 @@ const routes: Routes = [
   { path: 'library', component: LibraryComponent, canActivate: [StudentGuard] },
   { path: 'paypal/:id', component: PaypalComponent },
   {
-    path: 'admin',
+    path: 'dashboard',
     component: AdminDashboardComponent,
     canActivate: [AdminGuard],
   },

@@ -5,7 +5,7 @@ var { Student } = require("./models/studentModel");
 var { CourseModel } = require("./models/courseModel");
 var { Admin } = require("./models/adminModel");
 
-mongoose.connect("mongodb+srv://hbib:hbib@cluster0.m3m3t.mongodb.net/mindlab", {
+mongoose.connect(process.env.DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -60,7 +60,7 @@ exports.getAllInstructors = function () {
 };
 
 exports.getInstructorByEmail = function (email) {
-  return Instructor.findOne({ email: email }).populate("store");
+  return Instructor.findOne({ email: email });
 };
 
 exports.getStudentByEmail = function (email) {
@@ -68,14 +68,14 @@ exports.getStudentByEmail = function (email) {
 };
 
 exports.findCourseById = function (id) {
-  return CourseModel.findById(id);
+  return CourseModel.findById(id).populate("IdInstructor");
 };
 exports.updateCourse = function (id, course) {
   return CourseModel.findByIdAndUpdate(id, course);
 };
 
 exports.getCourseById = function (id) {
-  return CourseModel.findOne({ _id: id });
+  return CourseModel.findOne({ _id: id }).populate("IdInstructor");
 };
 
 exports.getStudentByEmail = function (email) {

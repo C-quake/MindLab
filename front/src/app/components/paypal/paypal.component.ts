@@ -23,7 +23,6 @@ export class PaypalComponent implements OnInit {
 
   user: any = JSON.parse(localStorage.getItem('user') || '{}');
   showSuccess: boolean = false;
-
   ngOnInit(): void {
     var id = this.activateroute.snapshot.params.id;
     this.storeService.getCourseById(id).subscribe((res: any) => {

@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   user: any;
+  currentUser: any = JSON.parse(localStorage.getItem('user') || '{}');
   image: any;
   file: any;
   update: boolean = false;

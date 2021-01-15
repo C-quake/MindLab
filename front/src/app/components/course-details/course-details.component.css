@@ -307,3 +307,7 @@ ngb-rating {
 .rating > label:hover ~ input:checked ~ label {
   color: #ea0;
 }
+
+#instr:hover {
+  color: rgb(0, 132, 255);
+}
