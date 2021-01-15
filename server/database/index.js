@@ -7,7 +7,9 @@ var { Admin } = require("./models/adminModel");
 
 mongoose.connect("mongodb+srv://hbib:hbib@cluster0.m3m3t.mongodb.net/mindlab", {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
 });
 
 const db = mongoose.connection;
@@ -155,3 +157,7 @@ exports.changeStudentStatus = function (id, status) {
 exports.findCourseByInstructor = function (id) {
   return CourseModel.find({ IdInstructor: id });
 };
+
+
+ 
+

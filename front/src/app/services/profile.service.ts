@@ -34,4 +34,18 @@ export class ProfileService {
   image(form: any) {
     return this._http.post(`http://localhost:3000/image`, form);
   }
+  follow(id:string, idToFollow:string,role:string){
+        const body={
+          idToFollow: idToFollow,
+          role:role
+        }
+       return this._http.patch(`http://localhost:3000/api/instructor/follow/${id}`,body)
+  }
+  unfollow(id:string, idToUnfollow: string,role:string){
+    const body={
+      idToUnfollow: idToUnfollow,
+      role:role
+    }
+   return this._http.patch(`http://localhost:3000/api/instructor/unfollow/${id}`,body)
+  }
 }

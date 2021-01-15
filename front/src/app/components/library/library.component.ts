@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../services/student.service';
 import { Router } from '@angular/router';
+import { StoreService } from './../../services/store.service';
 
 @Component({
   selector: 'app-library',
@@ -10,7 +11,9 @@ import { Router } from '@angular/router';
 export class LibraryComponent implements OnInit {
   user: any = JSON.parse(localStorage.getItem('user') || '{}');
   query: any;
-  constructor(private studentService: StudentService, private router: Router) {}
+  file:any
+  constructor(private studentService: StudentService, private router: Router,    private storeService: StoreService,
+    ) {}
 
   ngOnInit(): void {}
   getCourse(id: any) {
@@ -26,4 +29,15 @@ export class LibraryComponent implements OnInit {
       location.reload();
     });
   }
+  getfile(f: any) {
+    this.file = '';
+    // this.file = this.sanitizer.bypassSecurityTrustResourceUrl(
+    //   'assets/uploads/courses/' + f    );
+    const imgpdf=f.slice(0,-3)+'jpg'
+
+    this.file =imgpdf
+    console.log(this.file);
+
+  }
+
 }
