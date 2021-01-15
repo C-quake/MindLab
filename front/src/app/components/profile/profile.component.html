@@ -160,13 +160,15 @@
         />
         <h4 class="mb-0">{{ user.username }}</h4>
         <p class="text-muted">{{ user.role }}</p>
-        <div >
+        <div *ngIf="!isCurrentUser">
           <button
             type="button"
             class="btn btn-success btn-xs waves-effect mb-2 waves-light"
-             (click)="updateFollow()"  *ngIf="!isCurrentUser">
-             {{type}}
-         </button>
+            (click)="updateFollow()"
+            *ngIf="!isCurrentUser"
+          >
+            {{ type }}
+          </button>
           <button
             type="button"
             class="btn btn-danger btn-xs waves-effect mb-2 waves-light"

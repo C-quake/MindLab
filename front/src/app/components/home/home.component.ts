@@ -21,6 +21,12 @@ export class HomeComponent implements OnInit {
     this.storeService.getService().subscribe((res: any) => {
       this.courseCount = res.length;
     })
+    this.studentService.getAllStudents().subscribe((res: any) => {
+      this.studentCount = res.length;
+    });
+    this.instructorService.getAllInstructors().subscribe((res: any) => {
+      this.instructorCount = res.length;
+    })
   }
      
   getresult(query: any) {
