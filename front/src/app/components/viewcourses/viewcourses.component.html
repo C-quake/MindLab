@@ -145,7 +145,13 @@
             <li>
               <a href="/store" *ngIf="user.role === 'instructor'">Store</a>
             </li>
-            <li><a (click)="Logout()" href="">Log Out</a></li>
+            <li *ngIf="!isUserUndefined">
+              <a (click)="Logout()" href="">Log Out</a>
+            </li>
+            <li></li>
+            <li *ngIf="isUserUndefined">
+              <a href="/login">Login</a>
+            </li>
             <li>
               <div>
                 <form
@@ -257,7 +263,7 @@
               <div class="pull-right">
                 <ul class="list-inline">
                   <li *ngIf="course.type === 'Pro'">
-                    <a>{{ course.price }} $</a>
+                    <a>{{ course.price }} EUR</a>
                   </li>
                   <li *ngIf="course.type === 'Free'">
                     <a>Free</a>

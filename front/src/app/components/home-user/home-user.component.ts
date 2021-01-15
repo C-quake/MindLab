@@ -19,6 +19,7 @@ export class HomeUserComponent implements OnInit {
   studentCount: any;
   lib: any = [];
   query: string = '';
+  isUserUndefined: boolean = false;
 
   constructor(
     private storeService: StoreService,
@@ -29,6 +30,9 @@ export class HomeUserComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (Object.keys(this.user).length === 0) {
+      this.isUserUndefined = true;
+    }
     this.storeService.getService().subscribe((res: any) => {
       this.courses = res;
       this.courseCount = res.length;
