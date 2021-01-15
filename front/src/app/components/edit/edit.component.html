@@ -50,9 +50,9 @@
         <div class="row-fluid">
           <div class="col-md-6 col-sm-6 text-left">
             <p>
-              <strong><i class="fa fa-phone"></i></strong> +90 543 123 45 67
+              <strong><i class="fa fa-phone"></i></strong> +216 24 440 222
               &nbsp;&nbsp; <strong><i class="fa fa-envelope"></i></strong>
-              <a href="mailto:#">info@yoursite.com</a>
+              <a href="mailto:#">mindlabsiteweb@gmail.com</a>
             </p>
           </div>
           <!-- end left -->
@@ -240,13 +240,11 @@
       <div class="col-md-8 col-md-offset-2">
         <h1>Edit Course</h1>
 
-        <form  [formGroup]="loginForm">
-        
-
+        <form [formGroup]="loginForm">
           <div class="form-group">
             <label for="title">Title <span class="require">*</span></label>
             <input
-              ngModel="{{course.title}}"
+              ngModel="{{ course.title }}"
               type="text"
               formControlName="title"
               class="form-control"
@@ -261,21 +259,18 @@
               accept="video/mp4"
               (change)="onSelectVideo($event)"
               name="video"
-              ngModel="{{course.video}}"
-
+              ngModel="{{ course.video }}"
             />
           </div>
           <div class="form-group">
             <label for="pdf">Pdf</label>
             <input
-            
               formControlName="pdf"
               (change)="onSelectPdf($event)"
               type="file"
               name="pdf"
               accept="application/pdf"
-              ngModel="{{course.pdf}}"
-
+              ngModel="{{ course.pdf }}"
             />
           </div>
           <div class="form-group">
@@ -283,13 +278,11 @@
 
             <select
               name="cat"
-
               required
               formControlName="selectedOption"
               placeholder="select categorie"
               class="form-control"
-              ngModel="{{course.category}}"
-
+              ngModel="{{ course.category }}"
             >
               >
               <option value="default" disabled selected hidden>
@@ -311,34 +304,24 @@
             <label for="title">Free/Pro<span class="require">*</span></label>
 
             <select
-            ngModel="{{course.type}}"
-
+              ngModel="{{ course.type }}"
               name="Free/pro"
               required
               formControlName="type"
               placeholder="select "
               class="form-control"
-
             >
+              <option value="default" selected>Please Choose...</option>
 
-              <option value="default"  selected >
-                Please Choose...
-              </option>
-
-              <option>
-                Free
-              </option>
-              <option>
-                Pro
-              </option>
-             </select>
+              <option>Free</option>
+              <option>Pro</option>
+            </select>
           </div>
 
           <div class="form-group">
             <label for="title">Price <span class="require">*</span></label>
             <input
-            ngModel="{{course.price}}"
-
+              ngModel="{{ course.price }}"
               type="text"
               formControlName="price"
               class="form-control"
@@ -349,8 +332,7 @@
           <div class="form-group">
             <label for="description">Description</label>
             <textarea
-            ngModel="{{course.description}}"
-
+              ngModel="{{ course.description }}"
               rows="5"
               formControlName="description"
               class="form-control"
@@ -363,7 +345,11 @@
           </div>
 
           <div class="form-group">
-            <button type="submit" class="btn btn-primary" (click)="EditCourse()">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="EditCourse()"
+            >
               Edit
             </button>
             <button class="btn btn-default">Cancel</button>

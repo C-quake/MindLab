@@ -95,7 +95,9 @@ export class HomeUserComponent implements OnInit {
   }
 
   switchPaypal(id: any) {
-    this.router.navigate(['/paypal', id]);
+    this.router.navigate(['/paypal', id]).then(() => {
+      location.reload();
+    });
   }
 
   Logout() {
