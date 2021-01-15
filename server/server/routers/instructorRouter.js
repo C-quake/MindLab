@@ -101,7 +101,7 @@ router.route("/api/instructor/follow/:id").patch( async (req, res) => {
         (err, docs) => {
             if (!err) res.status(201).json(docs);
           
-            else return res.status(400).jsos(err);
+            else return res.status(400).json(err);
           
     })
   }else {
@@ -112,7 +112,7 @@ router.route("/api/instructor/follow/:id").patch( async (req, res) => {
       (err, docs) => {
         if (!err) res.status(201).json(docs);
 
-        else return res.status(400).jsos(err);
+        else return res.status(400).json(err);
        
       }
     );
@@ -148,7 +148,7 @@ router.route("/api/instructor/unfollow/:id").patch(async(req, res) => {
       { new: true, upsert: true },
       (err, docs) => {
         if (!err) res.status(201).json(docs);
-        else return res.status(400).jsos(err);
+        else return res.status(400).json(err);
       }
     )
   }else {
@@ -158,7 +158,7 @@ router.route("/api/instructor/unfollow/:id").patch(async(req, res) => {
       { new: true, upsert: true },
       (err, docs) => {
         if (!err) res.status(201).json(docs);
-        else return res.status(400).jsos(err);
+        else return res.status(400).json(err);
       }
     )
   }
@@ -170,7 +170,7 @@ router.route("/api/instructor/unfollow/:id").patch(async(req, res) => {
       { new: true, upsert: true },
       (err, docs) => {
       // if (!err) res.status(201).json(docs);
-        if (err) return res.status(400).jsos(err);
+        if (err) return res.status(400).json(err);
       }
     );
     

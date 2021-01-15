@@ -25,6 +25,7 @@ export class ViewcoursesComponent implements OnInit {
   selectedCourse: any;
   lib: any = [];
   currentIndex: any;
+  isUserUndefined: boolean = false;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -35,6 +36,9 @@ export class ViewcoursesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (Object.keys(this.user).length === 0) {
+      this.isUserUndefined = true;
+    }
     this.getAllcourses();
     if (this.user.role === 'student') {
       for (var ele of this.user.library) {
@@ -80,7 +84,9 @@ export class ViewcoursesComponent implements OnInit {
   }
 
   switchPaypal(id: any) {
-    this.router.navigate(['/paypal', id]);
+    this.router.navigate(['/paypal', id]).then(() => {
+      location.reload();
+    });
   }
 
   Logout() {

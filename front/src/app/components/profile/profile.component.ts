@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   user: any;
+  currentUser: any = JSON.parse(localStorage.getItem('user') || '{}');
   image: any;
   file: any;
   update: boolean = false;
@@ -179,8 +180,8 @@ export class ProfileComponent implements OnInit {
     this.profileService
         .unfollow(this.id,this.activateroute.snapshot.params.id,this.role )
         .subscribe((data) => {
+          console.log('data',data)
           localStorage.setItem('user', JSON.stringify(data))
-
           this.type = 'Follow'
           console.log(data);
         

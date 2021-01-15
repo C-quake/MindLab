@@ -50,9 +50,9 @@
         <div class="row-fluid">
           <div class="col-md-6 col-sm-6 text-left">
             <p>
-              <strong><i class="fa fa-phone"></i></strong> +90 543 123 45 67
+              <strong><i class="fa fa-phone"></i></strong> +216 24 440 222
               &nbsp;&nbsp; <strong><i class="fa fa-envelope"></i></strong>
-              <a href="mailto:#">info@yoursite.com</a>
+              <a href="mailto:#">mindlabsiteweb@gmail.com</a>
             </p>
           </div>
           <!-- end left -->
@@ -220,17 +220,22 @@
                   You can opt out of our newsletters at any time.<br />
                   See our <a href="#">privacy policy</a>.
                 </p>
-                <form class="form-inline" role="search">
-                  <div class="form-1">
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Enter email here.."
-                    />
-                    <button type="submit" class="btn btn-primary">
-                      <i class="fa fa-paper-plane-o"></i>
-                    </button>
-                  </div>
+                <form
+                  class="form-inline pull-right"
+                  style="margin-top: 5px; margin-left: 20px"
+                >
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="query"
+                    placeholder="Search"
+                    name="query"
+                  />
+                  <i
+                    class="fa fa-search"
+                    (click)="getresult(query)"
+                    style="cursor: pointer; margin-left: 10px"
+                  ></i>
                 </form>
                 <img src="images/payments.png" alt="" class="img-responsive" />
               </div>

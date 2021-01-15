@@ -14,7 +14,7 @@ import { StoreService } from '../../services/store.service';
 export class DoughnutChartComponent {
   instructor: any = [];
   student: any = [];
-  doughnutChartLabels: Label[] = ['Instructor', 'Student', 'Courses'];
+  doughnutChartLabels: Label[] = ['Free Courses', 'Pro Courses'];
   doughnutChartData: any;
   doughnutChartType: ChartType = 'doughnut';
   constructor(
@@ -23,14 +23,18 @@ export class DoughnutChartComponent {
     private storeservice: StoreService
   ) {}
   ngOnInit(): void {
-    forkJoin([
-      this.allinstructor(),
-      this.allstudent(),
-      this.allcouses(),
-    ]).subscribe((data: any) => {
-      console.log(data[0].length);
-      console.log(data[1].length);
-      this.doughnutChartData = [data[0].length, data[1].length, data[2].length];
+    this.allcouses().subscribe((data: any) => {
+      var free = 0;
+      var pro = 0;
+
+      for (var ele of data) {
+        if (ele.type === 'Free') {
+          free++;
+        } else {
+          pro++;
+        }
+      }
+      this.doughnutChartData = [free, pro];
     });
   }
   allinstructor() {

@@ -47,6 +47,7 @@ export class NotifictaionsComponent implements OnInit {
   }
 
   sendMail() {
+    this.isSent = false;
     this.isLoading = true;
     this.service
       .sendService(
