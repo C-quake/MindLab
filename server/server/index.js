@@ -11,8 +11,15 @@ var upload = multer({ dest: "uploads/" });
 const PORT = process.env.PORT || 3000;
 var server = http.createServer(app);
 var io = require("socket.io").listen(server);
-var nodemailer = require("nodemailer");
-const fs = require("fs");
+var nodemailer = require('nodemailer');
+const fs = require('fs')
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: "dtl8igxn0",
+  api_key: "737957125387357",
+  api_secret: "eyMhNYy2H39QyH-q5olfImKsquI"
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -60,14 +67,6 @@ var upload0 = multer({
 }).single("image"); //Field name and max count
 
 const storage = multer.diskStorage({
-  destination: function (req, file, callback) {
-    callback(null, DIR);
-  },
-  filename: function (req, file, callback) {
-    const fileName = file.originalname.toLowerCase().split(" ").join("-");
-    name_file = fileName;
-    callback(null, fileName);
-  }
 });
 
 var upload = multer({
@@ -130,6 +129,7 @@ app.post("/api/sendemail", (req, res) => {
 });
 
 app.post("/image", upload.single("file"), async (req, res) => {
+  console.log(req.file)
   if (!req.file) {
     console.log("No file received");
     return res.send({
@@ -137,11 +137,9 @@ app.post("/image", upload.single("file"), async (req, res) => {
     });
   } else {
     console.log("file received");
-    const image = await cloudinary.uploader.upload(req.file.path, {
-      resource_type: "image"
-    });
 
-    return res.send(image.url);
+    const image = await cloudinary.uploader.upload(req.file.path, {resource_type: "image"})
+    return res.json(image.url);
   }
 });
 app.use(function (req, res, next) {

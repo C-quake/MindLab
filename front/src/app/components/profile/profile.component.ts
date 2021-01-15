@@ -53,9 +53,9 @@ export class ProfileComponent implements OnInit {
         });
     }
   }
-  onChange(img: any) {
-    this.image = img.files[0].name.toLowerCase();
-    this.file = img.files[0];
+  onChange(event: any) {
+    this.image = event.target.files[0].name.toLowerCase();
+    this.file = event.target.files[0];
     this.imgSelectErr = false;
   }
   changeView(view: boolean) {
@@ -88,16 +88,16 @@ export class ProfileComponent implements OnInit {
   }
 
   updateImage() {
+    console.log(this.file)
     if (!this.image || !this.file) {
       this.imgSelectErr = true;
       return;
     }
     const formData = new FormData();
     formData.append('file', this.file);
-    var obj = { image: '../../../assets/images/' + this.image };
-
-    this.profileService.update(this.user._id, obj).subscribe(() => {
-      this.profileService.image(formData).subscribe(() => {
+    this.profileService.image(formData).subscribe((res:any) => {
+     var obj = { image: res };
+     this.profileService.update(this.user._id, obj).subscribe(() => {
         this.profileService
           .getUserById(this.user._id, this.user.role)
           .subscribe((data: any) => {
