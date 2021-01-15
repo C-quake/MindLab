@@ -5,7 +5,7 @@ var { Student } = require("./models/studentModel");
 var { CourseModel } = require("./models/courseModel");
 var { Admin } = require("./models/adminModel");
 
-mongoose.connect("mongodb+srv://hbib:hbib@cluster0.m3m3t.mongodb.net/mindlab", {
+mongoose.connect(process.env.DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
