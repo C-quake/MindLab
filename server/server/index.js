@@ -1,7 +1,8 @@
 const express = require("express");
 var app = express();
 var http = require("http");
-
+var dotenv = require("dotenv");
+dotenv.config();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -86,7 +87,6 @@ var upload = multer({
     }
   }
 });
-
 app.post("/api/sendemail", (req, res) => {
   upload0(req, res, function (err) {
     if (err) {
@@ -101,7 +101,7 @@ app.post("/api/sendemail", (req, res) => {
         service: "gmail",
         auth: {
           user: "mindlabsiteweb@gmail.com",
-          pass: "mindlab123"
+          pass: process.env.EMAIL_PASS
         }
       });
 
@@ -137,6 +137,7 @@ app.post("/image", upload.single("file"), async (req, res) => {
     });
   } else {
     console.log("file received");
+
     const image = await cloudinary.uploader.upload(req.file.path, {resource_type: "image"})
     return res.json(image.url);
   }

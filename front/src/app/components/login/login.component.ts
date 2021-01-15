@@ -169,7 +169,7 @@ export class LoginComponent implements OnInit {
       } else {
         this._service.loginAdmin(this.loginForm.value).subscribe((data) => {
           localStorage.setItem('user', JSON.stringify(data));
-          this._router.navigate(['/admin']);
+          this._router.navigate(['/dashboard']);
         });
       }
     }

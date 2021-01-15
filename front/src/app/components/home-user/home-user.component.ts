@@ -19,6 +19,7 @@ export class HomeUserComponent implements OnInit {
   studentCount: any;
   lib: any = [];
   query: string = '';
+  isUserUndefined: boolean = false;
 
   constructor(
     private storeService: StoreService,
@@ -29,8 +30,9 @@ export class HomeUserComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('initializing');
-
+    if (Object.keys(this.user).length === 0) {
+      this.isUserUndefined = true;
+    }
     this.storeService.getService().subscribe((res: any) => {
       this.courses = res;
       this.courseCount = res.length;
@@ -42,8 +44,6 @@ export class HomeUserComponent implements OnInit {
             sum = sum + rate.rates;
           });
           course['averagerate'] = (sum / course.rates.length).toFixed(1);
-
-          console.log(course);
           return course;
         })
         .sort(function (a: any, b: any) {
@@ -56,7 +56,6 @@ export class HomeUserComponent implements OnInit {
           }
         });
     });
-    console.log('courses', this.courses);
 
     // this.ready = true;
     this.instructorService.getAllInstructors().subscribe((res: any) => {
@@ -100,7 +99,9 @@ export class HomeUserComponent implements OnInit {
   }
 
   switchPaypal(id: any) {
-    this.router.navigate(['/paypal', id]);
+    this.router.navigate(['/paypal', id]).then(() => {
+      location.reload();
+    });
   }
 
   Logout() {

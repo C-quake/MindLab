@@ -50,9 +50,9 @@
         <div class="row-fluid">
           <div class="col-md-6 col-sm-6 text-left">
             <p>
-              <strong><i class="fa fa-phone"></i></strong> +90 543 123 45 67
+              <strong><i class="fa fa-phone"></i></strong> +216 24 440 222
               &nbsp;&nbsp; <strong><i class="fa fa-envelope"></i></strong>
-              <a href="mailto:#">info@yoursite.com</a>
+              <a href="mailto:#">mindlabsiteweb@gmail.com</a>
             </p>
           </div>
           <!-- end left -->
@@ -145,7 +145,13 @@
             <li>
               <a href="/store" *ngIf="user.role === 'instructor'">Store</a>
             </li>
-            <li><a (click)="Logout()" href="">Log Out</a></li>
+            <li *ngIf="!isUserUndefined">
+              <a (click)="Logout()" href="">Log Out</a>
+            </li>
+            <li></li>
+            <li *ngIf="isUserUndefined">
+              <a href="/login">Login</a>
+            </li>
             <li>
               <div>
                 <form
@@ -159,13 +165,11 @@
                     placeholder="Search"
                     name="query"
                   />
-                  <button
-                    class="btn btn-outline-success"
+                  <i
+                    class="fa fa-search"
                     (click)="getresult(query)"
-                    type="submit"
-                  >
-                    Search
-                  </button>
+                    style="cursor: pointer; margin-left: 10px"
+                  ></i>
                 </form>
               </div>
             </li>
@@ -259,7 +263,7 @@
               <div class="pull-right">
                 <ul class="list-inline">
                   <li *ngIf="course.type === 'Pro'">
-                    <a>{{ course.price }} $</a>
+                    <a>{{ course.price }} EUR</a>
                   </li>
                   <li *ngIf="course.type === 'Free'">
                     <a>Free</a>

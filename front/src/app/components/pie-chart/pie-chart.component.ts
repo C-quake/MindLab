@@ -22,12 +22,23 @@ export class PieChartComponent {
   public pieChartOptions: ChartOptions = {
     responsive: true,
   };
-  public pieChartLabels: Label[] = ['Instructor', 'Student', 'Courses'];
-  pieChartData: SingleDataSet = [
-    this.instructor.length,
-    this.student.length,
-    20,
+  public pieChartLabels: Label[] = [
+    'Math',
+    'physics',
+    'chemistry',
+    'languages',
+    'biology',
+    'geology',
+    'computer science',
+    'economic',
+    'management',
+    'finance',
+    'history ',
+    'geography',
+    'philosophy',
+    'others',
   ];
+  pieChartData: any;
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
@@ -38,14 +49,43 @@ export class PieChartComponent {
     private storeservice: StoreService
   ) {}
   ngOnInit(): void {
-    forkJoin([
-      this.allinstructor(),
-      this.allstudent(),
-      this.allcouses(),
-    ]).subscribe((data: any) => {
-      console.log(data[0].length);
-      console.log(data[1].length);
-      this.pieChartData = [data[0].length, data[1].length, data[2].length];
+    this.allcouses().subscribe((data: any) => {
+      var obj = {
+        Math: 0,
+        physics: 0,
+        chemistry: 0,
+        languages: 0,
+        biology: 0,
+        geology: 0,
+        'computer science': 0,
+        economic: 0,
+        management: 0,
+        finance: 0,
+        history: 0,
+        geography: 0,
+        philosophy: 0,
+        others: 0,
+      };
+
+      for (var ele of data) {
+        obj[ele.category]++;
+      }
+      this.pieChartData = [
+        obj.Math,
+        obj.physics,
+        obj.chemistry,
+        obj.languages,
+        obj.biology,
+        obj.geology,
+        obj['computer science'],
+        obj.economic,
+        obj.management,
+        obj.finance,
+        obj.history,
+        obj.geography,
+        obj.philosophy,
+        obj.others,
+      ];
     });
   }
   allinstructor() {
