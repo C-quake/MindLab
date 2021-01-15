@@ -28,6 +28,12 @@ var instructorSchema = mongoose.Schema({
     enum: ["instructor", "student", "admin"],
     default: "instructor"
   },
+  followers: {
+    type: [String]
+  },
+  following: {
+    type: [String]
+  },
   status: {
     type: String,
     enum: ["active", "banned", "unverified"],

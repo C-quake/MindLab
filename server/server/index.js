@@ -45,6 +45,15 @@ app.use("/", instructorRouter);
 app.use("/", courseRouter);
 
 app.use("/api/admin", adminRouter);
+const corsOptions = {
+  origin: "http://localhost:4200",
+  credentials: true,
+  'allowedHeaders': ['sessionId', 'Content-Type'],
+  'exposedHeaders': ['sessionId'],
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'preflightContinue': false
+}
+app.use(cors(corsOptions));
 
 // email part
 var to;
@@ -142,20 +151,7 @@ app.post("/image", upload.single("file"), async (req, res) => {
     return res.json(image.url);
   }
 });
-app.use(function (req, res, next) {
-  res.removeHeader("X-Powered-By");
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type,Authorization"
-  );
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  next();
-});
+
 app.use("/", studentRouter);
 
 // live chat part

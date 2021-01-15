@@ -60,8 +60,12 @@ export class HomeUserComponent implements OnInit {
     // this.ready = true;
     this.instructorService.getAllInstructors().subscribe((res: any) => {
       this.instructorCount = res.length;
-      this.instructors = res;
-    });
+      this.instructors = res
+      .sort(function (a: any, b: any) {
+        
+          return b.followers.length > a.followers.length;
+        });
+    })
 
     this.studentService.getAllStudents().subscribe((res: any) => {
       this.studentCount = res.length;
