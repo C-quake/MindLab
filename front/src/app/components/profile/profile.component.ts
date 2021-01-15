@@ -21,7 +21,11 @@ export class ProfileComponent implements OnInit {
   imgSelectErr: boolean = false;
   query: any;
   isCurrentUser: boolean = true;
-
+  show: boolean = false;
+  type: string = '';
+  id: any;
+  role: any;
+  current: any;
   constructor(
     private profileService: ProfileService,
     private router: Router,
@@ -30,8 +34,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     if (
-      (this.activateroute.snapshot.params.id,
-      this.activateroute.snapshot.params.role)
+      this.activateroute.snapshot.params.id &&
+      this.activateroute.snapshot.params.id !== this.currentUser._id
     ) {
       this.isCurrentUser = false;
       this.profileService
@@ -42,14 +46,27 @@ export class ProfileComponent implements OnInit {
         .subscribe((data: any) => {
           this.user = data;
           this.experiences = this.user.experience;
+          if (
+            this.currentUser.following.includes(
+              this.activateroute.snapshot.params.id
+            )
+          ) {
+            this.type = 'UnFollow';
+          } else {
+            this.type = 'Follow';
+          }
+          this.id = this.currentUser._id;
+          this.role = this.currentUser.role;
         });
     } else {
-      this.user = JSON.parse(localStorage.getItem('user') || '{}');
+      this.user = this.currentUser;
+
       this.profileService
-        .getUserById(this.user._id, this.user.role)
+        .getUserById(this.currentUser._id, this.currentUser.role)
         .subscribe((data: any) => {
-          this.updateUser(data);
-          this.experiences = this.user.experience;
+          this.currentUser = data;
+          localStorage.setItem('user', JSON.stringify(data));
+          this.experiences = this.currentUser.experience;
         });
     }
   }
@@ -88,16 +105,16 @@ export class ProfileComponent implements OnInit {
   }
 
   updateImage() {
-    console.log(this.file)
+    console.log(this.file);
     if (!this.image || !this.file) {
       this.imgSelectErr = true;
       return;
     }
     const formData = new FormData();
     formData.append('file', this.file);
-    this.profileService.image(formData).subscribe((res:any) => {
-     var obj = { image: res };
-     this.profileService.update(this.user._id, obj).subscribe(() => {
+    this.profileService.image(formData).subscribe((res: any) => {
+      var obj = { image: res };
+      this.profileService.update(this.user._id, obj).subscribe(() => {
         this.profileService
           .getUserById(this.user._id, this.user.role)
           .subscribe((data: any) => {
@@ -152,5 +169,27 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/notifications', email]).then(() => {
       window.location.reload();
     });
+  }
+
+  updateFollow() {
+    if (this.type === 'UnFollow') {
+      this.profileService
+        .unfollow(this.id, this.activateroute.snapshot.params.id, this.role)
+        .subscribe((data) => {
+          console.log('data', data);
+          localStorage.setItem('user', JSON.stringify(data));
+          this.type = 'Follow';
+          console.log(data);
+        });
+    } else if (this.type === 'Follow') {
+      this.profileService
+        .follow(this.id, this.activateroute.snapshot.params.id, this.role)
+        .subscribe((data) => {
+          localStorage.setItem('user', JSON.stringify(data));
+
+          this.type = 'UnFollow';
+          console.log(data);
+        });
+    }
   }
 }

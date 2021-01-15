@@ -1,3 +1,5 @@
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
 <div id="preloader">
   <img class="preloader" src="../../../assets/images/loader.gif" alt="" />
 </div>
@@ -184,117 +186,112 @@
   </header>
 
   <!-- here carousel -->
-  <section class="section gb">
+  <section class="details-card">
     <div class="container">
-      <div class="section-title text-center">
-        <h3>Most Rated Courses</h3>
-        <br /><br />
-      </div>
-      <!-- end title -->
-      <div style="display: flex; margin-right: 66%">
+      <h2 class="h3 block-title text-center">Recent courses</h2>
+
+      <div class="row" style="margin-left: 2%">
         <div
-          class="caro-item"
+          class="col-lg-4 col-md-4 col-sm-4 col-xs-12"
           *ngFor="let course of courses; let i = index"
-          style="width: 272px; margin: 2%"
+          style="width: 272px; margin: 4%"
         >
-          <div class="course-box" *ngIf="i < 4">
+          <div
+            class="card-content"
+            style="
+              width: 250px;
+              box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12), 0 1px 2px;
+            "
+            *ngIf="i < 6"
+          >
             <div
+              class="card-img"
               class="image-wrap entry"
               style="cursor: pointer"
               (click)="getCourse(course._id)"
             >
               <img
+                style="width: 250px"
                 class="courseVid"
                 src="{{
                   course.video.slice(0, course.video.length - 3) + 'jpg'
                 }}"
               />
-
+            </div>
+            <div class="card-desc">
               <div class="magnifier">
                 <a title=""><i class="flaticon-add"></i></a>
               </div>
-            </div>
-            <!-- end image-wrap -->
-            <div class="course-details">
-              <h4>
-                <small>{{ course.category }}</small>
-                <a (click)="getCourse(course._id)" style="cursor: pointer">{{
-                  course.title
-                }}</a>
-              </h4>
+              <p>{{ course.category }}</p>
+              <a (click)="getCourse(course._id)" style="cursor: pointer">{{
+                course.title
+              }}</a>
               <p>
                 {{ course.description }}
               </p>
-            </div>
-            <div *ngIf="user.library">
-              <button
-                *ngIf="!lib.includes(course._id) && course.type === 'Free'"
-                class="btnAddCourse"
-                (click)="addToLibrary(course)"
-              >
-                Add To Library
-              </button>
-              <button
-                *ngIf="!lib.includes(course._id) && course.type === 'Pro'"
-                class="btnAddCourse"
-                (click)="switchPaypal(course._id)"
-              >
-                Purchase
-              </button>
-              <button *ngIf="lib.includes(course._id)" class="btnAddCourse">
-                Added
-              </button>
-            </div>
-            <!-- end details -->
-            <div class="course-footer clearfix">
-              <div class="pull-left">
-                <ul class="list-inline">
-                  <li>
-                    <a>{{ course.averagerate }}</a>
-                  </li>
-                </ul>
+              <div *ngIf="user.library">
+                <button
+                  *ngIf="!lib.includes(course._id) && course.type === 'Free'"
+                  class="btnAddCourse"
+                  (click)="addToLibrary(course)"
+                >
+                  Add To Library
+                </button>
+                <button
+                  *ngIf="!lib.includes(course._id) && course.type === 'Pro'"
+                  class="btnAddCourse"
+                  (click)="switchPaypal(course._id)"
+                >
+                  Purchase
+                </button>
+                <button *ngIf="lib.includes(course._id)" class="btnAddCourse">
+                  Added
+                </button>
               </div>
-              <!-- end left -->
+              <div class="course-footer clearfix">
+                <div class="pull-left">
+                  <ul class="list-inline">
+                    <li>
+                      <a>{{ course.averagerate }}</a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- end left -->
 
-              <div class="pull-right">
-                <ul class="list-inline">
-                  <li *ngIf="course.type === 'Pro'">
-                    <a>{{ course.price }} EUR</a>
-                  </li>
-                  <li *ngIf="course.type === 'Free'">
-                    <a>Free</a>
-                  </li>
-                </ul>
+                <div class="pull-right">
+                  <ul class="list-inline">
+                    <li *ngIf="course.type === 'Pro'">
+                      <a>{{ course.price }} $</a>
+                    </li>
+                    <li *ngIf="course.type === 'Free'">
+                      <a>Free</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="rating">
+                  <ngb-rating
+                    [(rate)]="course.averagerate"
+                    [max]="5"
+                    style="font-size: 20px; color: #ffc107"
+                    [readonly]="true"
+                  ></ngb-rating>
+                </div>
+                <!-- end left -->
               </div>
-              <div class="rating">
-                <ngb-rating
-                  [(rate)]="course.averagerate"
-                  [max]="5"
-                  style="font-size: 20px; color: #ffc107"
-                  [readonly]="true"
-                ></ngb-rating>
-              </div>
-              <!-- end left -->
             </div>
-            <!-- end footer -->
           </div>
-          <!-- end box -->
         </div>
-        <!-- end col -->
       </div>
-      <!-- end row -->
-      <hr class="invis" />
-
       <div class="section-button text-center">
         <a class="btn btn-primary" (click)="getcourses()">View All Courses</a>
       </div>
     </div>
-    <!-- end container -->
   </section>
   <!-- end of carousel -->
 
   <section class="section db">
     <div class="container">
+      <div class="section-title text-center"><br /><br /></div>
       <div class="row">
         <div class="col-lg-4 col-md-4">
           <div class="stat-count">
@@ -345,47 +342,48 @@
     <!-- end container -->
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-title text-center">
-        <h3>Our Instructors</h3>
-        <br /><br />
-      </div>
-      <!-- end title -->
-
-      <div class="row">
-        <div
-          class="col-md-4"
-          *ngFor="let instructor of instructors; let i = index"
+  <section class="container pt-3 mb-3">
+    <br /><br />
+    <h2 class="h3 block-title text-center">Instructors</h2>
+    <br />
+    <div class="row pt-5 mt-30">
+      <div
+        class="col-lg-4 col-sm-6 mb-30 pb-5"
+        *ngFor="let instructor of instructors; let i = index"
+      >
+        <a
+          class="card"
+          *ngIf="i < 3"
+          (click)="getProfile(instructor._id, instructor.role)"
+          style="cursor: pointer"
         >
           <div
-            class="box testimonial"
-            *ngIf="i < 3"
-            (click)="getProfile(instructor._id, instructor.role)"
-            style="cursor: pointer"
+            class="box-shadow bg-white rounded-circle mx-auto text-center"
+            style="width: 90px; height: 90px; margin-top: -45px"
           >
-            <p class="testiname">
-              <strong>
-                <img src="{{ instructor.image }}" alt="" class="img-circle" />
-                {{ instructor.username }}
-              </strong>
-            </p>
-            <p>
-              {{ instructor.about }}
-            </p>
+            <img src="{{ instructor.image }}" alt="" class="img-circle" />
           </div>
-        </div>
+          <div class="card-body text-center">
+            <h3 class="card-title pt-1">{{ instructor.username }}</h3>
+            <p class="card-text text-sm">{{ instructor.about }}</p>
+            <span
+              class="text-sm text-uppercase font-weight-bold"
+              (click)="getProfile(instructor._id, instructor.role)"
+              >Learn More&nbsp;<i class="fe-icon-arrow-right"></i
+            ></span>
+          </div>
+        </a>
+        <br /><br />
       </div>
     </div>
-    <br /><br />
+
     <div class="section-button text-center">
       <a class="btn btn-primary" (click)="getInstructors()"
         >View All Instructors</a
       >
     </div>
-
-    <!-- end container -->
   </section>
+
   <div class="chat0" style="text-align: center" (click)="goToChat()">
     Join Mindlab Chat And Share Your Experience With Others
   </div>

@@ -164,8 +164,10 @@
           <button
             type="button"
             class="btn btn-success btn-xs waves-effect mb-2 waves-light"
+            (click)="updateFollow()"
+            *ngIf="!isCurrentUser"
           >
-            Follow
+            {{ type }}
           </button>
           <button
             type="button"

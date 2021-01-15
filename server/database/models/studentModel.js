@@ -29,6 +29,9 @@ var studentSchema = mongoose.Schema({
     enum: ["instructor", "student", "admin"],
     default: "student"
   },
+  following: {
+    type: [String]
+  },
   status: {
     type: String,
     enum: ["active", "banned", "unverified"],
