@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 var instructor = require("../../database/index");
+var  {Instructor } = require("../../database/models/instructorModel");
+var  {Student } = require("../../database/models/studentModel");
 
 router.route("/api/newinstructor").post((req, res) => {
   const saltRounds = 10;
@@ -86,6 +88,96 @@ router.route("/api/instructor/ban/:id").put((req, res) => {
   instructor
     .changeInstructorStatus(req.params.id, req.body)
     .then((data) => res.send(data));
+});
+
+router.route("/api/instructor/follow/:id").patch( async (req, res) => {
+  try {
+    // add to the follower list
+    if(req.body.role==='student'){
+      await Student.findByIdAndUpdate(
+        req.params.id,
+        { $addToSet: { following: req.body.idToFollow } },
+        { new: true, upsert: true },
+        (err, docs) => {
+            if (!err) res.status(201).json(docs);
+          
+            else return res.status(400).json(err);
+          
+    })
+  }else {
+    await Instructor.findByIdAndUpdate(
+      req.params.id,
+      { $addToSet: { following: req.body.idToFollow } },
+      { new: true, upsert: true },
+      (err, docs) => {
+        if (!err) res.status(201).json(docs);
+
+        else return res.status(400).json(err);
+       
+      }
+    );
+  }
+    // add to following list
+   
+    await Instructor.findByIdAndUpdate(
+      req.body.idToFollow,
+      { $addToSet: { followers: req.params.id } },
+      { new: true, upsert: true },
+      (err, docs) => {
+        // if (!err)  {
+          // return res.status(201).json(docs)   
+        // }  else {
+          if (err) return res.status(400).json(err);
+        // }  
+      }
+    );
+    
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({ message: err })
+  }
+
+});
+router.route("/api/instructor/unfollow/:id").patch(async(req, res) => {
+ 
+  try {
+    if(req.body.role==='student'){
+    await Student.findByIdAndUpdate(
+      req.params.id,
+      { $pull: { following: req.body.idToUnfollow } },
+      { new: true, upsert: true },
+      (err, docs) => {
+        if (!err) res.status(201).json(docs);
+        else return res.status(400).json(err);
+      }
+    )
+  }else {
+    await Instructor.findByIdAndUpdate(
+      req.params.id,
+      { $pull: { following: req.body.idToUnfollow } },
+      { new: true, upsert: true },
+      (err, docs) => {
+        if (!err) res.status(201).json(docs);
+        else return res.status(400).json(err);
+      }
+    )
+  }
+    // remove to following list
+ 
+    await Instructor.findByIdAndUpdate(
+      req.body.idToUnfollow,
+      { $pull: { followers: req.params.id } },
+      { new: true, upsert: true },
+      (err, docs) => {
+      // if (!err) res.status(201).json(docs);
+        if (err) return res.status(400).json(err);
+      }
+    );
+    
+  } catch (err) {
+    return res.status(500).json({ message: err });
+  }
+
 });
 
 module.exports = router;

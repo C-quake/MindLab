@@ -13,10 +13,10 @@ import { InstructorService } from '../../services/instructor-service.service';
 })
 export class ViewinstructorsComponent implements OnInit {
   user: any = JSON.parse(localStorage.getItem('user') || '{}');
-  page = 1; 
-  count = 0; 
+  page = 1;
+  count = 0;
   tableSize = 7;
-
+  query: any;
   tableSizes = [3, 6, 9, 12];
   currentIndex: any;
 

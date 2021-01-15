@@ -3,6 +3,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { StoreService } from '../../services/store.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'app-result',
@@ -16,16 +17,40 @@ export class ResultComponent implements OnInit {
   video: any;
   courses: any = [];
   results: any = [];
+  lib: any = [];
   constructor(
     private sanitizer: DomSanitizer,
     private service: StoreService,
     private router: Router,
-    private activateroute: ActivatedRoute
+    private activateroute: ActivatedRoute,
+    private profileService: ProfileService
   ) {}
 
   ngOnInit(): void {
     this.getallcourses();
-    console.log(this.query);
+    if (this.user.role === 'student') {
+      for (var ele of this.user.library) {
+        this.lib.push(ele._id);
+      }
+    }
+  }
+
+  addToLibrary(course: any) {
+    this.lib.push(course._id);
+    this.user.library.push(course);
+    console.log(this.lib);
+    localStorage.setItem('user', JSON.stringify(this.user));
+    this.profileService
+      .update(this.user._id, { library: this.lib })
+      .subscribe(() =>
+        this.router.navigate(['library']).then(() => {
+          location.reload();
+        })
+      );
+  }
+
+  switchPaypal(id: any) {
+    this.router.navigate(['/paypal', id]);
   }
 
   getallcourses() {
@@ -53,11 +78,10 @@ export class ResultComponent implements OnInit {
     this.file = '';
     // this.file = this.sanitizer.bypassSecurityTrustResourceUrl(
     //   'assets/uploads/courses/' + f    );
-    const imgpdf=f.slice(0,-3)+'jpg'
+    const imgpdf = f.slice(0, -3) + 'jpg';
 
-    this.file =imgpdf
+    this.file = imgpdf;
     console.log(this.file);
-
   }
   getCourse(id: any) {
     this.router.navigate(['/coursedetails', id]).then(() => {
@@ -72,5 +96,4 @@ export class ResultComponent implements OnInit {
   Logout() {
     localStorage.clear();
   }
-  
 }

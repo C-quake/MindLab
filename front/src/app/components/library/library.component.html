@@ -50,9 +50,9 @@
         <div class="row-fluid">
           <div class="col-md-6 col-sm-6 text-left">
             <p>
-              <strong><i class="fa fa-phone"></i></strong> +90 543 123 45 67
+              <strong><i class="fa fa-phone"></i></strong> +216 24 440 222
               &nbsp;&nbsp; <strong><i class="fa fa-envelope"></i></strong>
-              <a href="mailto:#">info@yoursite.com</a>
+              <a href="mailto:#">mindlabsiteweb@gmail.com</a>
             </p>
           </div>
           <!-- end left -->
@@ -197,16 +197,16 @@
                 width="100%"
                 height="200"
                 controls
-                autoplay
                 style="margin: 10px 0"
+                src="{{ course.video }}"
+                type="video/mp4"
               >
-                <source
-                  src="assets/uploads/courses/{{ course.video }}"
-                  type="video/mp4"
-                />
+               
               </video>
 
               <span data-toggle="modal" data-target="#modal-lg"
+              (click)="getfile(course.pdf)"
+
                 ><i
                   class="fa fa-file-pdf-o"
                   style="
@@ -247,7 +247,7 @@
               </div>
               <div class="modal-body">
                 <div class="embed-responsive embed-responsive-16by9">
-                  <iframe class="embed-responsive-item"></iframe>
+                  <img  [src]="file" class="img-responsive">
                 </div>
               </div>
               <div class="modal-footer justify-content-between">

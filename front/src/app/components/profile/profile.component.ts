@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   user: any;
+  currentUser: any = JSON.parse(localStorage.getItem('user') || '{}');
   image: any;
   file: any;
   update: boolean = false;
@@ -20,7 +21,11 @@ export class ProfileComponent implements OnInit {
   imgSelectErr: boolean = false;
   query: any;
   isCurrentUser: boolean = true;
-
+ show:boolean=false
+ type:string=""
+ id:any
+ role:any
+ current:any
   constructor(
     private profileService: ProfileService,
     private router: Router,
@@ -28,7 +33,20 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    console.log('following',this.user)
+    if(this.user.following.includes(this.activateroute.snapshot.params.id)){
+      this.type="UnFollow"
+    }else {
+      this.type="Follow"
+    }
+    this.id=this.user._id
+    this.role=this.user.role
+    console.log("userid",this.user._id)
+    console.log("params",this.activateroute.snapshot.params.id)
+     
+    console.log('user',this.user)
+        if (
       (this.activateroute.snapshot.params.id,
       this.activateroute.snapshot.params.role)
     ) {
@@ -44,6 +62,7 @@ export class ProfileComponent implements OnInit {
         });
     } else {
       this.user = JSON.parse(localStorage.getItem('user') || '{}');
+     
       this.profileService
         .getUserById(this.user._id, this.user.role)
         .subscribe((data: any) => {
@@ -51,6 +70,8 @@ export class ProfileComponent implements OnInit {
           this.experiences = this.user.experience;
         });
     }
+   
+
   }
   onChange(event: any) {
     this.image = event.target.files[0].name.toLowerCase();
@@ -152,4 +173,33 @@ export class ProfileComponent implements OnInit {
       window.location.reload();
     });
   }
+
+
+ updateFollow() {
+   if( this.type==="UnFollow"){
+    this.profileService
+        .unfollow(this.id,this.activateroute.snapshot.params.id,this.role )
+        .subscribe((data) => {
+          console.log('data',data)
+          localStorage.setItem('user', JSON.stringify(data))
+          this.type = 'Follow'
+          console.log(data);
+        
+        });
+  }else if(this.type === 'Follow'){
+    this.profileService
+      .follow(this.id,this.activateroute.snapshot.params.id,this.role)
+      .subscribe((data) => {
+        localStorage.setItem('user', JSON.stringify(data))
+
+        this.type="UnFollow"
+        console.log(data);
+      
+      });
+   
+  }
+  
+ }
+
+
 }

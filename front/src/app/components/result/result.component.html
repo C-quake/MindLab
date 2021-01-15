@@ -50,9 +50,9 @@
         <div class="row-fluid">
           <div class="col-md-6 col-sm-6 text-left">
             <p>
-              <strong><i class="fa fa-phone"></i></strong> +90 543 123 45 67
+              <strong><i class="fa fa-phone"></i></strong> +216 24 440 222
               &nbsp;&nbsp; <strong><i class="fa fa-envelope"></i></strong>
-              <a href="mailto:#">info@yoursite.com</a>
+              <a href="mailto:#">mindlabsiteweb@gmail.com</a>
             </p>
           </div>
           <!-- end left -->
@@ -177,54 +177,91 @@
   <br /><br />
 
   <div>
-    <div class="container p-0">
+    <div class="container p-0" style="margin-bottom: 50vh">
       <h1 class="h3 mb-3">Courses</h1>
 
       <div class="row">
         <div class="col-12 col-md-6 col-lg-3" *ngFor="let course of results">
-          <div class="card">
-            <div class="card-header px-4 pt-4">
-              <h3 class="card-title mb-0">Title :{{ course.title }}</h3>
-              <div class="badge bg-success my-2">Free/Pro</div>
+          <div class="course-box">
+            <div
+              class="image-wrap entry"
+              style="cursor: pointer"
+              (click)="getCourse(course._id)"
+            >
+              <img
+                class="courseVid"
+                src="{{
+                  course.video.slice(0, course.video.length - 3) + 'jpg'
+                }}"
+              />
 
-              <video
-                id="vid1"
-                width="100%"
-                height="200"
-                controls
-                style="margin: 10px 0"
-              >
-                <source
-                  src="assets/uploads/courses/{{ course.video }}"
-                  type="video/mp4"
-                />
-              </video>
-
-              <span
-                data-toggle="modal"
-                data-target="#modal-lg"
-                (click)="getfile(course.pdf)"
-                ><i
-                  class="fa fa-file-pdf-o"
-                  style="
-                    color: red;
-                    text-align: center;
-                    margin-left: 110px;
-                    font-size: 30px;
-                  "
-                  aria-hidden="true"
-                ></i
-              ></span>
-              <div class="card-body px-4 pt-2">
-                <a
-                  class="btn btn-secondary btn-lg"
-                  style="background-color: #55acee; margin-left: 40px"
-                  role="button"
-                  (click)="getCourse(course._id)"
-                  >Details</a
-                >
+              <div class="magnifier">
+                <a title=""><i class="flaticon-add"></i></a>
               </div>
             </div>
+            <!-- end image-wrap -->
+            <div class="course-details">
+              <h4>
+                <small>{{ course.category }}</small>
+                <a (click)="getCourse(course._id)" style="cursor: pointer">{{
+                  course.title
+                }}</a>
+              </h4>
+              <p>
+                {{ course.description }}
+              </p>
+            </div>
+            <div *ngIf="user.library">
+              <button
+                *ngIf="!lib.includes(course._id) && course.type === 'Free'"
+                class="btnAddCourse"
+                (click)="addToLibrary(course)"
+              >
+                Add To Library
+              </button>
+              <button
+                *ngIf="!lib.includes(course._id) && course.type === 'Pro'"
+                class="btnAddCourse"
+                (click)="switchPaypal(course._id)"
+              >
+                Purchase
+              </button>
+              <button *ngIf="lib.includes(course._id)" class="btnAddCourse">
+                Added
+              </button>
+            </div>
+            <!-- end details -->
+            <div class="course-footer clearfix">
+              <div class="pull-left">
+                <ul class="list-inline">
+                  <li>
+                    <a>{{ course.averagerate }}</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- end left -->
+
+              <div class="pull-right">
+                <ul class="list-inline">
+                  <li *ngIf="course.type === 'Pro'">
+                    <a>{{ course.price }} EUR</a>
+                  </li>
+                  <li *ngIf="course.type === 'Free'">
+                    <a>Free</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="rating">
+                <ngb-rating
+                  [(rate)]="course.averagerate"
+                  [max]="5"
+                  style="font-size: 20px; color: #ffc107"
+                  [readonly]="true"
+                ></ngb-rating>
+              </div>
+              <!-- end left -->
+            </div>
+            <!-- end footer -->
           </div>
         </div>
         <div class="modal fade" id="modal-lg" #modall>
@@ -243,7 +280,7 @@
               </div>
               <div class="modal-body">
                 <div class="embed-responsive embed-responsive-16by9">
-                  <img  [src]="file" class="img-responsive">
+                  <img [src]="file" class="img-responsive" />
                 </div>
               </div>
               <div class="modal-footer justify-content-between">
